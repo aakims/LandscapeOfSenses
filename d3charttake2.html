@@ -10,418 +10,496 @@
     <script src="data/newsensorydata.geojson"></script>
     <link href="https://fonts.googleapis.com/css?family=Karla|Oswald" rel="stylesheet">
 </head>
-    <meta name="viewpoint" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://www.w3schools.com/w3css/4/w3.css" />
-    <link rel="stylesheet" href="css/style.css" />
+<meta name="viewpoint" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/w3css/4/w3.css" />
+<link rel="stylesheet" href="css/style.css" />
+
 <body>
     <div class="w3-container w3-teal">
-        <h1>Sensing Points in Philadelphia</h1>
+        <h1>Landscape of Senses in Philadelphia</h1>
     </div>
-    <div class="w3-container">
-        <h2></h2>
+
+    <div class="w3-container" id="option">
+        <button id=addButtonC>Clear</button>
+        <button id=addButton1 onClick="updateData(1)">T1</button>
+        <button id=addButton2 onClick="updateData(2)">T2</button>
+        <button id=addButton3 onClick="updateData(3)">T3</button>
+        <button id=addButton4 onClick="updateData(4)">T4</button>
+        <button id=addButton5 onClick="updateData(5)">T5</button>
+        <button id=addButton6 onClick="updateData(6)">T6</button>
+        <button id=addButton7 onClick="updateData(7)">T7</button>
+        <button id=addButton8 onClick="updateData(8)">T8</button>
+        <button id=addButton9 onClick="updateData(9)">T9</button>
+        <button id=addButton10 onClick="updateData(10)">T10</button>
+        <button id=addButton11 onClick="updateData(11)">T11</button>
+        <button id=addButton12 onClick="updateData(12)">T12</button>
     </div>
+
+        <div class="w3-container">
+        <h3 id="dustlab">Air Quality: <h2 id="dustval"></h2></h3>
+        <h3 id="lightlab">Ambient Light: <h2 id="lightval"></h2></h3>
+        <h3 id="templab">Temperature: <h2 id="tempval"></h2></h3>
+        <h3 id="ginilab">GINI Index: <h2 id="ginival"></h2></h3>
+        </div>
     <div class="w3-row">
         <div class="w3-col w3-container m12 l6">
             <div id="map">
             </div>
         </div>
         <div class="w3-col w3-container m12 l6 ">
-            <div id = "graph">
-            <div id="chart1">
+            <div id="graph">
+                <div id="chart1">
+                </div>
+                <div id="chart2">
+                </div>
+                <div id="chart3">
+                </div>
+                <div id="chart4">
+                </div>
             </div>
-            <div id="chart2">
-            </div>
-            <div id="chart3">
-            </div>
-            <div id="chart4">
-            </div>
-        </div>
         </div>
     </div>
-
     <script>
-    var tripN = 4;
-    // Our D3 code will go here.
-    // Width and Height of the whole visualization
-    var mapwidth = 800;
-    var mapheight = 650;
-    var mapmargin = {top: 20, right: 10, bottom: 30, left: 20 }
-    // Create SVG
-    var mapsvg = d3.select("#map")
-        .append("svg")
-        .attr("width", mapwidth + mapmargin.left + mapmargin.right)
-        .attr("height", mapheight + mapmargin.top + mapmargin.bottom)
-                    .attr("transform",
+    //var tripN = 11;
+
+    function displayData(tripnumber) {
+
+        var tripN = tripnumber;
+        // Our D3 code will go here.
+        // Width and Height of the whole visualization
+        var mapwidth = 800;
+        var mapheight = 650;
+        var mapmargin = { top: 20, right: 10, bottom: 30, left: 20 }
+        // Create SVG
+        var mapsvg = d3.select("#map")
+            .append("svg")
+            .attr("width", mapwidth + mapmargin.left + mapmargin.right)
+            .attr("height", mapheight + mapmargin.top + mapmargin.bottom)
+            .attr("transform",
                 "translate(" + mapmargin.left + "," + mapmargin.top + ")");
 
 
-    // Append empty placeholder g element to the SVG
-    // g will contain geometry elements
-    var g = mapsvg.append("g");
-    // Width and Height of the whole visualization
-    // Set Projection Parameters
-    var center = [2.5725, 39.957049];
-    var offset = [mapwidth / 2, mapheight / 2];
-    var scale = 700000;
-    var PennSouthProjection = d3.geoConicConformal()
-        .scale(scale)
-        .parallels([39 + 56 / 60, 40 + 58 / 60])
-        .rotate([77 + 45 / 60, 0])
-        .center(center) //[2.5, 40.5]
-        .translate(offset);
+        // Append empty placeholder g element to the SVG
+        // g will contain geometry elements
+        var g = mapsvg.append("g");
+        // Width and Height of the whole visualization
+        // Set Projection Parameters
+        var center = [2.5725, 39.957049];
+        var offset = [mapwidth / 2, mapheight / 2];
+        var scale = 700000;
+        var PennSouthProjection = d3.geoConicConformal()
+            .scale(scale)
+            .parallels([39 + 56 / 60, 40 + 58 / 60])
+            .rotate([77 + 45 / 60, 0])
+            .center(center) //[2.5, 40.5]
+            .translate(offset);
 
-    // Create GeoPath function that uses built-in D3 functionality to turn
-    // lat/lon coordinates into screen coordinates
-    var geoPath = d3.geoPath()
-        .projection(PennSouthProjection);
+        // Create GeoPath function that uses built-in D3 functionality to turn
+        // lat/lon coordinates into screen coordinates
+        var geoPath = d3.geoPath()
+            .projection(PennSouthProjection);
 
-    // Classic D3... Select non-existent elements, bind the data, append the elements, and apply attributes
-    g.selectAll("path")
-        .data(philly_neighborhoods.features)
-        .enter()
-        .append("path")
-        .attr("fill", "#ccc")
-        .attr("stroke", "#333")
-        .attr("d", geoPath);
+        // Classic D3... Select non-existent elements, bind the data, append the elements, and apply attributes
+        g.selectAll("path")
+            .data(philly_neighborhoods.features)
+            .enter()
+            .append("path")
+            .attr("fill", "#ccc")
+            .attr("stroke", "#333")
+            .attr("d", geoPath);
 
-            var mapdata = _.filter(sdata.features, function(dataset) { return (dataset.properties["trip"] === tripN) && (dataset.properties["olive"] != tripN) });
-
-
+        var mapdata = _.filter(sdata.features, function(dataset) { return (dataset.properties["trip"] === tripN) && (dataset.properties["olive"] != tripN) });
 
 
-    ///// GRAPH 1
-
-    var renderGraph1 = function(dataset, tripN) {
-
-        var data = _.filter(sdata.features, function(dataset) { return (dataset.properties["trip"] === tripN) && (dataset.properties["olive"] != tripN) });
-        console.log(data);
-
-        data.forEach(function(d) {
-            d.properties["ftime"] = +d.properties["ftime"];
-            d.properties["dust"] = +d.properties["dust"];
-            //console.log(d.properties["dust"]);
-        });
 
 
-        createVisualization1(data);
-    };
+        ///// GRAPH 1
 
-    console.log(sdata.features[0]);
-    renderGraph1(sdata, tripN, "dust");
-    console.log("yes");
+        var renderGraph1 = function(dataset, tripN) {
 
+            var data = _.filter(sdata.features, function(dataset) { return (dataset.properties["trip"] === tripN) && (dataset.properties["olive"] != 1) });
+            console.log(data);
 
-    function createVisualization1(data) {
-        //Width and height
-        var canvasw = 600;
-        var canvash = 130;
-
-        var margin = { top: 40, right: 20, bottom: 30, left: 100 },
-            width = canvasw,
-            height = canvash;
+            data.forEach(function(d) {
+                d.properties["ftime"] = +d.properties["ftime"];
+                d.properties["dust"] = +d.properties["dust"];
+                //console.log(d.properties["dust"]);
+            });
 
 
-        var chart1 = d3.select("#chart1").append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-            .append("g")
-            .attr("transform",
-                "translate(" + margin.left + "," + margin.top + ")");
+            createVisualization1(data);
+        };
+
+        console.log(sdata.features[0]);
+        renderGraph1(sdata, tripN, "dust");
+        //console.log("yes");
 
 
-        var x = d3.scaleTime().range([0, width]);
-        var y = d3.scaleLinear().range([height, 0]);
+        function createVisualization1(data) {
+            //Width and height
+            var canvasw = 600;
+            var canvash = 130;
 
-        data.forEach(function(d) { d.properties["ftime"] = new Date(d.properties["unixt"] * 1000 + 18000000); });
-
-        x.domain(d3.extent(data, function(d) { return d.properties["ftime"]; }));
-        y.domain([0, d3.max(data, function(d) { return d.properties["dust"]; })]);
-
-        var valueline = d3.line()
-            .x(function(d) { return x(d["ftime"]) })
-            .y(function(d) { return y(d["dust"]) });
-
-        console.log(data);
-        var linedata = _.map(data, function(obj) { console.log(obj); return _.pick(obj.properties, "ftime", "dust") });
-        //console.log(linedata1);
-
-        chart1.append("path")
-            .attr("class", "line")
-            .attr("d", valueline(linedata));
+            var margin = { top: 40, right: 20, bottom: 30, left: 100 },
+                width = canvasw,
+                height = canvash;
 
 
-        chart1.append("g")
-            .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x));
+            var chart1 = d3.select("#chart1").append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
 
-        chart1.append("g")
-            .call(d3.axisLeft(y));
 
-                        chart1.append("text")
-        .attr("x", width - 70)             
-        .attr("y", 20)
-        .attr("text-anchor", "middle")  
-        .style("font-size", "16px") 
-        .style("fill", "teal")
-        .style("text-decoration", "underline")  
-        .text("Air Quality (pcs/0.01cf)");
+            var x = d3.scaleTime().range([0, width]);
+            var y = d3.scaleLinear().range([height, 0]);
 
+            data.forEach(function(d) { d.properties["ftime"] = new Date(d.properties["unixt"] * 1000 + 18000000); });
+
+            x.domain(d3.extent(data, function(d) { return d.properties["ftime"]; }));
+            y.domain([0, d3.max(data, function(d) { return d.properties["dust"]; })]);
+
+            var valueline = d3.line()
+                .x(function(d) { return x(d["ftime"]) })
+                .y(function(d) { return y(d["dust"]) });
+
+            console.log(data);
+            var linedata = _.map(data, function(obj) { console.log(obj); return _.pick(obj.properties, "ftime", "dust") });
+            //console.log(linedata1);
+
+            chart1.append("path")
+                .attr("class", "line")
+                .attr("d", valueline(linedata));
+
+
+            chart1.append("g")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x));
+
+            chart1.append("g")
+                .call(d3.axisLeft(y));
+
+            chart1.append("text")
+                .attr("x", width - 70)
+                .attr("y", 20)
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("fill", "teal")
+                .style("text-decoration", "underline")
+                .text("Air Quality (pcs/0.01cf)");
+
+        }
+
+        //// GRAPH2 
+
+        var renderGraph2 = function(dataset, tripN) {
+
+            var data = _.filter(sdata.features, function(dataset) { return (dataset.properties["trip"] === tripN) && (dataset.properties["olive"] != 1) });
+            console.log(data);
+
+            data.forEach(function(d) {
+                d.properties["ftime"] = +d.properties["ftime"];
+                d.properties["light"] = +d.properties["light"];
+                //console.log(d.properties["dust"]);
+            });
+
+
+            createVisualization2(data);
+        };
+
+        //console.log(sdata.features[0]);
+        renderGraph2(sdata, tripN);
+
+
+        function createVisualization2(data) {
+            //Width and height
+            var canvasw = 600;
+            var canvash = 130;
+
+            var margin = { top: 20, right: 20, bottom: 30, left: 100 },
+                width = canvasw,
+                height = canvash;
+
+
+            var chart2 = d3.select("#chart2").append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+
+            var x = d3.scaleTime().range([0, width]);
+            var y = d3.scaleLinear().range([height, 0]);
+
+            data.forEach(function(d) { d.properties["ftime"] = new Date(d.properties["unixt"] * 1000 + 18000000); });
+
+            x.domain(d3.extent(data, function(d) { return d.properties["ftime"]; }));
+            y.domain([d3.min(data, function(d) { return d.properties["light"]; }) - 50, d3.max(data, function(d) { return d.properties["light"]; })]);
+
+            var valueline = d3.line()
+                .x(function(d) { return x(d["ftime"]) })
+                .y(function(d) { return y(d["light"]) });
+
+            console.log(data);
+            var linedata = _.map(data, function(obj) { console.log(obj); return _.pick(obj.properties, "ftime", "light") });
+            console.log(linedata);
+
+            chart2.append("path")
+                .attr("class", "line")
+                .attr("d", valueline(linedata));
+
+
+            chart2.append("g")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x));
+
+            chart2.append("g")
+                .call(d3.axisLeft(y));
+
+            chart2.append("text")
+                .attr("x", width - 70)
+                .attr("y", 20)
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("fill", "teal")
+                .style("text-decoration", "underline")
+                .text("Ambient Light");
+
+        }
+
+
+        ///GRAPH 3
+
+        var renderGraph3 = function(dataset, tripN) {
+
+            var data = _.filter(sdata.features, function(dataset) { return (dataset.properties["trip"] === tripN) && (dataset.properties["olive"] != 1) });
+            console.log(data);
+
+            data.forEach(function(d) {
+                d.properties["ftime"] = +d.properties["ftime"];
+                d.properties["tempF"] = +d.properties["tempF"];
+                //console.log(d.properties["dust"]);
+            });
+
+
+            createVisualization3(data);
+        };
+
+        //console.log(sdata.features[0]);
+        renderGraph3(sdata, tripN);
+
+
+        function createVisualization3(data) {
+            //Width and height
+            var canvasw = 600;
+            var canvash = 130;
+
+            var margin = { top: 20, right: 20, bottom: 30, left: 100 },
+                width = canvasw,
+                height = canvash;
+
+            var chart3 = d3.select("#chart3").append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+            var x = d3.scaleTime().range([0, width]);
+            var y = d3.scaleLinear().range([height, 0]);
+
+            data.forEach(function(d) { d.properties["ftime"] = new Date(d.properties["unixt"] * 1000 + 18000000); });
+
+            x.domain(d3.extent(data, function(d) { return d.properties["ftime"]; }));
+            y.domain([d3.min(data, function(d) { return d.properties["tempF"]; }), d3.max(data, function(d) { return d.properties["tempF"]; })]);
+
+            var valueline = d3.line()
+                .x(function(d) { return x(d["ftime"]) })
+                .y(function(d) { return y(d["tempF"]) });
+
+            console.log(data);
+            var linedata = _.map(data, function(obj) { console.log(obj); return _.pick(obj.properties, "ftime", "tempF") });
+            //console.log(linedata3);
+
+            chart3.append("path")
+                .attr("class", "line")
+                .attr("d", valueline(linedata));
+
+
+            chart3.append("g")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x));
+
+            chart3.append("g")
+                .call(d3.axisLeft(y));
+
+            chart3.append("text")
+                .attr("x", width - 70)
+                .attr("y", 20)
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("fill", "teal")
+                .style("text-decoration", "underline")
+                .text("Temperature (F)");
+
+        }
+
+
+        var renderGraph4 = function(dataset, tripN) {
+
+            var data = _.filter(sdata.features, function(dataset) { return (dataset.properties["trip"] === tripN) && (dataset.properties["olive"] != 1) });
+            console.log(data);
+
+            data.forEach(function(d) {
+                d.properties["ftime"] = +d.properties["ftime"];
+                d.properties["GINI_IND"] = +d.properties["GINI_IND"];
+                //console.log(d.properties["dust"]);
+            });
+
+
+            createVisualization4(data);
+        };
+
+        //console.log(sdata.features[0]);
+        renderGraph4(sdata, tripN);
+
+
+        function createVisualization4(data) {
+            //Width and height
+            var canvasw = 600;
+            var canvash = 130;
+
+            var margin = { top: 20, right: 20, bottom: 30, left: 100 },
+                width = canvasw,
+                height = canvash;
+
+
+            var chart4 = d3.select("#chart4").append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+
+            var x = d3.scaleTime().range([0, width]);
+            var y = d3.scaleLinear().range([height, 0]);
+
+            data.forEach(function(d) { d.properties["ftime"] = new Date(d.properties["unixt"] * 1000 + 18000000); });
+
+            x.domain(d3.extent(data, function(d) { return d.properties["ftime"]; }));
+            y.domain([d3.min(data, function(d) { return d.properties["GINI_IND"]; }) - 0.1, d3.max(data, function(d) { return d.properties["GINI_IND"]; }) + 0.1]);
+
+            var valueline = d3.line()
+                .x(function(d) { return x(d["ftime"]) })
+                .y(function(d) { return y(d["GINI_IND"]) });
+
+            console.log(data);
+            var linedata = _.map(data, function(obj) { console.log(obj); return _.pick(obj.properties, "ftime", "GINI_IND") });
+            console.log(linedata);
+
+            chart4.append("path")
+                .attr("class", "line")
+                .attr("d", valueline(linedata));
+
+
+            chart4.append("g")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x));
+
+            chart4.append("g")
+                .call(d3.axisLeft(y));
+
+            chart4.append("text")
+                .attr("x", width - 70)
+                .attr("y", 20)
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("fill", "teal")
+                .style("text-decoration", "underline")
+                .text("GINI Index");
+
+        }
+
+
+        var bubbles = mapsvg.append("g");
+
+        bubbles.selectAll("path")
+            .data(mapdata)
+            .enter()
+            .append("path")
+            .attr("fill", "#900")
+            .attr("stroke", "#999")
+            .attr("d", geoPath)
+            .attr("class", "sensingpts")
+            .on("mouseover", function(d) {
+                d3.select("#dustval").text(d.properties["dust"])
+                d3.select("#lightval").text(d.properties["light"])
+                d3.select("#tempval").text(d.properties["tempF"])
+                d3.select("#ginival").text(d.properties["GINI_IND"])
+                d3.select(this).attr("class", "sensingpts hover");
+            })
+            .on("mouseout", function(d) {
+                d3.select("#dustval").text("")
+                d3.select("#lightval").text("")
+                d3.select("#tempval").text("")
+                d3.select("#ginival").text("")
+                d3.select(this).attr("class", "sensingpts");
+            });
+
+        //var datalocator = d3.line()
+    }
+    var tripN; 
+
+    addButtonC.onclick = function() {
+        bubbles.exit().remove();
+        chart1.exit().remove();
+        chart2.exit().remove();
+        chart3.exit().remove();
+        chart4.exit().remove();
     }
 
-    //// GRAPH2 
-
-    var renderGraph2 = function(dataset, tripN) {
-
-        var data = _.filter(sdata.features, function(dataset) { return (dataset.properties["trip"] === tripN) && (dataset.properties["olive"] != 1) });
-        console.log(data);
-
-        data.forEach(function(d) {
-            d.properties["ftime"] = +d.properties["ftime"];
-            d.properties["light"] = +d.properties["light"];
-            //console.log(d.properties["dust"]);
-        });
-
-
-        createVisualization2(data);
-    };
-
-    //console.log(sdata.features[0]);
-    renderGraph2(sdata, tripN);
-
-
-    function createVisualization2(data) {
-        //Width and height
-        var canvasw = 600;
-        var canvash = 130;
-
-        var margin = { top: 20, right: 20, bottom: 30, left: 100 },
-            width = canvasw,
-            height = canvash;
-
-
-        var chart2 = d3.select("#chart2").append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-            .append("g")
-            .attr("transform",
-                "translate(" + margin.left + "," + margin.top + ")");
-
-
-        var x = d3.scaleTime().range([0, width]);
-        var y = d3.scaleLinear().range([height, 0]);
-
-        data.forEach(function(d) { d.properties["ftime"] = new Date(d.properties["unixt"] * 1000 + 18000000); });
-
-        x.domain(d3.extent(data, function(d) { return d.properties["ftime"]; }));
-        y.domain([d3.min(data, function(d) { return d.properties["light"]; }) - 50, d3.max(data, function(d) { return d.properties["light"]; })]);
-
-        var valueline = d3.line()
-            .x(function(d) { return x(d["ftime"]) })
-            .y(function(d) { return y(d["light"]) });
-
-        console.log(data);
-        var linedata = _.map(data, function(obj) { console.log(obj); return _.pick(obj.properties, "ftime", "light") });
-        console.log(linedata);
-
-        chart2.append("path")
-            .attr("class", "line")
-            .attr("d", valueline(linedata));
-
-
-        chart2.append("g")
-            .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x));
-
-        chart2.append("g")
-            .call(d3.axisLeft(y));
-
-                        chart2.append("text")
-        .attr("x", width - 70)             
-        .attr("y", 20)
-        .attr("text-anchor", "middle")  
-        .style("font-size", "16px") 
-        .style("fill", "teal")
-        .style("text-decoration", "underline")  
-        .text("Ambient Light");
-
-    }
-
-
-    ///GRAPH 3
-
-    var renderGraph3 = function(dataset, tripN) {
-
-        var data = _.filter(sdata.features, function(dataset) { return (dataset.properties["trip"] === tripN) && (dataset.properties["olive"] != 1) });
-        console.log(data);
-
-        data.forEach(function(d) {
-            d.properties["ftime"] = +d.properties["ftime"];
-            d.properties["tempF"] = +d.properties["tempF"];
-            //console.log(d.properties["dust"]);
-        });
-
-
-        createVisualization3(data);
-    };
-
-    //console.log(sdata.features[0]);
-    renderGraph3(sdata, tripN);
-
-
-    function createVisualization3(data) {
-        //Width and height
-        var canvasw = 600;
-        var canvash = 130;
-
-        var margin = { top: 20, right: 20, bottom: 30, left: 100 },
-            width = canvasw,
-            height = canvash;
-
-        var chart3 = d3.select("#chart3").append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-            .append("g")
-            .attr("transform",
-                "translate(" + margin.left + "," + margin.top + ")");
-
-        var x = d3.scaleTime().range([0, width]);
-        var y = d3.scaleLinear().range([height, 0]);
-
-        data.forEach(function(d) { d.properties["ftime"] = new Date(d.properties["unixt"] * 1000 + 18000000); });
-
-        x.domain(d3.extent(data, function(d) { return d.properties["ftime"]; }));
-        y.domain([d3.min(data, function(d) { return d.properties["tempF"]; }), d3.max(data, function(d) { return d.properties["tempF"]; })]);
-
-        var valueline = d3.line()
-            .x(function(d) { return x(d["ftime"]) })
-            .y(function(d) { return y(d["tempF"]) });
-
-        console.log(data);
-        var linedata = _.map(data, function(obj) { console.log(obj); return _.pick(obj.properties, "ftime", "tempF") });
-        //console.log(linedata3);
-
-        chart3.append("path")
-            .attr("class", "line")
-            .attr("d", valueline(linedata));
-
-
-        chart3.append("g")
-            .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x));
-
-        chart3.append("g")
-            .call(d3.axisLeft(y));
-
-                chart3.append("text")
-        .attr("x", width - 50)             
-        .attr("y", 20)
-        .attr("text-anchor", "middle")  
-        .style("font-size", "16px") 
-        .style("fill", "teal")
-        .style("text-decoration", "underline")  
-        .text("Temperature (F)");
-
-    }
-
-
-    var renderGraph4 = function(dataset, tripN) {
-
-        var data = _.filter(sdata.features, function(dataset) { return (dataset.properties["trip"] === tripN) && (dataset.properties["olive"] != 1) });
-        console.log(data);
-
-        data.forEach(function(d) {
-            d.properties["ftime"] = +d.properties["ftime"];
-            d.properties["GINI_IND"] = +d.properties["GINI_IND"];
-            //console.log(d.properties["dust"]);
-        });
-
-
-        createVisualization4(data);
-    };
-
-    //console.log(sdata.features[0]);
-    renderGraph4(sdata, tripN);
-
-
-    function createVisualization4(data) {
-        //Width and height
-        var canvasw = 600;
-        var canvash = 130;
-
-        var margin = { top: 20, right: 20, bottom: 30, left: 100 },
-            width = canvasw,
-            height = canvash;
-
-
-        var chart4 = d3.select("#chart3").append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-            .append("g")
-            .attr("transform",
-                "translate(" + margin.left + "," + margin.top + ")");
-
-
-        var x = d3.scaleTime().range([0, width]);
-        var y = d3.scaleLinear().range([height, 0]);
-
-        data.forEach(function(d) { d.properties["ftime"] = new Date(d.properties["unixt"] * 1000 + 18000000); });
-
-        x.domain(d3.extent(data, function(d) { return d.properties["ftime"]; }));
-        y.domain([d3.min(data, function(d) { return d.properties["GINI_IND"]; }) - 0.1, d3.max(data, function(d) { return d.properties["GINI_IND"]; }) + 0.1]);
-
-        var valueline = d3.line()
-            .x(function(d) { return x(d["ftime"]) })
-            .y(function(d) { return y(d["GINI_IND"]) });
-
-        console.log(data);
-        var linedata = _.map(data, function(obj) { console.log(obj); return _.pick(obj.properties, "ftime", "GINI_IND") });
-        console.log(linedata);
-
-        chart4.append("path")
-            .attr("class", "line")
-            .attr("d", valueline(linedata));
-
-
-        chart4.append("g")
-            .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x));
-
-        chart4.append("g")
-            .call(d3.axisLeft(y));
-
-        chart4.append("text")
-        .attr("x", width - 30)             
-        .attr("y", 20)
-        .attr("text-anchor", "middle")  
-        .style("font-size", "16px") 
-        .style("fill", "teal")
-        .style("text-decoration", "underline")  
-        .text("GINI Index");
-
-    }
-
-
-    var bubbles = mapsvg.append("g");
-
-    bubbles.selectAll("path")
-        .data(mapdata)
-        .enter()
-        .append("path")
-        .attr("fill", "#900")
-        .attr("stroke", "#999")
-        .attr("d", geoPath)
-        .attr("class", "sensingpts")
-        .on("mouseover", function(d) {
-            d3.select("h2").text(d.properties["dust"])
-            d3.select(this).attr("class", "sensingpts hover");
-        })
-        .on("mouseout", function(d) {
-            d3.select("h2").text("");
-            d3.select(this).attr("class", "sensingpts");
-        });
-
-    var datalocator = d3.line()
-
+    addButton1.onclick = function() {
+    displayData(1);
+};
+    addButton2.onclick = function() {
+    displayData(2);
+};
+    addButton3.onclick = function() {
+    displayData(3);
+};
+    addButton4.onclick = function() {
+    displayData(4);
+};
+    addButton5.onclick = function() {
+    displayData(5);
+};
+    addButton6.onclick = function() {
+    displayData(6);
+};
+    addButton7.onclick = function() {
+    displayData(7);
+};
+    addButton8.onclick = function() {
+    displayData(8);
+};
+    addButton9.onclick = function() {
+    displayData(9);
+};
+    addButton10.onclick = function() {
+    displayData(10);
+};
+    addButton11.onclick = function() {
+    displayData(11);
+};
+    addButton12.onclick = function() {
+    displayData(12);
+};
+
+   // displayData(tripN);
     </script>
 </body>
 

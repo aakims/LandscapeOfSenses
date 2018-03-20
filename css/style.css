@@ -15,14 +15,91 @@ h1 {
     z-index: 999;
 }
 
-h2 {
+#option {
+    position: auto;
+    left: 300px;
+}
+
+#dustlab {
     position: absolute; 
-    left: 50px;
+    left: 40px;
+    font-family: "oswald", sans-serif;
     font-size: 1.3em;
-    font-weight: 100;
-    top: 30px;
+    font-weight: 70;
+    top: 80px;
     font-size: 1em;
 }
+
+#dustval {
+    position: absolute; 
+    left: 140px;
+    font-family: "oswald", sans-serif;
+    font-size: 1.3em;
+    font-weight: 70;
+    top: 80px;
+    font-size: 1em;
+}
+
+#lightlab {
+    position: absolute; 
+    left: 40px;
+    font-family: "oswald", sans-serif;
+    font-size: 1.3em;
+    font-weight: 70;
+    top: 100px;
+    font-size: 1em;
+}
+
+#lightval {
+    position: absolute; 
+    left: 140px;
+    font-family: "oswald", sans-serif;
+    font-size: 1.3em;
+    font-weight: 70;
+    top: 100px;
+    font-size: 1em;
+}
+
+#templab {
+    position: absolute; 
+    left: 40px;
+    font-family: "oswald", sans-serif;
+    font-size: 1.3em;
+    font-weight: 70;
+    top: 120px;
+    font-size: 1em;
+}
+
+#tempval {
+    position: absolute; 
+    left: 140px;
+    font-family: "oswald", sans-serif;
+    font-size: 1.3em;
+    font-weight: 70;
+    top: 120px;
+    font-size: 1em;
+}
+
+#ginilab {
+    position: absolute; 
+    left: 40px;
+    font-family: "oswald", sans-serif;
+    font-size: 1.3em;
+    font-weight: 70;
+    top: 140px;
+    font-size: 1em;
+}
+
+#ginival {
+    position: absolute; 
+    left: 140px;
+    font-family: "oswald", sans-serif;
+    font-size: 1.3em;
+    font-weight: 70;
+    top: 140px;
+    font-size: 1em;
+}
+
 
 path {
     stroke: grey;
