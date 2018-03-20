@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Mapping with D3</title>
+    <script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+    <script src="data/Neighborhoods_Philadelphia.geojson"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
+    <script src="data/sensorymapdata.geojson"></script>
+    <link rel="stylesheet" href="css/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Karla|Oswald" rel="stylesheet">
+</head>
+
+<body>
+    <script>
+    //var tripN = 2; 
+
+    var renderGraph = function(dataset, tripN) {
+
+        var data = _.filter(sdata.features, function(dataset) { return dataset.properties["trip"] === tripN; });
+        console.log(data);
+
+        data.forEach(function(d) {
+            d.properties["ftime"] = +d.properties["ftime"];
+            d.properties["dust"] = +d.properties["dust"];
+            //console.log(d.properties["dust"]);
+        });
+
+
+        createVisualization(data);
+    };
+
+    console.log(sdata.features[0]);
+    renderGraph(sdata, 2);
+
+
+    function createVisualization(data) {
+        //Width and height
+        var width = 1000;
+        var height = 500;
+
+        var margin = { top: 30, right: 20, bottom: 30, left: 50 },
+            width = 800 - margin.left - margin.right,
+            height = 500 - margin.top - margin.bottom;
+
+
+        var svg = d3.select("body").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+
+
+        var x = d3.scaleTime().range([0, width]);
+        var y = d3.scaleLinear().range([height, 0]);
+
+        data.forEach(function(d) { d.properties["ftime"] = new Date(d.properties["unixt"] * 1000 + 18000000); });
+
+        x.domain(d3.extent(data, function(d) { return d.properties["ftime"]; }));
+        y.domain([0, d3.max(data, function(d) { return d.properties["dust"]; })]);
+
+        var valueline = d3.line()
+            .x(function(d) { return x(d["ftime"]) })
+            .y(function(d) { return y(d["dust"]) });
+
+        console.log(data);
+        var linedata = _.map(data, function (obj) {console.log (obj); return _.pick(obj.properties, "ftime","dust")});
+        console.log(linedata);
+
+        svg.append("path")
+            .attr("class", "line")
+            .attr("d", valueline(linedata));
+
+        svg.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x));
+
+        svg.append("g")
+            .call(d3.axisLeft(y));
+
+    }
+    </script>
+</body>
+
+</html>

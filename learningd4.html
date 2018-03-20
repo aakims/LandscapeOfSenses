@@ -24,11 +24,17 @@ body {
 
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
-    <script src="data/sensorymapdata.geojson"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
     <script src="data/minidata.geojson"></script>
     <script>
     // Set the dimensions of the canvas / graph
-    sdata.features.forEach(function(d) { d.properties["ftime"] = new Date(d.properties["unixt"] * 1000 + 18000000); });
+
+var downloadData = $.ajax("https://raw.githubusercontent.com/aakims/sensorymap/master/data/sensorymapdata.geojson").then(function(res) {
+    //console.log(res);
+    return res; 
+  });
+
 
     var formatDate = d3.timeFormat("%B %d, %Y");
     var formatTime = d3.timeFormat("%I:%M:%S");
@@ -47,9 +53,12 @@ body {
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 
-var draw = function (dataset, tripN) {
 
-    var data = dataset.filter(function (d) {return (d.properties["trip"] === tripN)});
+var draw = function (dataset) {
+
+    dataset.forEach(function(d) { d.properties["ftime"] = new Date(d.properties["unixt"] * 1000 + 18000000); });
+    
+    var data = dataset; 
     console.log(data[0]);
 
     data.forEach(function(d) { 
@@ -65,23 +74,17 @@ var draw = function (dataset, tripN) {
     y.domain([0, d3.max(data, function(d) {return d.properties["dust"];})]);
 
     var valueline = d3.line()
-    .x(function(d) { return x(d["ftime"]); })
-    .y(function(d) { return y(d["dust"]); });
-
-
-
+    .x(function(d) { return x(d["ftime"])})
+    .y(function(d) { return y(d["dust"])});
 
   //console.log(dataset[0]);
-
-
-    
 
   //add valueline path
 
     svg.append("path")
       .data([data])
       .attr("class", "line")
-      .attr("d", valueline([data]));
+      .attr("d", valueline(data.properties));
   
 
   svg.append("g")
@@ -95,8 +98,16 @@ var draw = function (dataset, tripN) {
 
 //get the data
 
-draw(sdata.features, 2);
+var tripN = 2; 
+var sdata; 
 
+downloadData.done(function(dataset) {
+  console.log(dataset);
+  sdata = dataset.features; 
+  sdata2 = _.filter(sdata, function(d) {return d.properties["trip"] == tripN});
+  console.log(sdata2);
+  draw(sdata2);
+});
 
 </script>
 </body>

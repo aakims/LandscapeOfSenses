@@ -1,4 +1,5 @@
-{"type": "FeatureCollection",
+var sdata = {
+"type": "FeatureCollection",
   "features": [
     {
       "type": "Feature",
