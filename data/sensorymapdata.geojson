@@ -1,5 +1,4 @@
-var sdata = {
-  "type": "FeatureCollection",
+"type": "FeatureCollection",
   "features": [
     {
       "type": "Feature",
