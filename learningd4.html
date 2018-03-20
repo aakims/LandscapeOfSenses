@@ -40,11 +40,6 @@ body {
         height = 500 - margin.top - margin.bottom;
 
 
-
-
-
-
-
   var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -58,19 +53,19 @@ var draw = function (dataset, tripN) {
     console.log(data[0]);
 
     data.forEach(function(d) { 
-    d.properties["timestamp"] = formatAll(d.properties["ftime"]);
-    d.properties["dust"] = d.properties["dust"];
+    d.properties["ftime"] = +d.properties["ftime"];
+    d.properties["dust"] = +d.properties["dust"];
     //console.log(d.properties["dust"]);
     });
           // set the ranges
     var x = d3.scaleTime().range([0, width]);
     var y = d3.scaleLinear().range([height, 0]);
 
-    x.domain(d3.extent(data, function(d) {return d.properties["timestamp"];}));
+    x.domain(d3.extent(data, function(d) {return d.properties["ftime"];}));
     y.domain([0, d3.max(data, function(d) {return d.properties["dust"];})]);
 
     var valueline = d3.line()
-    .x(function(d) { return x(d["timestamp"]); })
+    .x(function(d) { return x(d["ftime"]); })
     .y(function(d) { return y(d["dust"]); });
 
 
