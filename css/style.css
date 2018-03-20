@@ -1,61 +1,96 @@
-
 p.main {
-  font-size: 24px;
+    font-size: 24px;
 }
-
-.map {
-    position: absolute;
-    right: 0px;
-    left: 400px;
-    height: 100%;
-    top: 0;
-}
-
-.sidebar {
-    position: absolute;
-    left: 0px;
-    width: 400px;
-    top: 0;
-    bottom: 0;
-    overflow-y: auto;
-    padding: 20px;
-    font-size: 16px;
-}
-
-.legend {
-  position: absolute;
-  background-color: #fff;
-  z-index: 2000;
-}
-
-
 
 body {
     position: absolute;
     font-family: "Karla", sans-serif;
 }
 
-h1{
-    font-family: "oswald";
-        position: absolute;
-    left: 10px;
-    font-size: 1.3em;
-    font-weight: 100;
-    }
-
-
-     h2 {
+.title-bar {
     position: absolute;
-    left: 10px;
+    left: 0;
+    top: 0;
+    width: 1500px;
+    height: 100;
+}
+
+h1 {
+    font-family: "oswald";
+    position: relative;
+    left: 50px;
+    font-size: 1.8em;
+    font-weight: 100;
+
+    z-index: 999;
+}
+
+
+h2 {
+    position: relative;
+    left: 50px;
     font-size: 1.3em;
     font-weight: 100;
-        top: 30px;
+    top: 30px;
     font-size: 1em;
+}
+
+path {
+    stroke: grey;
+    stroke-width: 2;
+    fill: none;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
 }
 
 .sensingpts {
     fill: steelblue;
 }
+
 .hover {
-    fill: yellow;   
+    fill: yellow;
+}
+
+.map {
+    position: absolute;
+    right: 0px;
+    left: 50px;
+    height: 100%;
+    width: 900px;
+    top: 120px;
+}
+
+.graph {
+    position: absolute;
+    left: 0;
+}
+
+#chart1 {
+    position: absolute;
+    left: 930px;
+    top: -30px;
+}
+
+#chart2 {
+    position: absolute;
+    left: 930px;
+    top: 170px;
+}
+
+#chart3 {
+    position: absolute;
+    left: 930px;
+    top: 370px;
+}
+
+#chart4 {
+    position: absolute;
+    left: 930px;
+    top: 570px;
 }

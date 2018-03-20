@@ -13,12 +13,89 @@
 </head>
 
 <body>
+    <div class="title-bar">
+        <h1>Sensing Points in Philadelphia</h1>
+        <h2></h2>
+    </div>
+    <!-- Page elements and content go here. -->
+    <div class="map">
+    </div>
+    <div class="graph">
+        <div id="chart1">
+        </div>
+        <div id="chart2">
+        </div>
+        <div id="chart3">
+        </div>
+        <div id="chart4">
+        </div>
+    </div>
     <script>
-    //var tripN = 2; 
+    var tripN = 2;
+    // Our D3 code will go here.
+    // Width and Height of the whole visualization
+    var width = 800;
+    var height = 650;
+    // Create SVG
+    var mapsvg = d3.select(".map")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+    // Append empty placeholder g element to the SVG
+    // g will contain geometry elements
+    var g = mapsvg.append("g");
+    // Width and Height of the whole visualization
+    // Set Projection Parameters
+    var center = [2.5725, 39.957049];
+    var offset = [width / 2, height / 2];
+    var scale = 700000;
+    var PennSouthProjection = d3.geoConicConformal()
+        .scale(scale)
+        .parallels([39 + 56 / 60, 40 + 58 / 60])
+        .rotate([77 + 45 / 60, 0])
+        .center(center) //[2.5, 40.5]
+        .translate(offset);
+
+    // Create GeoPath function that uses built-in D3 functionality to turn
+    // lat/lon coordinates into screen coordinates
+    var geoPath = d3.geoPath()
+        .projection(PennSouthProjection);
+
+    // Classic D3... Select non-existent elements, bind the data, append the elements, and apply attributes
+    g.selectAll("path")
+        .data(philly_neighborhoods.features)
+        .enter()
+        .append("path")
+        .attr("fill", "#ccc")
+        .attr("stroke", "#333")
+        .attr("d", geoPath);
+
+    var bubbles = mapsvg.append("g");
+
+    bubbles.selectAll("path")
+        .data(sdata.features)
+        .enter()
+        .append("path")
+        .attr("fill", "#900")
+        .attr("stroke", "#999")
+        .attr("d", geoPath)
+        .attr("class", "sensingpts")
+        .on("mouseover", function(d) {
+            d3.select("h2").text(d.properties["dust"])
+            d3.select(this).attr("class", "sensingpts hover");
+        })
+        .on("mouseout", function(d) {
+            d3.select("h2").text("");
+            d3.select(this).attr("class", "sensingpts");
+        });
+    </script>
+    <script>
+    var tripN = 2;
 
     var renderGraph = function(dataset, tripN) {
 
-        var data = _.filter(sdata.features, function(dataset) { return dataset.properties["trip"] === tripN; });
+        var data = _.filter(sdata.features, function(dataset) { return (dataset.properties["trip"] === tripN) && (dataset.properties["olive"] != 1) });
         console.log(data);
 
         data.forEach(function(d) {
@@ -32,20 +109,20 @@
     };
 
     console.log(sdata.features[0]);
-    renderGraph(sdata, 2);
+    renderGraph(sdata, tripN);
 
 
     function createVisualization(data) {
         //Width and height
-        var width = 1000;
-        var height = 500;
+        var canvasw = 600;
+        var canvash = 130;
 
-        var margin = { top: 30, right: 20, bottom: 30, left: 50 },
-            width = 800 - margin.left - margin.right,
-            height = 500 - margin.top - margin.bottom;
+        var margin = { top: 100, right: 20, bottom: 30, left: 50 },
+            width = canvasw,
+            height = canvash;
 
 
-        var svg = d3.select("body").append("svg")
+        var chart1 = d3.select("#chart1").append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
@@ -66,12 +143,223 @@
             .y(function(d) { return y(d["dust"]) });
 
         console.log(data);
-        var linedata = _.map(data, function (obj) {console.log (obj); return _.pick(obj.properties, "ftime","dust")});
+        var linedata = _.map(data, function(obj) { console.log(obj); return _.pick(obj.properties, "ftime", "dust") });
+        console.log(linedata);
+
+        chart1.append("path")
+            .attr("class", "line")
+            .attr("d", valueline(linedata));
+
+
+        chart1.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x));
+
+        chart1.append("g")
+            .call(d3.axisLeft(y));
+
+    }
+    </script>
+    <script>
+    //var tripN = 2; 
+
+    var renderGraph = function(dataset, tripN) {
+
+        var data = _.filter(sdata.features, function(dataset) { return (dataset.properties["trip"] === tripN) && (dataset.properties["olive"] != 1) });
+        console.log(data);
+
+        data.forEach(function(d) {
+            d.properties["ftime"] = +d.properties["ftime"];
+            d.properties["light"] = +d.properties["light"];
+            //console.log(d.properties["dust"]);
+        });
+
+
+        createVisualization(data);
+    };
+
+    //console.log(sdata.features[0]);
+    renderGraph(sdata, tripN);
+
+
+    function createVisualization(data) {
+        //Width and height
+        var canvasw = 600;
+        var canvash = 130;
+
+        var margin = { top: 100, right: 20, bottom: 30, left: 50 },
+            width = canvasw,
+            height = canvash;
+
+
+        var svg = d3.select("#chart2").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+
+
+        var x = d3.scaleTime().range([0, width]);
+        var y = d3.scaleLinear().range([height, 0]);
+
+        data.forEach(function(d) { d.properties["ftime"] = new Date(d.properties["unixt"] * 1000 + 18000000); });
+
+        x.domain(d3.extent(data, function(d) { return d.properties["ftime"]; }));
+        y.domain([d3.min(data, function(d) { return d.properties["light"]; }) - 50, d3.max(data, function(d) { return d.properties["light"]; })]);
+
+        var valueline = d3.line()
+            .x(function(d) { return x(d["ftime"]) })
+            .y(function(d) { return y(d["light"]) });
+
+        console.log(data);
+        var linedata = _.map(data, function(obj) { console.log(obj); return _.pick(obj.properties, "ftime", "light") });
         console.log(linedata);
 
         svg.append("path")
             .attr("class", "line")
             .attr("d", valueline(linedata));
+
+
+        svg.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x));
+
+        svg.append("g")
+            .call(d3.axisLeft(y));
+
+    }
+    </script>
+    <script>
+    var tripN = 2;
+
+    var renderGraph = function(dataset, tripN) {
+
+        var data = _.filter(sdata.features, function(dataset) { return (dataset.properties["trip"] === tripN) && (dataset.properties["olive"] != 1) });
+        console.log(data);
+
+        data.forEach(function(d) {
+            d.properties["ftime"] = +d.properties["ftime"];
+            d.properties["tempF"] = +d.properties["tempF"];
+            //console.log(d.properties["dust"]);
+        });
+
+
+        createVisualization(data);
+    };
+
+    //console.log(sdata.features[0]);
+    renderGraph(sdata, tripN);
+
+
+    function createVisualization(data) {
+        //Width and height
+        var canvasw = 600;
+        var canvash = 130;
+
+        var margin = { top: 100, right: 20, bottom: 30, left: 50 },
+            width = canvasw,
+            height = canvash;
+
+
+        var svg = d3.select("#chart3").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+
+
+        var x = d3.scaleTime().range([0, width]);
+        var y = d3.scaleLinear().range([height, 0]);
+
+        data.forEach(function(d) { d.properties["ftime"] = new Date(d.properties["unixt"] * 1000 + 18000000); });
+
+        x.domain(d3.extent(data, function(d) { return d.properties["ftime"]; }));
+        y.domain([d3.min(data, function(d) { return d.properties["tempF"]; }), d3.max(data, function(d) { return d.properties["tempF"]; })]);
+
+        var valueline = d3.line()
+            .x(function(d) { return x(d["ftime"]) })
+            .y(function(d) { return y(d["tempF"]) });
+
+        console.log(data);
+        var linedata = _.map(data, function(obj) { console.log(obj); return _.pick(obj.properties, "ftime", "tempF") });
+        console.log(linedata);
+
+        svg.append("path")
+            .attr("class", "line")
+            .attr("d", valueline(linedata));
+
+
+        svg.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x));
+
+        svg.append("g")
+            .call(d3.axisLeft(y));
+
+    }
+    </script>
+    <script>
+    var tripN = 2;
+
+    var renderGraph = function(dataset, tripN) {
+
+        var data = _.filter(sdata.features, function(dataset) { return (dataset.properties["trip"] === tripN) && (dataset.properties["olive"] != 1) });
+        console.log(data);
+
+        data.forEach(function(d) {
+            d.properties["ftime"] = +d.properties["ftime"];
+            d.properties["tempF"] = +d.properties["tempF"];
+            //console.log(d.properties["dust"]);
+        });
+
+
+        createVisualization(data);
+    };
+
+    //console.log(sdata.features[0]);
+    renderGraph(sdata, tripN);
+
+
+    function createVisualization(data) {
+        //Width and height
+        var canvasw = 600;
+        var canvash = 130;
+
+        var margin = { top: 100, right: 20, bottom: 30, left: 50 },
+            width = canvasw,
+            height = canvash;
+
+
+        var svg = d3.select("#chart3").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+
+
+        var x = d3.scaleTime().range([0, width]);
+        var y = d3.scaleLinear().range([height, 0]);
+
+        data.forEach(function(d) { d.properties["ftime"] = new Date(d.properties["unixt"] * 1000 + 18000000); });
+
+        x.domain(d3.extent(data, function(d) { return d.properties["ftime"]; }));
+        y.domain([d3.min(data, function(d) { return d.properties["tempF"]; }), d3.max(data, function(d) { return d.properties["tempF"]; })]);
+
+        var valueline = d3.line()
+            .x(function(d) { return x(d["ftime"]) })
+            .y(function(d) { return y(d["tempF"]) });
+
+        console.log(data);
+        var linedata = _.map(data, function(obj) { console.log(obj); return _.pick(obj.properties, "ftime", "tempF") });
+        console.log(linedata);
+
+        svg.append("path")
+            .attr("class", "line")
+            .attr("d", valueline(linedata));
+
 
         svg.append("g")
             .attr("transform", "translate(0," + height + ")")
