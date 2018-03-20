@@ -36,6 +36,7 @@
     </div>
 
         <div class="w3-container">
+        <h3 id="datelab">Date: <h2 id="dateval"></h2></h3>
         <h3 id="dustlab">Air Quality: <h2 id="dustval"></h2></h3>
         <h3 id="lightlab">Ambient Light: <h2 id="lightval"></h2></h3>
         <h3 id="templab">Temperature: <h2 id="tempval"></h2></h3>
@@ -436,6 +437,7 @@
             .attr("d", geoPath)
             .attr("class", "sensingpts")
             .on("mouseover", function(d) {
+                d3.select("#dateval").text(d.properties["date"])
                 d3.select("#dustval").text(d.properties["dust"])
                 d3.select("#lightval").text(d.properties["light"])
                 d3.select("#tempval").text(d.properties["tempF"])
@@ -443,6 +445,7 @@
                 d3.select(this).attr("class", "sensingpts hover");
             })
             .on("mouseout", function(d) {
+                d3.select("#dateval").text("")
                 d3.select("#dustval").text("")
                 d3.select("#lightval").text("")
                 d3.select("#tempval").text("")
