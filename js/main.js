@@ -1,240 +1,499 @@
-/* =====================
-Leaflet Configuration
-===================== */
 
-var map = L.map('map', {
-  center: [40.000, -75.1090],
-  zoom: 8
-});
-var Stamen_TonerLite = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-  attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-  subdomains: 'abcd',
-  minZoom: 0,
-  maxZoom: 20,
-  ext: 'png'
-}).addTo(map);
+    var tripIndex; // define trip number 1~11
+
+    // DEFINE TRIP DATA 
+
+    var thisData = []; 
+    var queryData = function (dataset, tripNum) {
+        thisData = _.filter(dataset.features, function (feature) {
+            return (feature.properties["trip"] === tripNum) 
+            && (feature.properties["olive"] > 5)
+        })
+    }; //works 
+
+    // Data will change depending on the queryData() result, but the canvas sizes and svgs won't change.. 
+    // let's define them first separately. 
+
+    var mapCanvas = function () {
+
+        // setting map object extent 
+        var mapWidth = 800,
+        mapHeight = 650,
+        mapMargin = { top: 20, right: 10, bottom: 30, left: 20}
+
+        // create map svg 
+        mapsvg = d3.select("#map")
+        .append("svg")
+        .attr("width", mapWidth + mapMargin.left + mapMaring.right)
+        .attr("height", mapHeight + mapMargin.top + mapMargin.bottom)
+        .attr("transform", "translate(" + mapMargin.left + "," + mapMargin.top + ")"); 
+
+        //?? Append empty placeholder g element to the SVG
+        // g will contain geometry elements
+        var g = mapsvg.append("g");
+
+        // map projection parameters
+        // these were achieved by just adjusting decimal units multiple times
+        // and refreshing the html page. should figure out automatic centering. 
+        var center = [2.5725, 39.957049],
+        offset = [mapWidth / 2, mapHeight /2],
+        scale = 700000,
+        PennSouthProjection = d3.geoConicConformal().scale(scale)
+                                                    .parallels([39 + 56 / 60, 40 + 58 / 60])
+                                                    .rotate([77+45/60, 0])
+                                                    .center(center)
+                                                    .translate(offset); 
+
+        // Create GeoPath function that uses built-in D3 functionality to turn 
+        // lat/long coordinates into screen coordinates 
+        var geoPath = d3.geoPath()
+                        .projection(PennSouthProjection); 
+
+    },
+
+    graphCanvas = function (chartID) {
+        //Width and height
+            var graphWidth = 600;
+            var graphHeight = 130;
+
+            var graphMargin = { top: 40, right: 20, bottom: 30, left: 100 };
+            var whichChart = document.getElementById(chartID).value;
+            console.log(whichChart);
+            var chart = d3.select(whichChart).append("svg")
+                .attr("width", graphWidth + graphMargin.left + graphMargin.right)
+                .attr("height", graphHeight + graphMargin.top + graphMargin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + graphMargin.left + "," + graphMargin.top + ")");
 
 
-    var myControl = L.Control.extend({
+            var x = d3.scaleTime().range([0, width]);
+            var y = d3.scaleLinear().range([height, 0]);
+    };
 
-      options: {
-        position: 'topright' 
-        //control position - allowed: 'topleft', 'topright', 'bottomleft', 'bottomright'
-      },
 
-      onAdd: function (map) {
-        var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
 
-        L.DomEvent
-        .addListener(container, 'click', L.DomEvent.stopPropagation)
-            .addListener(container, 'click', L.DomEvent.preventDefault)
 
-        container.style.backgroundColor = 'white';
-        container.style.width = '30px';
-        container.style.height = '30px';
-        container.status = 0;  // my own variable 
+    function mapTripPath(tripNum) {
 
-        container.onclick = function(){
-          console.log(container.status);
+        // now off to classic D3: select non-existent elements, bind the data, append the elements, and apply attributes
+        g.selectAll("path")
+            .data(philly_neighborhoods.features)
+            .enter() //what does this do
+            .append("path")
+            .attr("fill","#ccc")
+            .attr("stroke", "#333")
+            .attr("d", geoPath);
 
-          // might want to do this as a switch statement, if many more cases
-          if(container.status == 0){
-              container.status = 1;
-            } else if(container.status == 1){
-              container.status = 0;
-            }
+    }
 
-            changeColoring(container.status);
+
+
+
+    function displayData(tripnumber) {
+
+        var tripN = tripnumber;
+        // Our D3 code will go here.
+        // Width and Height of the whole visualization
+        var mapwidth = 800;
+        var mapheight = 650;
+        var mapmargin = { top: 20, right: 10, bottom: 30, left: 20 }
+        // Create SVG
+        var mapsvg = d3.select("#map")
+            .append("svg")
+            .attr("width", mapwidth + mapmargin.left + mapmargin.right)
+            .attr("height", mapheight + mapmargin.top + mapmargin.bottom)
+            .attr("transform",
+                "translate(" + mapmargin.left + "," + mapmargin.top + ")");
+
+
+        // Create GeoPath function that uses built-in D3 functionality to turn
+        // lat/lon coordinates into screen coordinates
+        var geoPath = d3.geoPath()
+            .projection(PennSouthProjection);
+
+        // Classic D3... Select non-existent elements, bind the data, append the elements, and apply attributes
+        g.selectAll("path")
+            .data(philly_neighborhoods.features)
+            .enter()
+            .append("path")
+            .attr("fill", "#ccc")
+            .attr("stroke", "#333")
+            .attr("d", geoPath);
+
+        var mapdata = _.filter(sdata.features, function(dataset) { return (dataset.properties["trip"] === tripN) && (dataset.properties["olive"] != tripN) });
+
+
+
+
+        ///// GRAPH 1
+
+        var renderGraph1 = function(dataset, tripN) {
+
+            var data = _.filter(sdata.features, function(dataset) { return (dataset.properties["trip"] === tripN) && (dataset.properties["olive"] != 1) });
+            console.log(data);
+
+            data.forEach(function(d) {
+                d.properties["ftime"] = +d.properties["ftime"];
+                d.properties["dust"] = +d.properties["dust"];
+                //console.log(d.properties["dust"]);
+            });
+
+
+            createVisualization1(data);
+        };
+
+        console.log(sdata.features[0]);
+        renderGraph1(sdata, tripN, "dust");
+        //console.log("yes");
+
+
+        function createVisualization1(data) {
+
+
+            data.forEach(function(d) { d.properties["ftime"] = new Date(d.properties["unixt"] * 1000 + 18000000); });
+
+            x.domain(d3.extent(data, function(d) { return d.properties["ftime"]; }));
+            y.domain([0, d3.max(data, function(d) { return d.properties["dust"]; })]);
+
+            var valueline = d3.line()
+                .x(function(d) { return x(d["ftime"]) })
+                .y(function(d) { return y(d["dust"]) });
+
+            console.log(data);
+            var linedata = _.map(data, function(obj) { console.log(obj); return _.pick(obj.properties, "ftime", "dust") });
+            //console.log(linedata1);
+
+            chart1.append("path")
+                .attr("class", "line")
+                .attr("d", valueline(linedata));
+
+
+            chart1.append("g")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x));
+
+            chart1.append("g")
+                .call(d3.axisLeft(y));
+
+            chart1.append("text")
+                .attr("x", width - 70)
+                .attr("y", 20)
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("fill", "teal")
+                .style("text-decoration", "underline")
+                .text("Air Quality (pcs/0.01cf)");
+
         }
-        return container;
-      }
 
-    });
+        //// GRAPH2 
 
-    map.addControl(new myControl());
+        var renderGraph2 = function(dataset, tripN) {
 
-/* =====================
+            var data = _.filter(sdata.features, function(dataset) { return (dataset.properties["trip"] === tripN) && (dataset.properties["olive"] != 1) });
+            console.log(data);
 
-## Task 1
+            data.forEach(function(d) {
+                d.properties["ftime"] = +d.properties["ftime"];
+                d.properties["light"] = +d.properties["light"];
+                //console.log(d.properties["dust"]);
+            });
 
-Load the dataset into our application. Set the 'dataset' variable to the address for
-'philadelphia-garbage-collection-boundaries.geojson' in the class dataset repository
-https://raw.githubusercontent.com/CPLN-692-401/datasets/master/geojson/philadelphia-garbage-collection-boundaries.geojson
 
-You should now have GeoJSON data projected onto your map!
+            createVisualization2(data);
+        };
 
-## Task 2 - our first choropleth map
+        //console.log(sdata.features[0]);
+        renderGraph2(sdata, tripN);
 
-Style each garbage collection area with a different color depending on what day
-of the week garbage collection occurs. For example, all areas with Monday
-garbage collection could be red, all areas with Tuesday garbage collection could
-be blue, etc.
 
-The myStyle function should return an object that contains style information.
-For example, if you add the following line inside of the myStyle function, every
-feature should be colored red.
+        function createVisualization2(data) {
+            //Width and height
+            var canvasw = 600;
+            var canvash = 130;
 
-return {fillColor: 'red'}
+            var margin = { top: 20, right: 20, bottom: 30, left: 100 },
+                width = canvasw,
+                height = canvash;
 
-Other options for styling include opacity and weight. For a full list, see:
-http://leafletjs.com/reference.html#path
 
-For our myStyle function, we want a different fillColor to be returned depending
-on the day of the week. If you need help, review http://leafletjs.com/examples/geojson.html for
-working examples of this function.
+            var chart2 = d3.select("#chart2").append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
 
-## Task 3
 
-You might have noticed that two of the features we are mapping have empty
-strings as their value for collection date. These will probably have the default
-style on your map, not the new styles you defined for the days of the week.
+            var x = d3.scaleTime().range([0, width]);
+            var y = d3.scaleLinear().range([height, 0]);
 
-Our map is better than that. Let's filter out the junk data.
+            data.forEach(function(d) { d.properties["ftime"] = new Date(d.properties["unixt"] * 1000 + 18000000); });
 
-Check out the myFilter function. This function is used in a similar fashion to
-the second argument we provide to Underscore's _.filter() function. The filter
-loops through each feature in your GeoJSON file. For each feature, when the function
-returns true, that feature is added to the map. When it returns false, that feature
-is not added to the map.
+            x.domain(d3.extent(data, function(d) { return d.properties["ftime"]; }));
+            y.domain([d3.min(data, function(d) { return d.properties["light"]; }) - 50, d3.max(data, function(d) { return d.properties["light"]; })]);
 
-Currently, the myFilter function contains only:
+            var valueline = d3.line()
+                .x(function(d) { return x(d["ftime"]) })
+                .y(function(d) { return y(d["light"]) });
 
-`return true;`
+            console.log(data);
+            var linedata = _.map(data, function(obj) { console.log(obj); return _.pick(obj.properties, "ftime", "light") });
+            console.log(linedata);
 
-Since it always returns true, it will add each feature to the map. Modify the
-code so it only adds features to the map if they have a collection day (not an
-empty string).
+            chart2.append("path")
+                .attr("class", "line")
+                .attr("d", valueline(linedata));
 
-## Task 4
 
-Let's make something happen when a user clicks on a feature. Change the "Day of
-Week" in the sidebar to show the day of the week of garbage removal. Make sure
-to display the full name (display "Monday" instead of "MON").
+            chart2.append("g")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x));
 
-We will write everything we want to happen to each feature inside of the
-following (aptly named) function:
+            chart2.append("g")
+                .call(d3.axisLeft(y));
 
-var eachFeatureFunction = function(feature, layer) {
-  ...
-});
+            chart2.append("text")
+                .attr("x", width - 70)
+                .attr("y", 20)
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("fill", "teal")
+                .style("text-decoration", "underline")
+                .text("Ambient Light");
 
-You'll notice that inside of that block of code we have a second block of code:
+        }
 
-layer.on('click', function (e) {
-  ...
-})
 
-That part sets up a click event on each feature. Any code inside that second
-block of code will happen each time a feature is clicked.
+        ///GRAPH 3
 
-## Task 5
+        var renderGraph3 = function(dataset, tripN) {
 
-Create a legend for the map. You do not need to use Javascript. You can use HTML
-and CSS to create legend boxes and give each a different color. Put a label next
-to each box. Position the legend on top of the map (hint: you can use absolute
-positioning, which is the technique used to position the sidebar and map on this
-page).
+            var data = _.filter(sdata.features, function(dataset) { return (dataset.properties["trip"] === tripN) && (dataset.properties["olive"] != 1) });
+            console.log(data);
 
-## Task 6 (Stretch goal)
+            data.forEach(function(d) {
+                d.properties["ftime"] = +d.properties["ftime"];
+                d.properties["tempF"] = +d.properties["tempF"];
+                //console.log(d.properties["dust"]);
+            });
 
-Let's associate the leaflet ID (we can use this to look up a leaflet layer) with
-our HTML element. Try to use the `getLayerId` method of `L.FeatureGroup` and
-`L.LayerGroup` (on myFeatureGroup) below.
-With it, add the Leaflet ID to the information provided on the left.
 
-## Task 7 (Stretch Goal)
+            createVisualization3(data);
+        };
 
-Use fitBounds (http://leafletjs.com/reference.html#map-fitbounds) to zoom in and
-center the map on one particular feature. To find the bounds for a feature, use
-event.target.getBounds() inside of the layer.on function.
+        //console.log(sdata.features[0]);
+        renderGraph3(sdata, tripN);
 
-## Task 8 (Stretch Goal)
 
-Add a "Close" or "X" button to the top right of your sidebar. When when the
-button is clicked, call a function closeResults that performs the opposite
-processes as showResults, returning the user to the original state of the
-application.
+        function createVisualization3(data) {
+            //Width and height
+            var canvasw = 600;
+            var canvash = 130;
 
-## Task 9 (Stretch Goal)
+            var margin = { top: 20, right: 20, bottom: 30, left: 100 },
+                width = canvasw,
+                height = canvash;
 
-Use Underscore to perform analysis on this GeoJSON data: which day of
-the week was the most common for garbage removal? Update the original state
-of the application to report this information.
+            var chart3 = d3.select("#chart3").append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
 
-===================== */
+            var x = d3.scaleTime().range([0, width]);
+            var y = d3.scaleLinear().range([height, 0]);
 
-var dataset = "https://raw.githubusercontent.com/aakims/sensorymap/master/data/sensorymapdata.geojson"
+            data.forEach(function(d) { d.properties["ftime"] = new Date(d.properties["unixt"] * 1000 + 18000000); });
 
-var featureGroup = '';
+            x.domain(d3.extent(data, function(d) { return d.properties["ftime"]; }));
+            y.domain([d3.min(data, function(d) { return d.properties["tempF"]; }), d3.max(data, function(d) { return d.properties["tempF"]; })]);
 
-var myStyle = function(feature) {
-  switch (feature.properties.trip) {
-    case 1: return {color: "#D8472A"};
-    case 2: return {color: "#FBCA51"};
-    case 3: return {color: "#4D948F"};
-    case 4: return {color: "#4CB18D"};
-    case 5: return {color: "#7E3F46"};
-    case 6: return {color: "#D8472A"};
-    case 7: return {color: "#FBCA51"};
-    case 8: return {color: "#4D948F"};
-    case 9: return {color: "#4CB18D"};
-    case 10: return {color: "#7E3F46"};    
-    //default: return {color: "#000000"};
-  }
+            var valueline = d3.line()
+                .x(function(d) { return x(d["ftime"]) })
+                .y(function(d) { return y(d["tempF"]) });
+
+            console.log(data);
+            var linedata = _.map(data, function(obj) { console.log(obj); return _.pick(obj.properties, "ftime", "tempF") });
+            //console.log(linedata3);
+
+            chart3.append("path")
+                .attr("class", "line")
+                .attr("d", valueline(linedata));
+
+
+            chart3.append("g")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x));
+
+            chart3.append("g")
+                .call(d3.axisLeft(y));
+
+            chart3.append("text")
+                .attr("x", width - 70)
+                .attr("y", 20)
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("fill", "teal")
+                .style("text-decoration", "underline")
+                .text("Temperature (F)");
+
+        }
+
+
+        var renderGraph4 = function(dataset, tripN) {
+
+            var data = _.filter(sdata.features, function(dataset) { return (dataset.properties["trip"] === tripN) && (dataset.properties["olive"] != 1) });
+            console.log(data);
+
+            data.forEach(function(d) {
+                d.properties["ftime"] = +d.properties["ftime"];
+                d.properties["GINI_IND"] = +d.properties["GINI_IND"];
+                //console.log(d.properties["dust"]);
+            });
+
+
+            createVisualization4(data);
+        };
+
+        //console.log(sdata.features[0]);
+        renderGraph4(sdata, tripN);
+
+
+        function createVisualization4(data) {
+            //Width and height
+            var canvasw = 600;
+            var canvash = 130;
+
+            var margin = { top: 20, right: 20, bottom: 30, left: 100 },
+                width = canvasw,
+                height = canvash;
+
+
+            var chart4 = d3.select("#chart4").append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+
+            var x = d3.scaleTime().range([0, width]);
+            var y = d3.scaleLinear().range([height, 0]);
+
+            data.forEach(function(d) { d.properties["ftime"] = new Date(d.properties["unixt"] * 1000 + 18000000); });
+
+            x.domain(d3.extent(data, function(d) { return d.properties["ftime"]; }));
+            y.domain([d3.min(data, function(d) { return d.properties["GINI_IND"]; }) - 0.1, d3.max(data, function(d) { return d.properties["GINI_IND"]; }) + 0.1]);
+
+            var valueline = d3.line()
+                .x(function(d) { return x(d["ftime"]) })
+                .y(function(d) { return y(d["GINI_IND"]) });
+
+            console.log(data);
+            var linedata = _.map(data, function(obj) { console.log(obj); return _.pick(obj.properties, "ftime", "GINI_IND") });
+            console.log(linedata);
+
+            chart4.append("path")
+                .attr("class", "line")
+                .attr("d", valueline(linedata));
+
+
+            chart4.append("g")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x));
+
+            chart4.append("g")
+                .call(d3.axisLeft(y));
+
+            chart4.append("text")
+                .attr("x", width - 70)
+                .attr("y", 20)
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("fill", "teal")
+                .style("text-decoration", "underline")
+                .text("GINI Index");
+
+        }
+
+
+        var bubbles = mapsvg.append("g");
+
+        bubbles.selectAll("path")
+            .data(mapdata)
+            .enter()
+            .append("path")
+            .attr("fill", "#900")
+            .attr("stroke", "#999")
+            .attr("d", geoPath)
+            .attr("class", "sensingpts")
+            .on("mouseover", function(d) {
+                d3.select("#dateval").text(d.properties["date"])
+                d3.select("#dustval").text(d.properties["dust"])
+                d3.select("#lightval").text(d.properties["light"])
+                d3.select("#tempval").text(d.properties["tempF"])
+                d3.select("#ginival").text(d.properties["GINI_IND"])
+                d3.select(this).attr("class", "sensingpts hover");
+            })
+            .on("mouseout", function(d) {
+                d3.select("#dateval").text("")
+                d3.select("#dustval").text("")
+                d3.select("#lightval").text("")
+                d3.select("#tempval").text("")
+                d3.select("#ginival").text("")
+                d3.select(this).attr("class", "sensingpts");
+            });
+
+        //var datalocator = d3.line()
+    }
+    var tripN; 
+
+    addButtonC.onclick = function() {
+        bubbles.exit().remove();
+        chart1.exit().remove();
+        chart2.exit().remove();
+        chart3.exit().remove();
+        chart4.exit().remove();
+    }
+
+    addButton1.onclick = function() {
+    displayData(1);
+};
+    addButton2.onclick = function() {
+    displayData(2);
+};
+    addButton3.onclick = function() {
+    displayData(3);
+};
+    addButton4.onclick = function() {
+    displayData(4);
+};
+    addButton5.onclick = function() {
+    displayData(5);
+};
+    addButton6.onclick = function() {
+    displayData(6);
+};
+    addButton7.onclick = function() {
+    displayData(7);
+};
+    addButton8.onclick = function() {
+    displayData(8);
+};
+    addButton9.onclick = function() {
+    displayData(9);
+};
+    addButton10.onclick = function() {
+    displayData(10);
+};
+    addButton11.onclick = function() {
+    displayData(11);
+};
+    addButton12.onclick = function() {
+    displayData(12);
 };
 
-
-var showResults = function() {
-  /* =====================
-  This function uses some jQuery methods that may be new. $(element).hide()
-  will add the CSS "display: none" to the element, effectively removing it
-  from the page. $(element).show() removes "display: none" from an element,
-  returning it to the page. You don't need to change this part.
-  ===================== */
-  // => <div id="intro" css="display: none">
-  $('#intro').hide();
-  // => <div id="results">
-  $('#results').show();
-};
-
-
-var eachFeatureFunction = function(layer) {
-  layer.on('click', function (event) {
-    /* =====================
-    The following code will run every time a layer on the map is clicked.
-    Check out layer.feature to see some useful data about the layer that
-    you can use in your application.
-    ===================== */
-    console.log(layer.feature);
-    //console.log(layer.feature.properties.COLLDAY);
-    var dayTemplate = function (str) {
-      str = ((str === "MON") ? "Monday" :
-      (str === "TUE") ? "Tuesday" :
-      (str === "WED") ? "Wednesday" :
-      (str === "THU") ? "Thursday" :
-      (str === "FRI") ? "Friday" : str);
-      return str;};
-      //return str[0] + str.substr(1).toLowerCase() + 'day';};
-    $('.day-of-week').text(dayTemplate(layer.feature.properties.COLLDAY));
-    showResults();
-  });
-};
-
-var myFilter = function(feature) {
-  if (feature.properties.COLLDAY !== " ") {
-    return true;
-  } else return false;
-};
-
-$(document).ready(function() {
-  $.ajax(dataset).done(function(data) {
-    var parsedData = JSON.parse(data);
-    featureGroup = L.geoJson(parsedData, {
-      style: myStyle,
-      filter: myFilter
-    }).addTo(map);
-
-    // quite similar to _.each
-    featureGroup.eachLayer(eachFeatureFunction);
-  });
-});
+   // displayData(tripN);
