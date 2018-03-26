@@ -6,30 +6,21 @@ var indexFields = ["trip", "olive"]
 
 var selectFields = _.union(indexFields, timeField, dataFields);
 
+var graphTitles = ["Air Quality", "Light Level", "Temperature", "Gini Index"];
+
 // DEFINE TRIP DATA 
 
 var thisData = _.chain(sdata.features)
             .filter(function (feature) {
                 return (feature.properties["trip"] === tripIndex) && (feature.properties["olive"] > 5)
                 })
-            .map(function (feature) {
+            .each(function (feature) {
                 return _.pick(feature.properties, _.map(selectFields, function (key) {return key}))
                 })
             .value(); 
             // needs to work more on this 
             
-
-                .value()
-var queryData = function(dataset, tripNum) {
-    thisData = _.filter(dataset.features, function(feature) {
-        return (feature.properties["trip"] === tripNum) &&
-            (feature.properties["olive"] > 5)
-    })
-}; //works 
-
 //_.map(sdata.features, function (feature) {return _.pick(feature.properties, _.map(selectData, function (key) {return key}))})
-
-
 
 
 //canvas size variables 
@@ -58,22 +49,71 @@ var center = [2.5725, 39.957049],
     .center(center)
     .translate(offset);
 
-    // Data will change depending on the queryData() result, but the canvas sizes and svgs won't change.. 
-    // let's define them first separately. 
+// Data will change depending on the queryData() result, but the canvas sizes and svgs won't change.. 
+// let's define them first separately. 
 
 
+var setupCanvas = function (graphIndexEl) {
+
+    var chart = d3.select(graphIndexEl).append("svg")
+        .attr("width", graphWidth + graphMargin.left + graphMargin.right)
+        .attr("height", graphHeight + graphMargin.top + graphMargin.bottom)
+        .append("g")
+        .attr("transform",
+            "translate(" + graphMargin.left + "," + graphMargin.top + ")");
+
+    chart.append("text")
+        .attr("x", graphWidth - 70)
+        .attr("y", 20)
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .style("fill", "teal")
+        .style("text-decoration", "underline")
+        .text(graphTitles[graphIndex]);
+};
 
 
-    var displayGraphs = function () {
+ var prepData = function (graphIndexEl) {
+
+     var thisIndex = _.indexOf(graphSeries, graphIndexEl);
+     var yData = selectData[thisIndex];
+
+     var yMin = d3.min(_.map(thisData, function(sensObj) { return sensObj.properties[yData]; })),
+         yMax = d3.max(_.map(thisData, function(sensObj) { return sensObj.properties[yData]; }));
+
+     //console.log(yMin, yMax);
+
+     thisData = _.chain(thisData)
+                .each(function (sensObj) {sensObj.properties["ftime"] = ((sensObj.properties["unixt"]) > 0) ? 
+                    new Date(sensObj.properties["unixt"] * 1000 + 18000000) : console.log("no time stamp")})
+                .each{function (sensObj) {return ((sensObj.properties[yData]) ? )}};
+           
+
+     x.domain(d3.extent(thisData, function(sensObj) { return sensObj.properties["fttime"]; }));
+     y.domain([0.8 * yMin, 1.2 * yMax]);
+
+     var graphLine = d3.line()
+         .x(function(d) { return x(d["ftime"]); })
+         .y(function(d) { return y(d[yData]); });
+
+    var linedata = _.map(thisData, function(sensObj) { 
+        //console.log(obj); 
+        return _.pick(sensObj.properties, "ftime", yData)});
+
+
+var displayGraphs = function () {
 
             // graph the all graph divs defined by classname "graphs"
             var graphSeries = document.getElementsByClassName("graphs"); 
 
             // data prep: time variable + y variables
-            _.chain(thisData) 
-            .each(function (sensObj) {return ((sensObj.properties["ftime"]) ? 
+            var map
+            .each(function (sensObj) {return ((sensObj.properties["unixt"]) ? 
                 sensObj.properties["ftime"] : new Date(sensObj.properties["unixt"] * 1000 + 18000000))}
-            .each(function (sensObj) {return (_.contains([selectData], _.keys(sensObj.properties))) ?
+            .each(function (sensObj) {return ((senseObj.properties[dataFields[thisIndex]]) ? 
+                sensOjb.properties
+
+                _.contains([selectData], _.keys(sensObj.properties))) ?
                 sensObj.properties[]
                 sensObj.properties["ftime"] : 
 
@@ -103,43 +143,8 @@ return _.map(thisData, function(sensObj) {return _.pick(sensObj.properties, "fti
 
 
 
-            var setupCanvas(graphIndexEl) {
-                
-                var chart = d3.select(graphIndexEl).append("svg")
-                .attr("width", graphWidth + graphMargin.left + graphMargin.right)
-                .attr("height", graphHeight + graphMargin.top + graphMargin.bottom)
-                .append("g")
-                .attr("transform",
-                    "translate(" + graphMargin.left + "," + graphMargin.top + ")");
 
-                chart.append("text")
-                    .attr("x", graphWidth - 70)
-                    .attr("y", 20)
-                    .attr("text-anchor", "middle")
-                    .style("font-size", "16px")
-                    .style("fill", "teal")
-                    .style("text-decoration", "underline")
-                    .text("Title");
-            };
-
-         var prepData = function (thisGraph) {
-
-            var thisIndex = _.indexOf(graphSeries, thisGraph);
-            var yData = selectData[thisIndex]; 
-
-            var yMin = d3.min(_.map(thisData, function (sensObj) {return sensObj.properties[yData];})),
-             yMax = d3.max(_.map(thisData, function (sensObj) {return sensObj.properties[yData];}));
-
-            //console.log(yMin, yMax);
-
-            x.domain(d3.extent(thisData, function (sensObj) { return sensObj.properties["fttime"]; }));
-            y.domain([0.8*yMin, 1.2*yMax]); 
-
-            graphLine = d3.line()
-            .x(function(d) {return x(d["ftime"]);})
-            .y(function(d) {return y(d[yData]);}); 
-
-        }; //works
+//works
 
 
 
