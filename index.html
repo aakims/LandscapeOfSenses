@@ -24,8 +24,8 @@
         <h1>Landscape of Senses in Philadelphia</h1>
     </div>
     <div class="w3-container" id="option">
-        <button id=addButtonC>Clear</button>
-        <button id=addButton1 onClick="updateData(1)">T1</button>
+        <button id=addButtonC onClick="clearCanvas()">Clear</button>
+        <button id=addButton1 onClick="displayGraphs(1)">T1</button>
         <button id=addButton2 onClick="updateData(2)">T2</button>
         <button id=addButton3 onClick="updateData(3)">T3</button>
         <button id=addButton4 onClick="updateData(4)">T4</button>
@@ -51,14 +51,14 @@
             </div>
         </div>
         <div class="w3-col w3-container m12 l6 ">
-            <div id="graph">
-                <div id="chart1">
+            <div class = "dataviz">
+                <div class = "graphs" id="chart1">
                 </div>
-                <div id="chart2">
+                <div class = "graphs" id="chart2">
                 </div>
-                <div id="chart3">
+                <div class = "graphs" id="chart3">
                 </div>
-                <div id="chart4">
+                <div class = "graphs" id="chart4">
                 </div>
             </div>
         </div>

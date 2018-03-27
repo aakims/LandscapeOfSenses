@@ -1,10 +1,11 @@
 var tripIndex; // define trip number 1~11
 var indexFields = ["trip", "olive"],
     timeField = ["ftime"],
+    displayFields = ["dust", "light", "tempF", "GINI_IND"]
     dataFields = ["unixt", "trip", "olive", "ftime", "dust", "light", "tempF", "GINI_IND"],
     locationFields = ["FIPS", ];
 
-var selectFields = _.unique(indexFields, timeField, dataFields);
+var selectFields = _.unique(indexFields, timeField, displayFields, dataFields);
 
 var graphTitles = ["Air Quality", "Light Level", "Temperature", "Gini Index"];
 
@@ -54,9 +55,9 @@ var center = [2.5725, 39.957049],
 // let's define them first separately. 
 
 
-var setupCanvas = function(graphIndexEl) {
+var setupCanvas = function(thisItem) {
 
-    var chart = d3.select(graphIndexEl).append("svg")
+    chart = d3.select("#" + thisItem).append("svg")
         .attr("width", graphWidth + graphMargin.left + graphMargin.right)
         .attr("height", graphHeight + graphMargin.top + graphMargin.bottom)
         .append("g")
@@ -70,19 +71,36 @@ var setupCanvas = function(graphIndexEl) {
         .style("font-size", "16px")
         .style("fill", "teal")
         .style("text-decoration", "underline")
-        .text(graphTitles[graphIndex]);
+        .text(graphTitles[thisIndex]);
+
 };
 
+var renderGraph = function() {
+                    chart.append("path")
+                        .attr("class", "line")
+                        .attr("d", graphLine(linedata));
 
-var prepData = function(graphIndexEl) {
 
-    var thisIndex = _.indexOf(graphSeries, graphIndexEl);
-    var yData = selectData[thisIndex];
+                    chart.append("g")
+                        .attr("transform", "translate(0," + graphHeight + ")")
+                        .call(d3.axisBottom(x));
 
-    var yMin = d3.min(_.map(thisData, function(sensObj) { return sensObj.properties[yData]; })),
-        yMax = d3.max(_.map(thisData, function(sensObj) { return sensObj.properties[yData]; }));
+                    chart.append("g")
+                        .call(d3.axisLeft(y));
+}
 
-    //console.log(yMin, yMax);
+
+var prepData = function(thisIndex) {
+
+    //var thisIndex = _.indexOf(graphItems, graphItem);
+    var yData = displayFields[thisIndex];
+    console.log(yData); 
+    console.log(thisData[10]);
+
+    var yMin = d3.min(thisData, function(sensObj) { return sensObj.properties[yData]; }),
+        yMax = d3.max(thisData, function(sensObj) { console.log(sensObj.properties); return sensObj.properties[yData]; });
+
+    console.log(yMin, yMax);
 
     thisData = _.map(thisData, function(sensObj) {
             sensObj.properties["ftime"] =
@@ -95,65 +113,38 @@ var prepData = function(graphIndexEl) {
     x.domain(d3.extent(thisData, function(sensObj) { return sensObj.properties["fttime"]; }));
     y.domain([0.8 * yMin, 1.2 * yMax]);
 
-    var graphLine = d3.line()
+    graphLine = d3.line()
         .x(function(d) { return x(d["ftime"]); })
         .y(function(d) { return y(d[yData]); });
 
-    var linedata = _.map(thisData, function(sensObj) {
-        //console.log(obj); 
+    lineData = _.map(thisData, function(sensObj) {
+        console.log(sensObj); 
         return _.pick(sensObj.properties, "ftime", yData)
     });
 };
 
+var graphSeries, graphItems, thisIndex; 
+var displayGraphs = function(tripNumber) {
 
-var displayGraphs = function() {
-
+        tripIndex = tripNumber; 
+        console.log(tripIndex); 
         // graph the all graph divs defined by classname "graphs"
-        var graphSeries = document.getElementsByClassName("graphs");
-
-        // data prep: time variable + y variables
-
-
-        _.each(graphSeries, function(graphIndexEls) {
-
-                        _.chain(graphIndexEls)
-                        .prepData()
-                        .setupCanvas(graphIndexEl)
-                        .createVisualization()
-                        .renderGraph();
-                });
-
-                // for each graph div looped through by the graphIndex,
+        graphSeries = document.getElementsByClassName("graphs");
+        graphItems = _.map(graphSeries, function (graphItem) {return graphItem.id});
+        console.log(graphItems); 
+        _.map(graphItems, function (graphItem) {
+            thisIndex = _.indexOf(graphItems, graphItem); 
+            console.log(thisIndex);
+            console.log(graphItem);
+            this[graphItem] = this[graphItem];
+            var chart, graphLine, lineData; 
+            setupCanvas(graphItem); 
+            prepData(thisIndex);
+            renderGraph(thisIndex); 
+        })
 
 
-                //_.indexOf([array], value)
-
-                var mapGraphData; _.each(selectData, createVisualization);
-
-
-
-
-                //works
-
-
-
-                var renderGraph() {
-                    chart.append("path")
-                        .attr("class", "line")
-                        .attr("d", valueline(linedata));
-
-
-                    chart.append("g")
-                        .attr("transform", "translate(0," + height + ")")
-                        .call(d3.axisBottom(x));
-
-                    chart.append("g")
-                        .call(d3.axisLeft(y));
-                }
-
-
-            };
-
+}
 
 
 
@@ -234,274 +225,7 @@ var displayGraphs = function() {
 
 
 
-            function createVisualization1(data) {
 
-
-                x.domain(d3.extent(data, function(d) { return d.properties["ftime"]; }));
-                y.domain([0, d3.max(data, function(d) { return d.properties["dust"]; })]);
-
-                var valueline = d3.line()
-                    .x(function(d) { return x(d["ftime"]) })
-                    .y(function(d) { return y(d["dust"]) });
-
-                console.log(data);
-                var linedata = _.map(data, function(obj) { console.log(obj); return _.pick(obj.properties, "ftime", "dust") });
-                //console.log(linedata1);
-
-                chart1.append("path")
-                    .attr("class", "line")
-                    .attr("d", valueline(linedata));
-
-
-                chart1.append("g")
-                    .attr("transform", "translate(0," + height + ")")
-                    .call(d3.axisBottom(x));
-
-                chart1.append("g")
-                    .call(d3.axisLeft(y));
-
-                chart1.append("text")
-                    .attr("x", width - 70)
-                    .attr("y", 20)
-                    .attr("text-anchor", "middle")
-                    .style("font-size", "16px")
-                    .style("fill", "teal")
-                    .style("text-decoration", "underline")
-                    .text("Air Quality (pcs/0.01cf)");
-
-            }
-
-            //// GRAPH2 
-
-            var renderGraph2 = function(dataset, tripN) {
-
-                var data = _.filter(sdata.features, function(dataset) { return (dataset.properties["trip"] === tripN) && (dataset.properties["olive"] != 1) });
-                console.log(data);
-
-                data.forEach(function(d) {
-                    d.properties["ftime"] = +d.properties["ftime"];
-                    d.properties["light"] = +d.properties["light"];
-                    //console.log(d.properties["dust"]);
-                });
-
-
-                createVisualization2(data);
-            };
-
-            //console.log(sdata.features[0]);
-            renderGraph2(sdata, tripN);
-
-
-            function createVisualization2(data) {
-                //Width and height
-                var canvasw = 600;
-                var canvash = 130;
-
-                var margin = { top: 20, right: 20, bottom: 30, left: 100 },
-                    width = canvasw,
-                    height = canvash;
-
-
-                var chart2 = d3.select("#chart2").append("svg")
-                    .attr("width", width + margin.left + margin.right)
-                    .attr("height", height + margin.top + margin.bottom)
-                    .append("g")
-                    .attr("transform",
-                        "translate(" + margin.left + "," + margin.top + ")");
-
-
-                var x = d3.scaleTime().range([0, width]);
-                var y = d3.scaleLinear().range([height, 0]);
-
-                data.forEach(function(d) { d.properties["ftime"] = new Date(d.properties["unixt"] * 1000 + 18000000); });
-
-                x.domain(d3.extent(data, function(d) { return d.properties["ftime"]; }));
-                y.domain([d3.min(data, function(d) { return d.properties["light"]; }) - 50, d3.max(data, function(d) { return d.properties["light"]; })]);
-
-                var valueline = d3.line()
-                    .x(function(d) { return x(d["ftime"]) })
-                    .y(function(d) { return y(d["light"]) });
-
-                console.log(data);
-                var linedata = _.map(data, function(obj) { console.log(obj); return _.pick(obj.properties, "ftime", "light") });
-                console.log(linedata);
-
-                chart2.append("path")
-                    .attr("class", "line")
-                    .attr("d", valueline(linedata));
-
-
-                chart2.append("g")
-                    .attr("transform", "translate(0," + height + ")")
-                    .call(d3.axisBottom(x));
-
-                chart2.append("g")
-                    .call(d3.axisLeft(y));
-
-                chart2.append("text")
-                    .attr("x", width - 70)
-                    .attr("y", 20)
-                    .attr("text-anchor", "middle")
-                    .style("font-size", "16px")
-                    .style("fill", "teal")
-                    .style("text-decoration", "underline")
-                    .text("Ambient Light");
-
-            }
-
-
-            ///GRAPH 3
-
-            var renderGraph3 = function(dataset, tripN) {
-
-                var data = _.filter(sdata.features, function(dataset) { return (dataset.properties["trip"] === tripN) && (dataset.properties["olive"] != 1) });
-                console.log(data);
-
-                data.forEach(function(d) {
-                    d.properties["ftime"] = +d.properties["ftime"];
-                    d.properties["tempF"] = +d.properties["tempF"];
-                    //console.log(d.properties["dust"]);
-                });
-
-
-                createVisualization3(data);
-            };
-
-            //console.log(sdata.features[0]);
-            renderGraph3(sdata, tripN);
-
-
-            function createVisualization3(data) {
-                //Width and height
-                var canvasw = 600;
-                var canvash = 130;
-
-                var margin = { top: 20, right: 20, bottom: 30, left: 100 },
-                    width = canvasw,
-                    height = canvash;
-
-                var chart3 = d3.select("#chart3").append("svg")
-                    .attr("width", width + margin.left + margin.right)
-                    .attr("height", height + margin.top + margin.bottom)
-                    .append("g")
-                    .attr("transform",
-                        "translate(" + margin.left + "," + margin.top + ")");
-
-                var x = d3.scaleTime().range([0, width]);
-                var y = d3.scaleLinear().range([height, 0]);
-
-                data.forEach(function(d) { d.properties["ftime"] = new Date(d.properties["unixt"] * 1000 + 18000000); });
-
-                x.domain(d3.extent(data, function(d) { return d.properties["ftime"]; }));
-                y.domain([d3.min(data, function(d) { return d.properties["tempF"]; }), d3.max(data, function(d) { return d.properties["tempF"]; })]);
-
-                var valueline = d3.line()
-                    .x(function(d) { return x(d["ftime"]) })
-                    .y(function(d) { return y(d["tempF"]) });
-
-                console.log(data);
-                var linedata = _.map(data, function(obj) { console.log(obj); return _.pick(obj.properties, "ftime", "tempF") });
-                //console.log(linedata3);
-
-                chart3.append("path")
-                    .attr("class", "line")
-                    .attr("d", valueline(linedata));
-
-
-                chart3.append("g")
-                    .attr("transform", "translate(0," + height + ")")
-                    .call(d3.axisBottom(x));
-
-                chart3.append("g")
-                    .call(d3.axisLeft(y));
-
-                chart3.append("text")
-                    .attr("x", width - 70)
-                    .attr("y", 20)
-                    .attr("text-anchor", "middle")
-                    .style("font-size", "16px")
-                    .style("fill", "teal")
-                    .style("text-decoration", "underline")
-                    .text("Temperature (F)");
-
-            }
-
-
-            var renderGraph4 = function(dataset, tripN) {
-
-                var data = _.filter(sdata.features, function(dataset) { return (dataset.properties["trip"] === tripN) && (dataset.properties["olive"] != 1) });
-                console.log(data);
-
-                data.forEach(function(d) {
-                    d.properties["ftime"] = +d.properties["ftime"];
-                    d.properties["GINI_IND"] = +d.properties["GINI_IND"];
-                    //console.log(d.properties["dust"]);
-                });
-
-
-                createVisualization4(data);
-            };
-
-            //console.log(sdata.features[0]);
-            renderGraph4(sdata, tripN);
-
-
-            function createVisualization4(data) {
-                //Width and height
-                var canvasw = 600;
-                var canvash = 130;
-
-                var margin = { top: 20, right: 20, bottom: 30, left: 100 },
-                    width = canvasw,
-                    height = canvash;
-
-
-                var chart4 = d3.select("#chart4").append("svg")
-                    .attr("width", width + margin.left + margin.right)
-                    .attr("height", height + margin.top + margin.bottom)
-                    .append("g")
-                    .attr("transform",
-                        "translate(" + margin.left + "," + margin.top + ")");
-
-
-                var x = d3.scaleTime().range([0, width]);
-                var y = d3.scaleLinear().range([height, 0]);
-
-                data.forEach(function(d) { d.properties["ftime"] = new Date(d.properties["unixt"] * 1000 + 18000000); });
-
-                x.domain(d3.extent(data, function(d) { return d.properties["ftime"]; }));
-                y.domain([d3.min(data, function(d) { return d.properties["GINI_IND"]; }) - 0.1, d3.max(data, function(d) { return d.properties["GINI_IND"]; }) + 0.1]);
-
-                var valueline = d3.line()
-                    .x(function(d) { return x(d["ftime"]) })
-                    .y(function(d) { return y(d["GINI_IND"]) });
-
-                console.log(data);
-                var linedata = _.map(data, function(obj) { console.log(obj); return _.pick(obj.properties, "ftime", "GINI_IND") });
-                console.log(linedata);
-
-                chart4.append("path")
-                    .attr("class", "line")
-                    .attr("d", valueline(linedata));
-
-
-                chart4.append("g")
-                    .attr("transform", "translate(0," + height + ")")
-                    .call(d3.axisBottom(x));
-
-                chart4.append("g")
-                    .call(d3.axisLeft(y));
-
-                chart4.append("text")
-                    .attr("x", width - 70)
-                    .attr("y", 20)
-                    .attr("text-anchor", "middle")
-                    .style("font-size", "16px")
-                    .style("fill", "teal")
-                    .style("text-decoration", "underline")
-                    .text("GINI Index");
-
-            }
 
 
             var bubbles = mapsvg.append("g");
@@ -535,49 +259,11 @@ var displayGraphs = function() {
         }
         var tripN;
 
-        addButtonC.onclick = function() {
-            bubbles.exit().remove();
-            chart1.exit().remove();
-            chart2.exit().remove();
-            chart3.exit().remove();
-            chart4.exit().remove();
-        }
+        var clearCanvas = function () {
+            // Set new data on your chart:
+            var items = d3.select('svg').selectAll('.graphs').data(newData);
 
-        addButton1.onclick = function() {
-            displayData(1);
-        };
-        addButton2.onclick = function() {
-            displayData(2);
-        };
-        addButton3.onclick = function() {
-            displayData(3);
-        };
-        addButton4.onclick = function() {
-            displayData(4);
-        };
-        addButton5.onclick = function() {
-            displayData(5);
-        };
-        addButton6.onclick = function() {
-            displayData(6);
-        };
-        addButton7.onclick = function() {
-            displayData(7);
-        };
-        addButton8.onclick = function() {
-            displayData(8);
-        };
-        addButton9.onclick = function() {
-            displayData(9);
-        };
-        addButton10.onclick = function() {
-            displayData(10);
-        };
-        addButton11.onclick = function() {
-            displayData(11);
-        };
-        addButton12.onclick = function() {
-            displayData(12);
-        };
+            // Remove old elements:
+            items.exit().remove();
+                    }
 
-        // displayData(tripN);
