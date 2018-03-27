@@ -21,7 +21,7 @@ var defineData = function (numb) {
         return feature;
     })
     .value();
-    console.log(thisData[1]);
+    //console.log(thisData[1]);
 };
 
 
@@ -80,9 +80,13 @@ var setupCanvas = function(thisItem) {
 };
 
 var renderGraph = function() {
+
+                    console.log(lineData); 
                     chart.append("path")
                         .attr("class", "line")
-                        .attr("d", graphLine(linedata));
+                        .attr("d", graphLine(lineData));
+
+                    //console.log("Here");
 
 
                     chart.append("g")
@@ -102,9 +106,9 @@ var prepData = function(thisIndex) {
     console.log(thisData[10]);
 
     var yMin = d3.min(thisData, function(sensObj) { return sensObj.properties[yData]; }),
-        yMax = d3.max(thisData, function(sensObj) { console.log(sensObj.properties); return sensObj.properties[yData]; });
+        yMax = d3.max(thisData, function(sensObj) { return sensObj.properties[yData]; });
 
-    console.log(yMin, yMax);
+    // console.log(yMin, yMax);
 
     thisData = _.map(thisData, function(sensObj) {
             sensObj.properties["ftime"] =
@@ -114,18 +118,19 @@ var prepData = function(thisIndex) {
             return sensObj;
         });
 
-    console.log(thisData); 
+    //console.log(thisData); 
 
     x.domain(d3.extent(thisData, function(sensObj) { return sensObj.properties["fttime"]; }));
-    y.domain([0.8 * yMin, 1.2 * yMax]);
+    y.domain([0.75 * yMin, 1.25 * yMax]);
 
     graphLine = d3.line()
         .x(function(d) { return x(d["ftime"]); })
         .y(function(d) { return y(d[yData]); });
 
     lineData = _.map(thisData, function(sensObj) {
-        console.log(sensObj); 
-        return _.pick(sensObj.properties, "ftime", yData)
+        //console.log("in lineData"); 
+        sensObj.properties = _.pick(sensObj.properties, "ftime", yData);
+        return sensObj; 
     });
 };
 
@@ -149,6 +154,7 @@ var displayGraphs = function(tripNumber) {
             setupCanvas(graphItem); 
             prepData(thisIndex);
             renderGraph(thisIndex); 
+            defineData(tripIndex);
         })
 
 
