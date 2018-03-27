@@ -14,11 +14,11 @@ var thisData = _.chain(sdata.features)
             .filter(function (feature) {
                 return (feature.properties["trip"] === tripIndex) && (feature.properties["olive"] > 5)
                 })
-            .each(function (feature) {
-                return _.pick(feature.properties, _.map(selectFields, function (key) {return key}))
+            .map(function (feature) { 
+                feature.properties = _.pick(feature.properties, selectFields); return feature; 
                 })
             .value(); 
-            // needs to work more on this 
+
             
 //_.map(sdata.features, function (feature) {return _.pick(feature.properties, _.map(selectData, function (key) {return key}))})
 
@@ -99,6 +99,7 @@ var setupCanvas = function (graphIndexEl) {
     var linedata = _.map(thisData, function(sensObj) { 
         //console.log(obj); 
         return _.pick(sensObj.properties, "ftime", yData)});
+};
 
 
 var displayGraphs = function () {
