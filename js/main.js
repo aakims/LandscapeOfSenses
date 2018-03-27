@@ -1,17 +1,18 @@
 var tripIndex; // define trip number 1~11
 var indexFields = ["trip", "olive"],
     timeField = ["ftime"],
-    displayFields = ["dust", "light", "tempF", "GINI_IND"]
-    dataFields = ["unixt", "trip", "olive", "ftime", "dust", "light", "tempF", "GINI_IND"],
-    locationFields = ["FIPS", ];
+    displayFields = ["dust", "light", "tempF", "GINI_IND"],
+    dataFields = ["unixt", "trip", "olive", "ftime", "dust", "light", "tempF", "GINI_IND"];
 
-var selectFields = _.unique(indexFields, timeField, displayFields, dataFields);
+var selectFields = _.uniq(_.union(indexFields, timeField, displayFields, dataFields));
 
 var graphTitles = ["Air Quality", "Light Level", "Temperature", "Gini Index"];
-
+var thisData;
 // DEFINE TRIP DATA 
 
-var thisData = _.chain(sdata.features)
+var defineData = function (numb) {
+    tripIndex = numb; 
+    thisData = _.chain(sdata.features)
     .filter(function(feature) {
         return (feature.properties["trip"] === tripIndex) && (feature.properties["olive"] > 5)
     })
@@ -20,6 +21,9 @@ var thisData = _.chain(sdata.features)
         return feature;
     })
     .value();
+    console.log(thisData[1]);
+};
+
 
 
 //_.map(sdata.features, function (feature) {return _.pick(feature.properties, _.map(selectData, function (key) {return key}))})
@@ -110,6 +114,8 @@ var prepData = function(thisIndex) {
             return sensObj;
         });
 
+    console.log(thisData); 
+
     x.domain(d3.extent(thisData, function(sensObj) { return sensObj.properties["fttime"]; }));
     y.domain([0.8 * yMin, 1.2 * yMax]);
 
@@ -127,11 +133,13 @@ var graphSeries, graphItems, thisIndex;
 var displayGraphs = function(tripNumber) {
 
         tripIndex = tripNumber; 
+        defineData(tripIndex); 
         console.log(tripIndex); 
         // graph the all graph divs defined by classname "graphs"
         graphSeries = document.getElementsByClassName("graphs");
         graphItems = _.map(graphSeries, function (graphItem) {return graphItem.id});
         console.log(graphItems); 
+        console.log(thisData[10]);
         _.map(graphItems, function (graphItem) {
             thisIndex = _.indexOf(graphItems, graphItem); 
             console.log(thisIndex);
