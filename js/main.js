@@ -109,8 +109,8 @@ var prepData = function(thisIndex) {
         yMax = d3.max(thisData, function(sensObj) { return sensObj.properties[yData]; });
 
     // console.log(yMin, yMax);
-
-    thisData = _.map(thisData, function(sensObj) {
+    //https://www.quora.com/How-do-I-use-string-content-as-variable-name-in-JS
+    this[graphItem] = _.map(thisData, function(sensObj) {
             sensObj.properties["ftime"] =
                 (((sensObj.properties["unixt"]) > 0) ?
                     new Date(sensObj.properties["unixt"] * 1000 + 18000000) : console.log("no time stamp"));
