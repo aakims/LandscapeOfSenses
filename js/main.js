@@ -10,6 +10,7 @@ var graphTitles = ["Air Quality", "Light Level", "Temperature", "Gini Index"];
 var graphVars = ["chart1", "chart2", "chart3", "chart4"];
 var chart1, chart2, chart3, chart4;
 var thisData = [];
+var lineData; 
 // DEFINE TRIP DATA 
 
 var defineData = function (tripIndex) {
@@ -23,7 +24,15 @@ var defineData = function (tripIndex) {
         console.log(feature.properties);
         console.log(feature);
         return feature;
-    }).value();
+    })
+    .map(function(feature) {
+            feature.properties["ftime"] =
+                (((feature.properties["unixt"]) > 0) ?
+                    new Date(feature.properties["unixt"] * 1000 + 18000000) : console.log("no time stamp"));
+            return feature;
+        })
+    .value();
+        
     console.log(thisData[1]);
     return thisData; 
 
@@ -80,34 +89,30 @@ var prepData = function(yDataIndex) {
     //var thisIndex = _.indexOf(graphItems, graphItem);
     var yData = displayFields[yDataIndex];
     console.log(yData); 
-    console.log(thisData[1]);
+    //console.log(thisData[1]);
 
-    var yMin = d3.min(thisData, function(sensObj) { return sensObj.properties[yData]; }),
-        yMax = d3.max(thisData, function(sensObj) { return sensObj.properties[yData]; });
+    var yMin = d3.min(lineData, function(sensObj) { return sensObj.properties[yData]; }),
+        yMax = d3.max(lineData, function(sensObj) { return sensObj.properties[yData]; });
 
     // console.log(yMin, yMax);
     //https://www.quora.com/How-do-I-use-string-content-as-variable-name-in-JS
-    _.each(thisData, function(sensObj) {
-            sensObj.properties["ftime"] =
-                (((sensObj.properties["unixt"]) > 0) ?
-                    new Date(sensObj.properties["unixt"] * 1000 + 18000000) : console.log("no time stamp"));
-            return sensObj;
-        });
 
-    console.log(thisData); 
+    console.log(lineData[0]); 
+    console.log(thisData[0]);
 
-    x.domain(d3.extent(thisData, function(sensObj) { return sensObj.properties["fttime"]; }));
+    x.domain(d3.extent(lineData, function(sensObj) { return sensObj.properties["fttime"]; }));
     y.domain([0.75 * yMin, 1.25 * yMax]);
 
     graphLine = d3.line()
         .x(function(d) { return x(d["ftime"]); })
         .y(function(d) { return y(d[yData]); });
 
-    lineData = _.map(thisData, function(sensObj) {
+    lineData = _.map(lineData, function(sensObj) {
         //console.log("in lineData"); 
         sensObj.properties = _.pick(sensObj.properties, "ftime", yData);
         return sensObj; 
     });
+    console.log(lineData);
 };
 
 
@@ -117,23 +122,26 @@ var displayGraphs = function(tripIndex) {
         //console.log(sdata.features);
 
         console.log(tripIndex);
+        defineData(tripIndex);
         //console.log("definedData example:" + thisData[10]) ;
         // graph the all graph divs defined by classname "graphs"
         graphSeries = document.getElementsByClassName("graphs");
         graphItems = _.map(graphSeries, function (graphItem) {return graphItem.id});
         console.log(graphItems); 
         //console.log(thisData[10]);
-        prepData();
+        //prepData();
 
 
         _.each(graphItems, function (graphItem) {
 
             //(graphItem === "chart1") :
-             defineData(tripIndex); 
+            //defineData(tripIndex); 
+             lineData = thisData; 
+             console.log(thisData); 
              thisIndex = _.indexOf(graphItems, graphItem); 
              console.log(thisIndex);
              var thisGraph = graphItem;
-             var chart, graphLine, lineData; 
+             var chart, graphLine;  
              setupCanvas(graphItem); 
              prepData(thisIndex);
         });
