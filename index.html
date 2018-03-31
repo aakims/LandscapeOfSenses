@@ -12,12 +12,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
     <script src="https://d3js.org/d3-time-format.v2.min.js"></script>
     <!--- javascript imports --> 
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>
     <script src="js/main.js"></script>
     <!--- style sheets -->
     <link href="https://fonts.googleapis.com/css?family=Karla|Oswald" rel="stylesheet">
     <meta name="viewpoint" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://www.w3schools.com/w3css/4/w3.css" />
     <link rel="stylesheet" href="css/style.css" />
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel='stylesheet' />
 </head>
 
 <body>
@@ -46,11 +48,9 @@
         <h3 id="templab">Temperature: <h2 id="tempval"></h2></h3>
         <h3 id="ginilab">GINI Index: <h2 id="ginival"></h2></h3>
     </div>
+    <div id = 'map'> <!--- class="w3-col w3-container m12 l6"  -->
+    </div>
     <div class="w3-row">
-        <div class="w3-col w3-container m12 l6">
-            <div id="map">
-            </div>
-        </div>
         <div class="w3-col w3-container m12 l6 ">
             <div class = "dataviz">
                 <div class = "graphs" id="chart1">
@@ -64,6 +64,16 @@
             </div>
         </div>
     </div>
+
+    <script>
+                mapboxgl.accessToken = 'pk.eyJ1IjoiYWFraW1zIiwiYSI6ImNqZmQ1bm4yaDF4NnQzdW8xem54dmNzYXQifQ.VfaDRyNApyLYnCVL7PcpzA';
+
+        //create a map using the Mapbox Dark theme, zoomed in to Philly
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/aakims/cjfejc27a56ui2sqw2lh5c03m',
+        });
+    </script>
 </body>
 
 </html>

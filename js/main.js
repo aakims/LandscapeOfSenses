@@ -3,6 +3,12 @@ var indexFields = ["trip", "olive"],
     timeField = ["ftime"],
     displayFields = ["dust", "light", "tempF", "GINI_IND"],
     dataFields = ["unixt", "trip", "olive", "ftime", "dust", "light", "tempF", "GINI_IND"];
+var mapCenterCoor; 
+var defineMapCenter = function () {
+    var midIndex = thisData.length/2;
+    mapCenterCorr = thisData[midIndex].geometry.coordinates; 
+};
+
 
 var selectFields = _.uniq(_.union(indexFields, timeField, displayFields, dataFields));
 
@@ -36,10 +42,6 @@ var graphWidth = 600;
 var graphHeight = 130;
 var graphMargin = { top: 40, right: 20, bottom: 30, left: 100 };
 
-// x and y axis setup
-var x = d3.scaleTime().range([0, graphWidth]);
-var y = d3.scaleLinear().range([graphHeight, 0]);
-
 // setting map object extent 
 var mapWidth = 800,
     mapHeight = 650,
@@ -54,6 +56,12 @@ var center = [2.5725, 39.957049],
     .rotate([77 + 45 / 60, 0])
     .center(center)
     .translate(offset);
+
+// x and y axis setup
+var x = d3.scaleTime().range([0, graphWidth]);
+var y = d3.scaleLinear().range([graphHeight, 0]);
+
+
 
 var graphSeries, graphItems, thisIndex;
 
@@ -166,6 +174,8 @@ var displayGraphs = function(tripIndex) {
     clearCanvas();
     console.log(tripIndex);
     defineData(tripIndex);
+    defineMapCenter(); 
+    console.log(mapCenterCoor);
     //console.log("definedData example:" + thisData[10]) ;
     // graph the all graph divs defined by classname "graphs"
     graphSeries = document.getElementsByClassName("graphs");
@@ -261,3 +271,12 @@ var clearCanvas = function() {
     // Remove old elements:
     //items.exit().remove();
 };
+
+
+ //replace with YOUR access token
+
+
+
+        //var container = map.getCanvasContainer();
+        //var mapsvgbg = d3.select("#map").append("svg");
+

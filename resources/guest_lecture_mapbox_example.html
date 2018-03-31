@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8' />
+    <title>GL JS Choropleth</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel='stylesheet' />
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id='map'></div>
+    
+    <script>
+        //replace with YOUR access token
+        mapboxgl.accessToken = 'pk.eyJ1IjoidG9wb3MiLCJhIjoiY2o2eHh2dzNvMXBiZDJ3czZwYnVzcWE1dyJ9.K9k_YOdxOrAXuxgRdwo6mw';
+
+        //globals for the choropleth
+        let COLORS = ['#009392','#72aaa1','#b1c7b3','#f1eac8','#e5b9ad','#d98994','#d0587e'],
+            BREAKS = [.4, .8, 1.2, 1.6, 2, 2.4, 2.8]
+
+        //create a map using the Mapbox Dark theme, zoomed in to Philly
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/dark-v9',
+            zoom: 11,
+            center: [-75.1652, 39.9526]
+        });
+
+        //data source: http://opendata.dc.gov/datasets/e87a760828844422afe864a6754049c2_20?geometry=-77.297%2C38.854%2C-76.732%2C38.934
+        map.on('load', function () {
+            map.addSource('litter_index', {
+                type: 'geojson',
+                data: 'https://phl.carto.com/api/v2/sql?q=SELECT+*+FROM+litter_index_polygon&filename=litter_index_polygon&format=geojson&skipfields=cartodb_id'
+            });
+
+            map.addLayer({
+                "id": "blocks",
+                "type": "fill",
+                "source": "litter_index",
+                "paint": {
+                    "fill-color": {
+                        property: "division_score",
+                        stops: [
+                            [BREAKS[0], COLORS[0]],
+                            [BREAKS[1], COLORS[1]],
+                            [BREAKS[2], COLORS[2]],
+                            [BREAKS[3], COLORS[3]],
+                            [BREAKS[4], COLORS[4]],
+                            [BREAKS[5], COLORS[5]],
+                            [BREAKS[6], COLORS[6]]
+                        ]
+                    },
+                    "fill-opacity": 0.9                
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
