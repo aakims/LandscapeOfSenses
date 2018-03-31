@@ -6,74 +6,48 @@
     <!--- data imports-->
     <script src="data/Neighborhoods_Philadelphia.geojson"></script>
     <script src="data/newsensorydata.geojson"></script>
-    <!--- libraries imports --> 
+    <!--- libraries imports -->
     <script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
     <script src="https://d3js.org/d3-time-format.v2.min.js"></script>
-    <!--- javascript imports --> 
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>
-    <script src="js/main.js"></script>
     <!--- style sheets -->
     <link href="https://fonts.googleapis.com/css?family=Karla|Oswald" rel="stylesheet">
-    <meta name="viewpoint" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://www.w3schools.com/w3css/4/w3.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel='stylesheet' />
 </head>
 
 <body>
-    <div class="w3-container w3-teal">
-        <h1>Landscape of Senses in Philadelphia</h1>
-    </div>
-    <div class="w3-container" id="option">
-        <button id=addButtonC onClick="clearCanvas()">Clear</button>
-        <button id=addButton1 onClick="displayGraphs(1)">T1</button>
-        <button id=addButton2 onClick="displayGraphs(2)">T2</button>
-        <button id=addButton3 onClick="displayGraphs(3)">T3</button>
-        <button id=addButton4 onClick="displayGraphs(4)">T4</button>
-        <button id=addButton5 onClick="displayGraphs(5)">T5</button>
-        <button id=addButton6 onClick="displayGraphs(6)">T6</button>
-        <button id=addButton7 onClick="displayGraphs(7)">T7</button>
-        <button id=addButton8 onClick="displayGraphs(8)">T8</button>
-        <button id=addButton9 onClick="displayGraphs(9)">T9</button>
-        <button id=addButton10 onClick="displayGraphs(10)">T10</button>
-        <button id=addButton11 onClick="displayGraphs(11)">T11</button>
-        <button id=addButton12 onClick="displayGraphs(12)">T12</button>
-    </div>
-    <div class="w3-container">
-        <h3 id="datelab">Date: <h2 id="dateval"></h2></h3>
-        <h3 id="dustlab">Air Quality: <h2 id="dustval"></h2></h3>
-        <h3 id="lightlab">Ambient Light: <h2 id="lightval"></h2></h3>
-        <h3 id="templab">Temperature: <h2 id="tempval"></h2></h3>
-        <h3 id="ginilab">GINI Index: <h2 id="ginival"></h2></h3>
-    </div>
-    <div id = 'map'> <!--- class="w3-col w3-container m12 l6"  -->
-    </div>
-    <div class="w3-row">
-        <div class="w3-col w3-container m12 l6 ">
-            <div class = "dataviz">
-                <div class = "graphs" id="chart1">
-                </div>
-                <div class = "graphs" id="chart2">
-                </div>
-                <div class = "graphs" id="chart3">
-                </div>
-                <div class = "graphs" id="chart4">
-                </div>
-            </div>
+    <div class="wrapper">
+        <div class="box header-bar">LANDSCAPE OF SENSES</div>
+        <div class="box navbar buttons">
+                <button id=addButtonC onClick="clearCanvas()">Clear</button>
+                <button id=addButton1 onClick="displayGraphs(1)">T1</button>
+                <button id=addButton2 onClick="displayGraphs(2)">T2</button>
+                <button id=addButton3 onClick="displayGraphs(3)">T3</button>
+                <button id=addButton4 onClick="displayGraphs(4)">T4</button>
+                <button id=addButton5 onClick="displayGraphs(5)">T5</button>
+                <button id=addButton6 onClick="displayGraphs(6)">T6</button>
+                <button id=addButton7 onClick="displayGraphs(7)">T7</button>
+                <button id=addButton8 onClick="displayGraphs(8)">T8</button>
+                <button id=addButton9 onClick="displayGraphs(9)">T9</button>
+                <button id=addButton10 onClick="displayGraphs(10)">T10</button>
+                <button id=addButton11 onClick="displayGraphs(11)">T11</button>
+                <button id=addButton12 onClick="displayGraphs(12)">T12</button>
+            
+        </div>
+        <div class="box maphere" id='map'>Left/Map Box</div>
+        <div class="box graphshere">
+            <div class="box graphs" id="graph1"></div>
+            <div class="box graphs" id="graph2"></div>
+            <div class="box graphs" id="graph3"></div>
+            <div class="box graphs" id="graph4"></div>
         </div>
     </div>
 
-    <script>
-                mapboxgl.accessToken = 'pk.eyJ1IjoiYWFraW1zIiwiYSI6ImNqZmQ1bm4yaDF4NnQzdW8xem54dmNzYXQifQ.VfaDRyNApyLYnCVL7PcpzA';
-
-        //create a map using the Mapbox Dark theme, zoomed in to Philly
-        var map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/aakims/cjfejc27a56ui2sqw2lh5c03m',
-        });
-    </script>
+    <!--- javascript imports -->
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>

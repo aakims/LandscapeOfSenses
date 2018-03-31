@@ -1,3 +1,13 @@
+                mapboxgl.accessToken = 'pk.eyJ1IjoiYWFraW1zIiwiYSI6ImNqZmQ1bm4yaDF4NnQzdW8xem54dmNzYXQifQ.VfaDRyNApyLYnCVL7PcpzA';
+
+        //create a map using the Mapbox Dark theme, zoomed in to Philly
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/aakims/cjfejc27a56ui2sqw2lh5c03m',
+            zoom: 11,
+            center: [-75.1652, 39.9526]
+        });
+
 var tripIndex; // define trip number 1~11
 var indexFields = ["trip", "olive"],
     timeField = ["ftime"],
@@ -174,8 +184,8 @@ var displayGraphs = function(tripIndex) {
     clearCanvas();
     console.log(tripIndex);
     defineData(tripIndex);
-    defineMapCenter(); 
-    console.log(mapCenterCoor);
+    //defineMapCenter(); 
+    //console.log(mapCenterCoor);
     //console.log("definedData example:" + thisData[10]) ;
     // graph the all graph divs defined by classname "graphs"
     graphSeries = document.getElementsByClassName("graphs");
@@ -183,7 +193,18 @@ var displayGraphs = function(tripIndex) {
     console.log(graphItems);
     //console.log(thisData[10]);
     //prepData();
-    displayMap();
+    map.on('load', function () {
+
+        map.addLayer({
+            "id": "points",
+            "type": "circle",
+            "source": {
+                "type": "geojson",
+                "data": thisData
+            }
+        });
+    });
+    //displayMap();
 
 
     _.each(graphItems, function(graphItem) {
@@ -272,11 +293,4 @@ var clearCanvas = function() {
     //items.exit().remove();
 };
 
-
- //replace with YOUR access token
-
-
-
-        //var container = map.getCanvasContainer();
-        //var mapsvgbg = d3.select("#map").append("svg");
 
