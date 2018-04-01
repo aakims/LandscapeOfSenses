@@ -262,7 +262,7 @@ var displayGraphs = function(tripIndex) {
 
     //displayMap();
     displayMapbox();
-    //enableToolTips();
+    enableToolTips();
 
     _.each(graphItems, function(graphItem) {
 
@@ -305,85 +305,103 @@ var clearCanvas = function() {
     //items.exit().remove();
 };
 
-//var enableToolTips = function() {
 
-var tooltipWidth = $(".graphs-here").outerWidth(true),
-tooltipHeight = $(".graphs-here").outerHeight(true); 
-console.log(tooltipWidth, tooltipHeight); //checks out 
 
-var tooltipMargin = {left: graphMargin.left, right: graphMargin.right, top: graphMargin.top, bottom: graphMargin.bottom};
-//var stalkerBar2 = $(".graphs-tool-tip").append("svg").position(159, 807);
+var tooltipWidth = graphWidth,
+tooltipHeight = $(".graphs-here").height() - graphMargin.top - graphMargin.bottom; 
+var graphStart = $(".graphs-tool-tip").width()/2 - (graphWidth/2) + 15; // 15 hard numb is not ideal but this works on roughly full screen
 var tooltipsvg = d3.select(".graphs-tool-tip") //mouseG
 .append("svg")
-.attr("width", tooltipWidth - tooltipMargin.left - tooltipMargin.right)
-.attr("height", tooltipHeight - tooltipMargin.top - tooltipMargin.bottom)
-.attr("transform", "translate(" + tooltipMargin.left + "," + tooltipMargin.top + ")");
+.attr("class", "stalker-radius")
+.attr("width", tooltipWidth)
+.attr("height", tooltipHeight)
+.attr("transform",
+            "translate(" + graphStart + "," + graphMargin.top + ")");
 
-tooltipsvg.append("path")
-.attr("class", "stalker-line")
+/* this took unfair amount of time to realize: the stalker-radius adjusts accrodingly depending on the ".graphs-here" class grid when first loaded. As soon as I load the graphs though, they are not responsive, so if the screen size is anything smaller than the full-size, the stalker-radius seems to be shrunk. This should be dealt with all together later when doing @media only responsive CSS adjustments. Proceeding with full-size screen in mind. i.e. stalker-radius will be catered to the full-length of the graphs */ 
+
+
+var stalkerG = tooltipsvg.append("g")
+.attr("class", "mouse-over-effects");
+
+
+
+var enableToolTips = function () {
+
+stalkerG.append("path")
+.attr("class", "mouse-line")
 .style("stroke", "#54505E")
-.style("stroke-width", "1px")
+.style("stroke-width", "2px")
 .style("opacity", "0");
-// var stalkerBar = tooltipsvg.append("g")
-// .attr("class", "mouse-over-effects");
-// //.translate("transform", "translate(" + graphMargin.left + "," + graphMargin.top + ")");
 
+var lines = document.getElementsByClassName("line"); 
 
-// var stalkerLines = document.getElementsByClassName("line"); //lines
-// //console.log(stalkerLine); // this does graph all four 
+var stalkerPerLine = stalkerG.selectAll(".mouse-per-line")
+.data(thisData)
+.enter()
+.append("g")
+.attr("class", "mouse-per-line");
 
+stalkerPerLine.append("circle")
+.attr("r", 4)
+.style("stroke",  "#54505E")
+.style("fill", "#54505E")
+.style("opacity", "0"); 
 
-// var stalkerPerLine = stalkerBar.selectAll(".stalker-per-line") // mousePerLine, .mouse-per-line
-// .data(thisData)
-// .enter()
-// .append("g")
-// .attr("class", "stalker-per-line");
-// //.classed('x', true);
+stalkerG.append("svg:rect")
+.attr("width", tooltipWidth)
+.attr("height", tooltipHeight)
+.attr("fill", "none")
+.attr("pointer-events", "all")
+.on("mouseout", function() {
+    d3.select(".mouse-line").style("opacity", "0");
+    d3.selectAll(".mouse-per-line circle").style("opacity", "0");
+    //d3.selectAll(".mouse-per-line text").style("opacity", "0");
+})
+.on("mouseover", function() {
+    d3.select(".mouse-line").style("opacity", "1");
+    d3.selectAll(".mouse-per-line circle").style("opacity", "1");
+    //d3.selectAll(".mouse-per-line text").style("opacity", "1");
+})
+.on("mousemove", function() {
+    var mouseCo = d3.mouse(this);
+    d3.select(".mouse-line")
+    .attr("d", function() {
+        var d = "M" + mouseCo[0] + "," + tooltipHeight;
+        d += " " + mouseCo[0] + "," + 0; 
+        return d;
+    });
 
-// stalkerPerLine.append("circle")
-// .attr("r", 3)
-// .style("stroke", "#54505E") // filter by color later (good air quality: green ,etc)
-// .style("fill", "none")
-// .style("stroke-width", "1px")
-// .style("opacity", "0");
+    var xTime = x.invert(mouseCo[0]); 
+    //console.log(xTime); 
 
+// below seems to be the moving circles; I don't need this for now but cool trick to know. 
+//     d3.selectAll(".mouse-per-line")
+//     .attr("transform", function (d, i) {
+//         console.log(tooltipWidth/mouseCo[0]);
+//         var xTime = x.invert(mouseCo[0]),
+//         bisect = d3.bisector(function(d) {return d["ftime"];}).right,
+//         idx = bisect(d.values, xTime); 
 
-// var tooltipMargin = { top: 20, right: 20, bottom: 20, left: 40 };
-// stalkerBar.append("svg:rect")
+//         var beginning = 0,
+//         end = lines[i].getTotalLength(),
+//         target = null; 
 
-// //.attr("position", )
-// //.attr("transform", "translate(" + $("#graph1").position().left + "," + $("#graph4").position(). + ")")
-// //.attr("transform", "translate(0," + tooltipHeight + ")")
-// .attr("fill", "none")
-// .attr("pointer-events", "all")
-// .on("mouseout", function() {
-//     d3.select(".stalker-line").style("opacity","0");
-//     d3.select(".stalker-per-line circle").style("opacity", "0");
-// })
-// .on("mouseover", function() {
-//     d3.select(".stalker-line").style("opacity","1");
-//     d3.select(".stalker-per-line circle").style("opacity", "1");
-// })
-// .on("mousemove", mousemove);
+//         while (true) {
+//             target = Math.floor((beginning + end) / 2);
+//             pos = lines[i].getPointAtLength(target);
+//             if ((target === end || target === beginning) && pos.x !== mouseCo[0]) {
+//                 break;
+//             }
+//             if (pos.x > mouseCo[0]) {end = target;} 
+//             else if (pos.x < mouseCo[0]) {beginning = target;}
+//             else break; 
+//         }
 
+//         // d3.select(this).select("text")
+//         // .text(y.invert(pos.y).toFixed(2)); 
 
-// var mousemove = function() {
-//     var mouse = d3.mouse(event.currentTarget);
-//     d3.select(".stalker-line")
-//     .attr("d", function() {
-//         var d = "M" + mouse[0] + "," + tooltipHeight;
-//         d += " " + mouse[0] + "," + 0;
-//         return d; 
+//         return "translate(" + mouseCo[0] + "," + pos.y + ")";
 //     });
-
-
-    // d3.selectAll(".stalker-per-line")
-    // .attr("transform", function(d, i) {
-    //     console.log(graphWidth/mouse[0])
-    //     var xDate = x.invert   
-//};
-
-// });
-
-//};
-
+});
+};
