@@ -3,9 +3,9 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYWFraW1zIiwiYSI6ImNqZmQ1bm4yaDF4NnQzdW8xem54d
 var mapStyle = 'mapbox://styles/aakims/cjfejc27a56ui2sqw2lh5c03m'
 
 //create a map using the Mapbox Dark theme, zoomed in to Philly
-var map = new mapboxgl.Map({
+var defaultMap = new mapboxgl.Map({
     container: 'map',
-    style: mapStyle, 
+    style: mapStyle,
     zoom: 11,
     center: [-75.1652, 39.9526]
 });
@@ -182,18 +182,18 @@ var renderGraph = function() {
 var displayMapbox = function() {
 
     var dataCenterCoor, dataMidPoint;
-    var latExtent, longExtent; 
+    var latExtent, longExtent;
     var defineMapCenter = function() {
         var dataMidPoint = Math.round(_.size(thisData) / 2);
         dataCenterCoor = thisData[dataMidPoint].geometry.coordinates;
     };
-    var customZoom = (_.size(thisData) < 100) ? 14 : 13; 
-    var markerSize = (customZoom === 14) ? 4 : 2; 
+    var customZoom = (_.size(thisData) < 100) ? 14 : 13;
+    var markerSize = (customZoom === 14) ? 4 : 2;
 
     defineMapCenter();
     console.log(dataCenterCoor);
 
-    map = new mapboxgl.Map({
+    var map = new mapboxgl.Map({
         container: 'map',
         style: mapStyle,
         zoom: customZoom,
@@ -201,7 +201,7 @@ var displayMapbox = function() {
     });
 
     map.on("load", function() {
-        map.addSource("sensing-points", {
+        map.addSource("sensing-samples", {
             "type": "geojson",
             "data": {
                 "type": "FeatureCollection",
@@ -210,14 +210,13 @@ var displayMapbox = function() {
         });
 
         map.addLayer({
-            "id": "park-volcanoes",
+            "id": "sensing-collection-path",
             "type": "circle",
-            "source": "sensing-points",
+            "source": "sensing-samples",
             "paint": {
                 "circle-radius": markerSize,
                 "circle-color": "#db8a83"
-            },
-            "filter": ["==", "$type", "Point"],
+            }
         });
 
 
@@ -227,7 +226,7 @@ var displayMapbox = function() {
 
 var displayGraphs = function(tripIndex) {
 
-    clearCanvas();
+    clearData();
     defineData(tripIndex);
     graphSeries = document.getElementsByClassName("graphs");
     graphItems = _.map(graphSeries, function(graphItem) { return graphItem.id });
@@ -251,69 +250,23 @@ var displayGraphs = function(tripIndex) {
     });
 };
 
-
-var displayMap = function() {
-
-    var mapsvg = d3.select("#map")
-        .append("svg")
-        .attr("width", mapWidth + mapMargin.left + mapMargin.right)
-        .attr("height", mapHeight + mapMargin.top + mapMargin.bottom)
-        .attr("transform",
-            "translate(" + mapMargin.left + "," + mapMargin.top + ")");
-
-    var geoPath = d3.geoPath()
-        .projection(PennSouthProjection);
-
-    var g = mapsvg.append("g");
-
-    g.selectAll("path")
-        .data(philly_neighborhoods.features)
-        .enter()
-        .append("path")
-        .attr("fill", "#ccc")
-        .attr("stroke", "#333")
-        .attr("d", geoPath);
-
-    var mapData = JSON.parse(JSON.stringify(thisData));
-    //console.log(mapData[0]);
-
-    var bubbles = mapsvg.append("g");
-
-    bubbles.selectAll("path")
-        .data(mapData)
-        .enter()
-        .append("path")
-        .attr("fill", "#900")
-        .attr("stroke", "#999")
-        .attr("d", geoPath)
-        .attr("class", "sensingpts")
-        .on("mouseover", function(d) {
-            d3.select("#dateval").text(d.properties["date"])
-            d3.select("#dustval").text(d.properties["dust"])
-            d3.select("#lightval").text(d.properties["light"])
-            d3.select("#tempval").text(d.properties["tempF"])
-            d3.select("#ginival").text(d.properties["GINI_IND"])
-            d3.select(this).attr("class", "sensingpts hover");
-        })
-        .on("mouseout", function(d) {
-            d3.select("#dateval").text("")
-            d3.select("#dustval").text("")
-            d3.select("#lightval").text("")
-            d3.select("#tempval").text("")
-            d3.select("#ginival").text("")
-            d3.select(this).attr("class", "sensingpts");
-        });
-
-    //var datalocator = d3.line()
+var clearData = function() {
+    _.each(graphItems, function(thisItem) {
+        $("#" + thisItem).empty();
+    });
 };
 
 var clearCanvas = function() {
 
-    // ("#" + thisItem).append("svg")
-    _.each(graphItems, function(thisItem) {
-        $("#" + thisItem).empty();
+    var defaultMap = new mapboxgl.Map({
+        container: 'map',
+        style: mapStyle,
+        zoom: 11,
+        center: [-75.1652, 39.9526]
     });
-    $("#map").empty();
+    // ("#" + thisItem).append("svg")
+    clearData();
+    //$("#map").append(defaultMap);
 
     //var items = d3.select('svg').selectAll('.item').data(newData);
 
