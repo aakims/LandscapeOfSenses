@@ -1,8 +1,26 @@
+mapboxgl.accessToken = 'pk.eyJ1IjoiYWFraW1zIiwiYSI6ImNqZmQ1bm4yaDF4NnQzdW8xem54dmNzYXQifQ.VfaDRyNApyLYnCVL7PcpzA';
+
+var mapStyle = 'mapbox://styles/aakims/cjfejc27a56ui2sqw2lh5c03m'
+
+//create a map using the Mapbox Dark theme, zoomed in to Philly
+var defaultMap = new mapboxgl.Map({
+    container: 'map',
+    style: mapStyle,
+    zoom: 11,
+    center: [-75.1652, 39.9526]
+});
+
 var tripIndex; // define trip number 1~11
 var indexFields = ["trip", "olive"],
     timeField = ["ftime"],
     displayFields = ["dust", "light", "tempF", "GINI_IND"],
     dataFields = ["unixt", "trip", "olive", "ftime", "dust", "light", "tempF", "GINI_IND"];
+var mapCenterCoor;
+var defineMapCenter = function() {
+    var midIndex = thisData.length / 2;
+    mapCenterCorr = thisData[midIndex].geometry.coordinates;
+};
+
 
 var selectFields = _.uniq(_.union(indexFields, timeField, displayFields, dataFields));
 
@@ -21,8 +39,8 @@ var defineData = function(tripIndex) {
         })
         .map(function(feature) {
             feature.properties = _.pick(feature.properties, selectFields);
-            console.log(feature.properties);
-            console.log(feature);
+            //console.log(feature.properties);
+            //console.log(feature);
             return feature;
         })
         .value();
@@ -34,11 +52,7 @@ var defineData = function(tripIndex) {
 
 var graphWidth = 600;
 var graphHeight = 130;
-var graphMargin = { top: 40, right: 20, bottom: 30, left: 100 };
-
-// x and y axis setup
-var x = d3.scaleTime().range([0, graphWidth]);
-var y = d3.scaleLinear().range([graphHeight, 0]);
+var graphMargin = { top: 20, right: 20, bottom: 20, left: 40 };
 
 // setting map object extent 
 var mapWidth = 800,
@@ -54,6 +68,12 @@ var center = [2.5725, 39.957049],
     .rotate([77 + 45 / 60, 0])
     .center(center)
     .translate(offset);
+
+// x and y axis setup
+var x = d3.scaleTime().range([0, graphWidth]);
+var y = d3.scaleLinear().range([graphHeight, 0]);
+
+
 
 var graphSeries, graphItems, thisIndex;
 
@@ -114,18 +134,18 @@ var prepData = function(yDataIndex) {
     console.log(thisData[0]);
 
     var xRange = xMax - xMin,
-    yRange = yMax - yMin; 
+        yRange = yMax - yMin;
     console.log(xRange, yRange);
     x.domain([xMin - (xRange * 0.01), xMax]);
     y.domain([yMin - (yRange * 0.1), yMax]);
     //y.domain([yMin - (yRange * 0.05), yMax + (yRange * 0.05)]);
 
     // set domain to be extent +- 5%
-//x.domain([xExtent[0] - (xRange * .05), xExtent[1] + (xRange * .05)]);
-//y.domain([yExtent[0] - (yRange * .05), yExtent[1] + (yRange * .05)]);
+    //x.domain([xExtent[0] - (xRange * .05), xExtent[1] + (xRange * .05)]);
+    //y.domain([yExtent[0] - (yRange * .05), yExtent[1] + (yRange * .05)]);
 
     graphLine = d3.line()
-        .x(function(d) { console.log(d.properties); return x(d.properties["ftime"]) })
+        .x(function(d) { return x(d.properties["ftime"]) })
         .y(function(d) { return y(d.properties[yData]); });
 
     lineData = _.map(lineData, function(sensObj) {
@@ -135,16 +155,16 @@ var prepData = function(yDataIndex) {
         sensObj.properties[yData] = +sensObj.properties[yData];
         return sensObj;
     });
-    console.log(lineData);
+    //console.log(lineData);
 };
 
 var renderGraph = function() {
 
     //console.log("Here");
 
-    var axisY = d3.axisLeft(y); 
+    var axisY = d3.axisLeft(y);
 
-    axisY.ticks(5); 
+    axisY.ticks(5);
 
     chart.append("g")
         .attr("transform", "translate(0," + graphHeight + ")")
@@ -159,28 +179,66 @@ var renderGraph = function() {
         .attr("d", graphLine(lineData));
 };
 
+var displayMapbox = function() {
+
+    var dataCenterCoor, dataMidPoint;
+    var latExtent, longExtent;
+    var defineMapCenter = function() {
+        var dataMidPoint = Math.round(_.size(thisData) / 2);
+        dataCenterCoor = thisData[dataMidPoint].geometry.coordinates;
+    };
+    var customZoom = (_.size(thisData) < 100) ? 14 : 13;
+    var markerSize = (customZoom === 14) ? 4 : 2;
+
+    defineMapCenter();
+    console.log(dataCenterCoor);
+
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: mapStyle,
+        zoom: customZoom,
+        center: dataCenterCoor //[-75.1652, 39.9526]
+    });
+
+    map.on("load", function() {
+        map.addSource("sensing-samples", {
+            "type": "geojson",
+            "data": {
+                "type": "FeatureCollection",
+                "features": thisData
+            }
+        });
+
+        map.addLayer({
+            "id": "sensing-collection-path",
+            "type": "circle",
+            "source": "sensing-samples",
+            "paint": {
+                "circle-radius": markerSize,
+                "circle-color": "#db8a83"
+            }
+        });
+
+
+    });
+}
+
 
 var displayGraphs = function(tripIndex) {
-    //console.log(thisData);
-    //console.log(sdata.features);
-    clearCanvas();
-    console.log(tripIndex);
+
+    clearData();
     defineData(tripIndex);
-    //console.log("definedData example:" + thisData[10]) ;
-    // graph the all graph divs defined by classname "graphs"
     graphSeries = document.getElementsByClassName("graphs");
     graphItems = _.map(graphSeries, function(graphItem) { return graphItem.id });
-    console.log(graphItems);
-    //console.log(thisData[10]);
-    //prepData();
-    displayMap();
 
+    //displayMap();
+    displayMapbox();
 
     _.each(graphItems, function(graphItem) {
 
         //(graphItem === "chart1") :
         //defineData(tripIndex); 
-        console.log(thisData);
+        //console.log(thisData);
         thisIndex = _.indexOf(graphItems, graphItem);
         console.log(thisIndex);
         var thisGraph = graphItem;
@@ -192,69 +250,23 @@ var displayGraphs = function(tripIndex) {
     });
 };
 
-
-var displayMap = function () {
-
-var mapsvg = d3.select("#map")
-        .append("svg")
-        .attr("width", mapWidth + mapMargin.left + mapMargin.right)
-        .attr("height", mapHeight + mapMargin.top + mapMargin.bottom)
-        .attr("transform",
-            "translate(" + mapMargin.left + "," + mapMargin.top + ")");
-
-        var geoPath = d3.geoPath()
-        .projection(PennSouthProjection);
-
-        var g = mapsvg.append("g");
-
-        g.selectAll("path")
-        .data(philly_neighborhoods.features)
-        .enter()
-        .append("path")
-        .attr("fill", "#ccc")
-        .attr("stroke", "#333")
-        .attr("d", geoPath);
-
-    var mapData = JSON.parse(JSON.stringify(thisData));
-    //console.log(mapData[0]);
-
-    var bubbles = mapsvg.append("g");
-
-    bubbles.selectAll("path")
-        .data(mapData)
-        .enter()
-        .append("path")
-        .attr("fill", "#900")
-        .attr("stroke", "#999")
-        .attr("d", geoPath)
-        .attr("class", "sensingpts")
-        .on("mouseover", function(d) {
-            d3.select("#dateval").text(d.properties["date"])
-            d3.select("#dustval").text(d.properties["dust"])
-            d3.select("#lightval").text(d.properties["light"])
-            d3.select("#tempval").text(d.properties["tempF"])
-            d3.select("#ginival").text(d.properties["GINI_IND"])
-            d3.select(this).attr("class", "sensingpts hover");
-        })
-        .on("mouseout", function(d) {
-            d3.select("#dateval").text("")
-            d3.select("#dustval").text("")
-            d3.select("#lightval").text("")
-            d3.select("#tempval").text("")
-            d3.select("#ginival").text("")
-            d3.select(this).attr("class", "sensingpts");
-        });
-
-    //var datalocator = d3.line()
+var clearData = function() {
+    _.each(graphItems, function(thisItem) {
+        $("#" + thisItem).empty();
+    });
 };
 
 var clearCanvas = function() {
 
-    // ("#" + thisItem).append("svg")
-    _.each(graphItems, function(thisItem) {
-        $("#" + thisItem).empty();
+    var defaultMap = new mapboxgl.Map({
+        container: 'map',
+        style: mapStyle,
+        zoom: 11,
+        center: [-75.1652, 39.9526]
     });
-    $("#map").empty();
+    // ("#" + thisItem).append("svg")
+    clearData();
+    //$("#map").append(defaultMap);
 
     //var items = d3.select('svg').selectAll('.item').data(newData);
 
