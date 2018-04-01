@@ -21,7 +21,6 @@ var defineMapCenter = function() {
     mapCenterCorr = thisData[midIndex].geometry.coordinates;
 };
 
-
 var selectFields = _.uniq(_.union(indexFields, timeField, displayFields, dataFields));
 
 var graphTitles = ["Air Quality", "Light Level", "Temperature", "Gini Index"];
@@ -54,7 +53,7 @@ var graphWidth = 600;
 var graphHeight = 130;
 var graphMargin = { top: 20, right: 20, bottom: 20, left: 40 };
 
-// setting map object extent 
+/* setting map object extent 
 var mapWidth = 800,
     mapHeight = 650,
     mapMargin = { top: 20, right: 10, bottom: 30, left: 20 };
@@ -69,14 +68,13 @@ var center = [2.5725, 39.957049],
     .center(center)
     .translate(offset);
 
+*/
+
 // x and y axis setup
 var x = d3.scaleTime().range([0, graphWidth]);
 var y = d3.scaleLinear().range([graphHeight, 0]);
 
-
-
 var graphSeries, graphItems, thisIndex;
-
 
 var setupCanvas = function(thisItem) {
 
@@ -187,8 +185,8 @@ var displayMapbox = function() {
         var dataMidPoint = Math.round(_.size(thisData) / 2);
         dataCenterCoor = thisData[dataMidPoint].geometry.coordinates;
     };
-    var customZoom = (_.size(thisData) < 100) ? 14 : 13;
-    var markerSize = (customZoom === 14) ? 4 : 2;
+    var customZoom = (_.size(thisData) < 100) ? 14.5 : 13.5;
+    var markerSize = (customZoom === 14.5) ? 6 : 4;
 
     defineMapCenter();
     console.log(dataCenterCoor);
@@ -215,9 +213,35 @@ var displayMapbox = function() {
             "source": "sensing-samples",
             "paint": {
                 "circle-radius": markerSize,
-                "circle-color": "#db8a83"
+                "circle-color": "#db8a83",
+                "circle-opacity": 1
             }
         });
+
+                map.addLayer({
+            "id": "path-hover",
+            "type": "circle",
+            "source": "sensing-samples",
+            "paint": {
+                "circle-radius": markerSize + 3,
+                "circle-color": "#54505E",
+                "circle-opacity": 1
+            },
+            "filter": ["==", "unixt", ""]
+        });
+
+        map.on("mousemove", "sensing-collection-path", function (e) {
+
+            map.getCanvas().style.cursor = 'pointer';
+
+            console.log(e.features[0]);
+            map.setFilter("path-hover", ["==", "unixt", e.features[0].properties["unixt"]]);
+            //map.setFilter("sensing-collection-path", ["==", "unixt", e.features[0].properties["unixt"]])
+});
+
+map.on("mouseleave", "sensing-collection-path", function (e) {
+    map.setFilter("path-hover", ["==", "unixt", ""]);
+});
 
 
     });
@@ -273,3 +297,4 @@ var clearCanvas = function() {
     // Remove old elements:
     //items.exit().remove();
 };
+
