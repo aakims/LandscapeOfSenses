@@ -94,6 +94,11 @@
     text-align: center;
 }
 
+.graphs-tool-tip {
+    grid-column: 1/2;
+    grid-row:1/5;
+}
+
 #graph1 {
     grid-column: 1/2;
     grid-row: 1/2;
