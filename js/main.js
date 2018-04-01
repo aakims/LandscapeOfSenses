@@ -10,6 +10,8 @@ var defaultMap = new mapboxgl.Map({
     center: [-75.1652, 39.9526]
 });
 
+defaultMap.addControl(new mapboxgl.NavigationControl());
+
 var tripIndex; // define trip number 1~11
 var indexFields = ["trip", "olive"],
     timeField = ["ftime"],
@@ -198,6 +200,8 @@ var displayMapbox = function() {
         center: dataCenterCoor //[-75.1652, 39.9526]
     });
 
+    map.addControl(new mapboxgl.NavigationControl());
+
     map.on("load", function() {
         map.addSource("sensing-samples", {
             "type": "geojson",
@@ -218,7 +222,7 @@ var displayMapbox = function() {
             }
         });
 
-                map.addLayer({
+        map.addLayer({
             "id": "path-hover",
             "type": "circle",
             "source": "sensing-samples",
@@ -230,18 +234,18 @@ var displayMapbox = function() {
             "filter": ["==", "unixt", ""]
         });
 
-        map.on("mousemove", "sensing-collection-path", function (e) {
+        map.on("mousemove", "sensing-collection-path", function(e) {
 
             map.getCanvas().style.cursor = 'pointer';
 
             console.log(e.features[0]);
             map.setFilter("path-hover", ["==", "unixt", e.features[0].properties["unixt"]]);
             //map.setFilter("sensing-collection-path", ["==", "unixt", e.features[0].properties["unixt"]])
-});
+        });
 
-map.on("mouseleave", "sensing-collection-path", function (e) {
-    map.setFilter("path-hover", ["==", "unixt", ""]);
-});
+        map.on("mouseleave", "sensing-collection-path", function(e) {
+            map.setFilter("path-hover", ["==", "unixt", ""]);
+        });
 
 
     });
@@ -297,4 +301,3 @@ var clearCanvas = function() {
     // Remove old elements:
     //items.exit().remove();
 };
-
