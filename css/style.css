@@ -58,6 +58,10 @@ h2 {
     display: grid;
 }
 
+.tripfilter {
+    align-items: stretch;
+}
+
 .maphere {
     grid-column: 1/2;
     grid-row: 3/4;
