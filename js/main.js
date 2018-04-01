@@ -1,22 +1,24 @@
-                mapboxgl.accessToken = 'pk.eyJ1IjoiYWFraW1zIiwiYSI6ImNqZmQ1bm4yaDF4NnQzdW8xem54dmNzYXQifQ.VfaDRyNApyLYnCVL7PcpzA';
+mapboxgl.accessToken = 'pk.eyJ1IjoiYWFraW1zIiwiYSI6ImNqZmQ1bm4yaDF4NnQzdW8xem54dmNzYXQifQ.VfaDRyNApyLYnCVL7PcpzA';
 
-        //create a map using the Mapbox Dark theme, zoomed in to Philly
-        var map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/aakims/cjfejc27a56ui2sqw2lh5c03m',
-            zoom: 11,
-            center: [-75.1652, 39.9526]
-        });
+var mapStyle = 'mapbox://styles/aakims/cjfejc27a56ui2sqw2lh5c03m'
+
+//create a map using the Mapbox Dark theme, zoomed in to Philly
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: mapStyle, 
+    zoom: 11,
+    center: [-75.1652, 39.9526]
+});
 
 var tripIndex; // define trip number 1~11
 var indexFields = ["trip", "olive"],
     timeField = ["ftime"],
     displayFields = ["dust", "light", "tempF", "GINI_IND"],
     dataFields = ["unixt", "trip", "olive", "ftime", "dust", "light", "tempF", "GINI_IND"];
-var mapCenterCoor; 
-var defineMapCenter = function () {
-    var midIndex = thisData.length/2;
-    mapCenterCorr = thisData[midIndex].geometry.coordinates; 
+var mapCenterCoor;
+var defineMapCenter = function() {
+    var midIndex = thisData.length / 2;
+    mapCenterCorr = thisData[midIndex].geometry.coordinates;
 };
 
 
@@ -37,8 +39,8 @@ var defineData = function(tripIndex) {
         })
         .map(function(feature) {
             feature.properties = _.pick(feature.properties, selectFields);
-            console.log(feature.properties);
-            console.log(feature);
+            //console.log(feature.properties);
+            //console.log(feature);
             return feature;
         })
         .value();
@@ -132,18 +134,18 @@ var prepData = function(yDataIndex) {
     console.log(thisData[0]);
 
     var xRange = xMax - xMin,
-    yRange = yMax - yMin; 
+        yRange = yMax - yMin;
     console.log(xRange, yRange);
     x.domain([xMin - (xRange * 0.01), xMax]);
     y.domain([yMin - (yRange * 0.1), yMax]);
     //y.domain([yMin - (yRange * 0.05), yMax + (yRange * 0.05)]);
 
     // set domain to be extent +- 5%
-//x.domain([xExtent[0] - (xRange * .05), xExtent[1] + (xRange * .05)]);
-//y.domain([yExtent[0] - (yRange * .05), yExtent[1] + (yRange * .05)]);
+    //x.domain([xExtent[0] - (xRange * .05), xExtent[1] + (xRange * .05)]);
+    //y.domain([yExtent[0] - (yRange * .05), yExtent[1] + (yRange * .05)]);
 
     graphLine = d3.line()
-        .x(function(d) { console.log(d.properties); return x(d.properties["ftime"]) })
+        .x(function(d) { return x(d.properties["ftime"]) })
         .y(function(d) { return y(d.properties[yData]); });
 
     lineData = _.map(lineData, function(sensObj) {
@@ -153,16 +155,16 @@ var prepData = function(yDataIndex) {
         sensObj.properties[yData] = +sensObj.properties[yData];
         return sensObj;
     });
-    console.log(lineData);
+    //console.log(lineData);
 };
 
 var renderGraph = function() {
 
     //console.log("Here");
 
-    var axisY = d3.axisLeft(y); 
+    var axisY = d3.axisLeft(y);
 
-    axisY.ticks(5); 
+    axisY.ticks(5);
 
     chart.append("g")
         .attr("transform", "translate(0," + graphHeight + ")")
@@ -177,64 +179,61 @@ var renderGraph = function() {
         .attr("d", graphLine(lineData));
 };
 
+var displayMapbox = function() {
 
-var displayGraphs = function(tripIndex) {
-    //console.log(thisData);
-    //console.log(sdata.features);
-    clearCanvas();
-    //console.log(tripIndex);
-    defineData(tripIndex);
-    //defineMapCenter(); 
-    //console.log(mapCenterCoor);
-    //console.log("definedData example:" + thisData[10]) ;
-    // graph the all graph divs defined by classname "graphs"
-    graphSeries = document.getElementsByClassName("graphs");
-    graphItems = _.map(graphSeries, function(graphItem) { return graphItem.id });
-    //console.log(graphItems);
-    //console.log(thisData[10]);
-    //prepData();
+    var dataCenterCoor, dataMidPoint;
+    var latExtent, longExtent; 
+    var defineMapCenter = function() {
+        var dataMidPoint = Math.round(_.size(thisData) / 2);
+        dataCenterCoor = thisData[dataMidPoint].geometry.coordinates;
+    };
+    var customZoom = (_.size(thisData) < 100) ? 14 : 13; 
+    var markerSize = (customZoom === 14) ? 4 : 2; 
 
-    //displayMap();
+    defineMapCenter();
+    console.log(dataCenterCoor);
+
     map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/aakims/cjfejc27a56ui2sqw2lh5c03m',
-            zoom: 11,
-            center: [-75.1652, 39.9526]
-        });
+        container: 'map',
+        style: mapStyle,
+        zoom: customZoom,
+        center: dataCenterCoor //[-75.1652, 39.9526]
+    });
 
     map.on("load", function() {
-    map.addSource("sensing-points", {
-        "type": "geojson",
-        "data": {
-            "type": "FeatureCollection",
-            "features": thisData
-        }
-    });
+        map.addSource("sensing-points", {
+            "type": "geojson",
+            "data": {
+                "type": "FeatureCollection",
+                "features": thisData
+            }
+        });
 
-    map.addLayer({
-        "id": "park-boundary",
-        "type": "fill",
-        "source": "sensing-points",
-        "paint": {
-            "fill-color": "#888888",
-            "fill-opacity": 0.4
-        },
-        "filter": ["==", "$type", "Polygon"]
-    });
+        map.addLayer({
+            "id": "park-volcanoes",
+            "type": "circle",
+            "source": "sensing-points",
+            "paint": {
+                "circle-radius": markerSize,
+                "circle-color": "#db8a83"
+            },
+            "filter": ["==", "$type", "Point"],
+        });
 
-    map.addLayer({
-        "id": "park-volcanoes",
-        "type": "circle",
-        "source": "sensing-points",
-        "paint": {
-            "circle-radius": 6,
-            "circle-color": "#B42222"
-        },
-        "filter": ["==", "$type", "Point"],
-    });
 
-    
-});
+    });
+}
+
+
+var displayGraphs = function(tripIndex) {
+
+    clearCanvas();
+    defineData(tripIndex);
+    graphSeries = document.getElementsByClassName("graphs");
+    graphItems = _.map(graphSeries, function(graphItem) { return graphItem.id });
+
+    //displayMap();
+    displayMapbox();
 
     _.each(graphItems, function(graphItem) {
 
@@ -253,21 +252,21 @@ var displayGraphs = function(tripIndex) {
 };
 
 
-var displayMap = function () {
+var displayMap = function() {
 
-var mapsvg = d3.select("#map")
+    var mapsvg = d3.select("#map")
         .append("svg")
         .attr("width", mapWidth + mapMargin.left + mapMargin.right)
         .attr("height", mapHeight + mapMargin.top + mapMargin.bottom)
         .attr("transform",
             "translate(" + mapMargin.left + "," + mapMargin.top + ")");
 
-        var geoPath = d3.geoPath()
+    var geoPath = d3.geoPath()
         .projection(PennSouthProjection);
 
-        var g = mapsvg.append("g");
+    var g = mapsvg.append("g");
 
-        g.selectAll("path")
+    g.selectAll("path")
         .data(philly_neighborhoods.features)
         .enter()
         .append("path")
@@ -321,5 +320,3 @@ var clearCanvas = function() {
     // Remove old elements:
     //items.exit().remove();
 };
-
-
