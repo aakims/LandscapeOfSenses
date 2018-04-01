@@ -44,6 +44,10 @@ var defineData = function(tripIndex) {
             //console.log(feature);
             return feature;
         })
+        .map(function(feature) {
+            feature.properties["gtime"] = new Date(feature.properties["unixt"] * 1000 + 18000000);
+            return feature;
+        })
         .value();
 
     console.log(thisData[1]);
@@ -180,6 +184,9 @@ var renderGraph = function() {
         .attr("d", graphLine(lineData));
 };
 
+var filterInput = document.getElementById('filter-input');
+var mapTime;
+
 var displayMapbox = function() {
 
     var dataCenterCoor, dataMidPoint;
@@ -194,7 +201,7 @@ var displayMapbox = function() {
     defineMapCenter();
     console.log(dataCenterCoor);
 
-    var map = new mapboxgl.Map({
+    map = new mapboxgl.Map({
         container: 'map',
         style: mapStyle,
         zoom: customZoom,
@@ -242,6 +249,8 @@ var displayMapbox = function() {
             //console.log(e.features[0]);
             map.setFilter("path-hover", ["==", "unixt", e.features[0].properties["unixt"]]);
             //map.setFilter("sensing-collection-path", ["==", "unixt", e.features[0].properties["unixt"]])
+            mapTime = e.features[0].properties["gtime"];
+            console.log(mapTime);
         });
 
         map.on("mouseleave", "sensing-collection-path", function(e) {
@@ -249,9 +258,17 @@ var displayMapbox = function() {
         });
 
 
+        stalkerG.on("mousemove", function() {
+            var mouseCo = d3.mouse(this);
+            d3.select(".mouse-line")
+                .attr("d", function() {
+                    var d = "M" + mouseCo[0] + "," + tooltipHeight;
+                    d += " " + mouseCo[0] + "," + 0;
+                    return d;
+                });
+        });
     });
-}
-
+};
 
 var displayGraphs = function(tripIndex) {
 
@@ -261,8 +278,9 @@ var displayGraphs = function(tripIndex) {
     graphItems = _.map(graphSeries, function(graphItem) { return graphItem.id });
 
     //displayMap();
-    displayMapbox();
+    var map;
     enableToolTips();
+    displayMapbox();
 
     _.each(graphItems, function(graphItem) {
 
@@ -278,7 +296,7 @@ var displayGraphs = function(tripIndex) {
         renderGraph();
 
     });
-    
+
 };
 
 var clearData = function() {
@@ -308,100 +326,60 @@ var clearCanvas = function() {
 
 
 var tooltipWidth = graphWidth,
-tooltipHeight = $(".graphs-here").height() - graphMargin.top - graphMargin.bottom; 
-var graphStart = $(".graphs-tool-tip").width()/2 - (graphWidth/2) + 15; // 15 hard numb is not ideal but this works on roughly full screen
-var tooltipsvg = d3.select(".graphs-tool-tip") //mouseG
-.append("svg")
-.attr("class", "stalker-radius")
-.attr("width", tooltipWidth)
-.attr("height", tooltipHeight)
-.attr("transform",
-            "translate(" + graphStart + "," + graphMargin.top + ")");
+    tooltipHeight = $(".graphs-here").height() - graphMargin.top - graphMargin.bottom;
 
-/* this took unfair amount of time to realize: the stalker-radius adjusts accrodingly depending on the ".graphs-here" class grid when first loaded. As soon as I load the graphs though, they are not responsive, so if the screen size is anything smaller than the full-size, the stalker-radius seems to be shrunk. This should be dealt with all together later when doing @media only responsive CSS adjustments. Proceeding with full-size screen in mind. i.e. stalker-radius will be catered to the full-length of the graphs */ 
+var graphStart = $(".graphs-tool-tip").width() / 2 - (graphWidth / 2) + 15; // 15 hard numb is not ideal but this works on roughly full screen
+
+var tooltipsvg = d3.select(".graphs-tool-tip") //mouseG
+    .append("svg")
+    .attr("class", "stalker-radius")
+    .attr("width", tooltipWidth)
+    .attr("height", tooltipHeight)
+    .attr("transform",
+        "translate(" + graphStart + "," + graphMargin.top + ")");
+
+/* this took unfair amount of time to realize: the stalker-radius adjusts accrodingly depending on the ".graphs-here" class grid when first loaded. As soon as I load the graphs though, they are not responsive, so if the screen size is anything smaller than the full-size, the stalker-radius seems to be shrunk. This should be dealt with all together later when doing @media only responsive CSS adjustments. Proceeding with full-size screen in mind. i.e. stalker-radius will be catered to the full-length of the graphs */
 
 
 var stalkerG = tooltipsvg.append("g")
-.attr("class", "mouse-over-effects");
+    .attr("class", "mouse-over-effects");
 
+var enableToolTips = function() {
 
+    stalkerG.append("path")
+        .attr("class", "mouse-line")
+        .style("stroke", "#54505E")
+        .style("stroke-width", "2px")
+        .style("opacity", "0");
 
-var enableToolTips = function () {
+    var lines = document.getElementsByClassName("line");
 
-stalkerG.append("path")
-.attr("class", "mouse-line")
-.style("stroke", "#54505E")
-.style("stroke-width", "2px")
-.style("opacity", "0");
+    var stalkerPerLine = stalkerG.selectAll(".mouse-per-line")
+        .data(thisData)
+        .enter()
+        .append("g")
+        .attr("class", "mouse-per-line");
 
-var lines = document.getElementsByClassName("line"); 
+    stalkerPerLine.append("circle")
+        .attr("r", 4)
+        .style("stroke", "#54505E")
+        .style("fill", "#54505E")
+        .style("opacity", "0");
 
-var stalkerPerLine = stalkerG.selectAll(".mouse-per-line")
-.data(thisData)
-.enter()
-.append("g")
-.attr("class", "mouse-per-line");
-
-stalkerPerLine.append("circle")
-.attr("r", 4)
-.style("stroke",  "#54505E")
-.style("fill", "#54505E")
-.style("opacity", "0"); 
-
-stalkerG.append("svg:rect")
-.attr("width", tooltipWidth)
-.attr("height", tooltipHeight)
-.attr("fill", "none")
-.attr("pointer-events", "all")
-.on("mouseout", function() {
-    d3.select(".mouse-line").style("opacity", "0");
-    d3.selectAll(".mouse-per-line circle").style("opacity", "0");
-    //d3.selectAll(".mouse-per-line text").style("opacity", "0");
-})
-.on("mouseover", function() {
-    d3.select(".mouse-line").style("opacity", "1");
-    d3.selectAll(".mouse-per-line circle").style("opacity", "1");
-    //d3.selectAll(".mouse-per-line text").style("opacity", "1");
-})
-.on("mousemove", function() {
-    var mouseCo = d3.mouse(this);
-    d3.select(".mouse-line")
-    .attr("d", function() {
-        var d = "M" + mouseCo[0] + "," + tooltipHeight;
-        d += " " + mouseCo[0] + "," + 0; 
-        return d;
-    });
-
-    var xTime = x.invert(mouseCo[0]); 
-    //console.log(xTime); 
-
-// below seems to be the moving circles; I don't need this for now but cool trick to know. 
-//     d3.selectAll(".mouse-per-line")
-//     .attr("transform", function (d, i) {
-//         console.log(tooltipWidth/mouseCo[0]);
-//         var xTime = x.invert(mouseCo[0]),
-//         bisect = d3.bisector(function(d) {return d["ftime"];}).right,
-//         idx = bisect(d.values, xTime); 
-
-//         var beginning = 0,
-//         end = lines[i].getTotalLength(),
-//         target = null; 
-
-//         while (true) {
-//             target = Math.floor((beginning + end) / 2);
-//             pos = lines[i].getPointAtLength(target);
-//             if ((target === end || target === beginning) && pos.x !== mouseCo[0]) {
-//                 break;
-//             }
-//             if (pos.x > mouseCo[0]) {end = target;} 
-//             else if (pos.x < mouseCo[0]) {beginning = target;}
-//             else break; 
-//         }
-
-//         // d3.select(this).select("text")
-//         // .text(y.invert(pos.y).toFixed(2)); 
-
-//         return "translate(" + mouseCo[0] + "," + pos.y + ")";
-//     });
-});
+    stalkerG.append("svg:rect")
+        .attr("width", tooltipWidth)
+        .attr("height", tooltipHeight)
+        .attr("fill", "none")
+        .attr("pointer-events", "all")
+        .on("mouseout", function() {
+            d3.select(".mouse-line").style("opacity", "0");
+            d3.selectAll(".mouse-per-line circle").style("opacity", "0");
+            //d3.selectAll(".mouse-per-line text").style("opacity", "0");
+        })
+        .on("mouseover", function() {
+            d3.select(".mouse-line").style("opacity", "1");
+            d3.selectAll(".mouse-per-line circle").style("opacity", "1");
+            //d3.selectAll(".mouse-per-line text").style("opacity", "1");
+        });
 };
+
