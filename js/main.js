@@ -1,6 +1,6 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiYWFraW1zIiwiYSI6ImNqZmQ1bm4yaDF4NnQzdW8xem54dmNzYXQifQ.VfaDRyNApyLYnCVL7PcpzA';
 
-var mapStyle = 'mapbox://styles/aakims/cjfejc27a56ui2sqw2lh5c03m'
+var mapStyle = 'mapbox://styles/aakims/cjfgej20o1t452smsp0rysgsi'
 
 //create a map using the Mapbox Dark theme, zoomed in to Philly
 var defaultMap = new mapboxgl.Map({
