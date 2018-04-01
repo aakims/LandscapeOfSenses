@@ -12,31 +12,34 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
     <script src="https://d3js.org/d3-time-format.v2.min.js"></script>
     <!--- style sheets -->
-    <link href="https://fonts.googleapis.com/css?family=Karla|Oswald" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Karla|Oswald|Nothing+You+Could+Do" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css" />
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel='stylesheet' />
 </head>
 
 <body>
     <div class="wrapper">
-        <div class="box header-bar">LANDSCAPE OF SENSES</div>
-        <div class="box navbar buttons">
-                <button id=addButtonC onClick="clearCanvas()">Clear</button>
-                <button id=addButton1 onClick="displayGraphs(1)">T1</button>
-                <button id=addButton2 onClick="displayGraphs(2)">T2</button>
-                <button id=addButton3 onClick="displayGraphs(3)">T3</button>
-                <button id=addButton4 onClick="displayGraphs(4)">T4</button>
-                <button id=addButton5 onClick="displayGraphs(5)">T5</button>
-                <button id=addButton6 onClick="displayGraphs(6)">T6</button>
-                <button id=addButton7 onClick="displayGraphs(7)">T7</button>
-                <button id=addButton8 onClick="displayGraphs(8)">T8</button>
-                <button id=addButton9 onClick="displayGraphs(9)">T9</button>
-                <button id=addButton10 onClick="displayGraphs(10)">T10</button>
-                <button id=addButton11 onClick="displayGraphs(11)">T11</button>
-                <button id=addButton12 onClick="displayGraphs(12)">T12</button>
-            
+        <div class="box header-bar"><h1>LANDSCAPE OF SENSES</h1></div>
+        <div class="box navbar">
+            <div id="nav-title"><h2>Sensing Samples</h2></div>
+            <div class="box buttons">
+                <div class = tripfilter><button id = buttonC onClick = "clearCanvas()">Clear</button></div>
+                <div class = tripfilter><button id = button1 onClick = "displayGraphs(1)">1</button></div>
+                <div class = tripfilter><button id = button2 onClick = "displayGraphs(2)">2</button></div>
+                <div class = tripfilter><button id = button3 onClick = "displayGraphs(3)">3</button></div>
+                <div class = tripfilter><button id = button4 onClick = "displayGraphs(4)">4</button></div>
+                <div class = tripfilter><button id = button5 onClick = "displayGraphs(5)">5</button></div>
+                <div class = tripfilter><button id = button6 onClick = "displayGraphs(6)">6</button></div>
+                <div class = tripfilter><button id = button7 onClick = "displayGraphs(7)">7</button></div>
+                <div class = tripfilter><button id = button8 onClick = "displayGraphs(8)">8</button></div>
+                <div class = tripfilter><button id = button9 onClick = "displayGraphs(9)">9</button></div>
+                <div class = tripfilter><button id = button10 onClick = "displayGraphs(10)">10</button></div>
+                <div class = tripfilter><button id = button11 onClick = "displayGraphs(11)">11</button></div>
+                <div class = tripfilter><button id = button12 onClick = "displayGraphs(12)">12</button></div>
+                <div class = tripfilter><button id = button13 onClick = "displayGraphs(13)">13</button></div>
+            </div>
         </div>
-        <div class="box maphere" id='map'>Left/Map Box</div>
+        <div class="box maphere" id='map'></div>
         <div class="box graphshere">
             <div class="box graphs" id="graph1"></div>
             <div class="box graphs" id="graph2"></div>

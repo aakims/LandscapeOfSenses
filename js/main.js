@@ -50,7 +50,7 @@ var defineData = function(tripIndex) {
 
 var graphWidth = 600;
 var graphHeight = 130;
-var graphMargin = { top: 40, right: 20, bottom: 30, left: 100 };
+var graphMargin = { top: 20, right: 20, bottom: 20, left: 40 };
 
 // setting map object extent 
 var mapWidth = 800,
@@ -204,7 +204,7 @@ var displayGraphs = function(tripIndex) {
             }
         });
     });
-    //displayMap();
+    displayMap();
 
 
     _.each(graphItems, function(graphItem) {
