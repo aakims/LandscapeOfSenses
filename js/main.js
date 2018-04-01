@@ -146,7 +146,8 @@ var prepData = function(yDataIndex) {
 
     graphLine = d3.line()
         .x(function(d) { return x(d.properties["ftime"]) })
-        .y(function(d) { return y(d.properties[yData]); });
+        .y(function(d) { return y(d.properties[yData]); })
+        .curve(d3.curveBasisOpen);
 
     lineData = _.map(lineData, function(sensObj) {
         //console.log("in lineData"); 
