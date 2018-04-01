@@ -311,11 +311,13 @@ var tooltipWidth = $(".graphs-here").outerWidth(true),
 tooltipHeight = $(".graphs-here").outerHeight(true); 
 console.log(tooltipWidth, tooltipHeight); //checks out 
 
+var tooltipMargin = {left: graphMargin.left, right: graphMargin.right, top: graphMargin.top, bottom: graphMargin.bottom};
 //var stalkerBar2 = $(".graphs-tool-tip").append("svg").position(159, 807);
 var tooltipsvg = d3.select(".graphs-tool-tip") //mouseG
 .append("svg")
-.attr("width", tooltipWidth)
-.attr("height", tooltipHeight);
+.attr("width", tooltipWidth - tooltipMargin.left - tooltipMargin.right)
+.attr("height", tooltipHeight - tooltipMargin.top - tooltipMargin.bottom)
+.attr("transform", "translate(" + tooltipMargin.left + "," + tooltipMargin.top + ")");
 
 tooltipsvg.append("path")
 .attr("class", "stalker-line")
