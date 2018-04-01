@@ -262,7 +262,7 @@ var displayGraphs = function(tripIndex) {
 
     //displayMap();
     displayMapbox();
-    enableToolTips();
+    //enableToolTips();
 
     _.each(graphItems, function(graphItem) {
 
@@ -278,6 +278,7 @@ var displayGraphs = function(tripIndex) {
         renderGraph();
 
     });
+    
 };
 
 var clearData = function() {
@@ -304,67 +305,83 @@ var clearCanvas = function() {
     //items.exit().remove();
 };
 
-var enableToolTips = function() {
+//var enableToolTips = function() {
 
-var tooltipWidth = d3.select(".graphs-tool-tip").node().getBoundingClientRect().width,
-tooltipHeight = d3.select(".graphs-tool-tip").node().getBoundingClientRect().height; 
+var tooltipWidth = $(".graphs-here").outerWidth(true),
+tooltipHeight = $(".graphs-here").outerHeight(true); 
+console.log(tooltipWidth, tooltipHeight); //checks out 
 
+//var stalkerBar2 = $(".graphs-tool-tip").append("svg").position(159, 807);
+var tooltipsvg = d3.select(".graphs-tool-tip") //mouseG
+.append("svg")
+.attr("width", tooltipWidth)
+.attr("height", tooltipHeight);
 
-var stalkerBar = d3.selectAll(".graphs") //mouseG
-.append("svg") 
-.append("g")
-.attr("class", "mouse-over-effects");
-
-stalkerBar.append("path")
+tooltipsvg.append("path")
 .attr("class", "stalker-line")
 .style("stroke", "#54505E")
 .style("stroke-width", "1px")
 .style("opacity", "0");
+// var stalkerBar = tooltipsvg.append("g")
+// .attr("class", "mouse-over-effects");
+// //.translate("transform", "translate(" + graphMargin.left + "," + graphMargin.top + ")");
 
-var stalkerLine = document.getElementsByClassName("line"); //lines
 
-var stalkerPerLine = stalkerBar.selectAll(".stalker-per-line") // mousePerLine, .mouse-per-line
-.data(thisData)
-.enter()
-.append("g")
-.attr("class", "stalker-per-line");
+// var stalkerLines = document.getElementsByClassName("line"); //lines
+// //console.log(stalkerLine); // this does graph all four 
 
-stalkerPerLine.append("circle")
-.attr("r", 3)
-.style("stroke", "#54505E") // filter by color later (good air quality: green ,etc)
-.style("fill", "none")
-.style("stroke-width", "1px")
-.style("opacity", "0");
 
-stalkerBar.append("svg:rect")
-.attr("width", tooltipWidth)
-.attr("height", tooltipHeight)
-.attr("fill", "none")
-.attr("pointer-events", "all")
-.on("mouseout", function() {
-    d3.select(".stalker-line").style("opacity","0");
-    d3.select(".stalker-per-line circle").style("opacity", "0");
-})
-.on("mouseover", function() {
-    d3.select(".stalker-line").style("opacity","1");
-    d3.select(".stalker-per-line circle").style("opacity", "1");
-})
-.on("mousemove", function() {
-    var mouse = d3.mouse(this);
-    d3.select(".stalker-line")
-    .attr("d", function() {
-        var d = "M" + mouse[0] + "," + graphHeight;
-        d += " " + mouse[0] + "," + 0;
-        return d; 
-    });
+// var stalkerPerLine = stalkerBar.selectAll(".stalker-per-line") // mousePerLine, .mouse-per-line
+// .data(thisData)
+// .enter()
+// .append("g")
+// .attr("class", "stalker-per-line");
+// //.classed('x', true);
 
-/*
-    d3.selectAll(".stalker-per-line")
-    .attr("transform", function(d, i) {
-        console.log(graphWidth/mouse[0])
-        var xDate = x.invert   
-})
-*/
-});
-};
+// stalkerPerLine.append("circle")
+// .attr("r", 3)
+// .style("stroke", "#54505E") // filter by color later (good air quality: green ,etc)
+// .style("fill", "none")
+// .style("stroke-width", "1px")
+// .style("opacity", "0");
+
+
+// var tooltipMargin = { top: 20, right: 20, bottom: 20, left: 40 };
+// stalkerBar.append("svg:rect")
+
+// //.attr("position", )
+// //.attr("transform", "translate(" + $("#graph1").position().left + "," + $("#graph4").position(). + ")")
+// //.attr("transform", "translate(0," + tooltipHeight + ")")
+// .attr("fill", "none")
+// .attr("pointer-events", "all")
+// .on("mouseout", function() {
+//     d3.select(".stalker-line").style("opacity","0");
+//     d3.select(".stalker-per-line circle").style("opacity", "0");
+// })
+// .on("mouseover", function() {
+//     d3.select(".stalker-line").style("opacity","1");
+//     d3.select(".stalker-per-line circle").style("opacity", "1");
+// })
+// .on("mousemove", mousemove);
+
+
+// var mousemove = function() {
+//     var mouse = d3.mouse(event.currentTarget);
+//     d3.select(".stalker-line")
+//     .attr("d", function() {
+//         var d = "M" + mouse[0] + "," + tooltipHeight;
+//         d += " " + mouse[0] + "," + 0;
+//         return d; 
+//     });
+
+
+    // d3.selectAll(".stalker-per-line")
+    // .attr("transform", function(d, i) {
+    //     console.log(graphWidth/mouse[0])
+    //     var xDate = x.invert   
+//};
+
+// });
+
+//};
 
