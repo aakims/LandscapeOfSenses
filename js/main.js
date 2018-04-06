@@ -258,17 +258,11 @@ var displayMapbox = function() {
         });
 
 
-        stalkerG.on("mousemove", function() {
-            var mouseCo = d3.mouse(this);
-            d3.select(".mouse-line")
-                .attr("d", function() {
-                    var d = "M" + mouseCo[0] + "," + tooltipHeight;
-                    d += " " + mouseCo[0] + "," + 0;
-                    return d;
-                });
-        });
+
     });
 };
+
+
 
 var displayGraphs = function(tripIndex) {
 
@@ -296,6 +290,15 @@ var displayGraphs = function(tripIndex) {
         renderGraph();
 
     });
+
+    console.log($(".mouse-line")[0]);
+    //console.log($(".mouse-line")[0].attributes.d.value);
+    document.getElementsByClassName("mouse-line").addEventListener('mousemove', function(e) {
+
+        //console.log(JSON.stringify(e.point));
+    });
+
+
 
 };
 
@@ -346,40 +349,78 @@ var stalkerG = tooltipsvg.append("g")
 
 var enableToolTips = function() {
 
-    stalkerG.append("path")
-        .attr("class", "mouse-line")
-        .style("stroke", "#54505E")
-        .style("stroke-width", "2px")
-        .style("opacity", "0");
+stalkerG.append("path")
+    .attr("class", "mouse-line")
+    .style("stroke", "#54505E")
+    .style("stroke-width", "2px")
+    .style("opacity", "0");
 
-    var lines = document.getElementsByClassName("line");
+var lines = document.getElementsByClassName("line");
 
-    var stalkerPerLine = stalkerG.selectAll(".mouse-per-line")
-        .data(thisData)
-        .enter()
-        .append("g")
-        .attr("class", "mouse-per-line");
+var stalkerPerLine = stalkerG.selectAll(".mouse-per-line")
+    .data(thisData)
+    .enter()
+    .append("g")
+    .attr("class", "mouse-per-line");
 
-    stalkerPerLine.append("circle")
-        .attr("r", 4)
-        .style("stroke", "#54505E")
-        .style("fill", "#54505E")
-        .style("opacity", "0");
+stalkerPerLine.append("circle")
+    .attr("r", 4)
+    .style("stroke", "#54505E")
+    .style("fill", "#54505E")
+    .style("opacity", "0");
 
-    stalkerG.append("svg:rect")
-        .attr("width", tooltipWidth)
-        .attr("height", tooltipHeight)
-        .attr("fill", "none")
-        .attr("pointer-events", "all")
-        .on("mouseout", function() {
-            d3.select(".mouse-line").style("opacity", "0");
-            d3.selectAll(".mouse-per-line circle").style("opacity", "0");
-            //d3.selectAll(".mouse-per-line text").style("opacity", "0");
-        })
-        .on("mouseover", function() {
-            d3.select(".mouse-line").style("opacity", "1");
-            d3.selectAll(".mouse-per-line circle").style("opacity", "1");
-            //d3.selectAll(".mouse-per-line text").style("opacity", "1");
-        });
+stalkerG.append("svg:rect")
+    .attr("width", tooltipWidth)
+    .attr("height", tooltipHeight)
+    .attr("fill", "none")
+    .attr("pointer-events", "all")
+    .on("mouseout", function() {
+        d3.select(".mouse-line").style("opacity", "0");
+        d3.selectAll(".mouse-per-line circle").style("opacity", "0");
+        //d3.selectAll(".mouse-per-line text").style("opacity", "0");
+    })
+    .on("mouseover", function() {
+        d3.select(".mouse-line").style("opacity", "1");
+        d3.selectAll(".mouse-per-line circle").style("opacity", "1");
+        //d3.selectAll(".mouse-per-line text").style("opacity", "1");
+    })
+    .on("mousemove", function() {
+        var mouseCo = d3.mouse(this);
+        d3.select(".mouse-line")
+            .attr("d", function() {
+                var d = "M" + mouseCo[0] + "," + tooltipHeight;
+                d += " " + mouseCo[0] + "," + 0;
+                return d;
+            });
+
+
+        d3.selectAll(".mouse-per-line")
+            .attr("transform", function(d, i) {
+                console.log(tooltipWidth / mouseCo[0]);
+                var xTime = x.invert(mouseCo[0]),
+                    bisect = d3.bisector(function(d) { return d["gtime"]; }).right,
+                    idx = bisect(d.values, xTime);
+
+                console.log(xTime);
+
+                var beginning = 0,
+                    end = lines[i].getTotalLength(),
+                    target = null;
+
+                while (true) {
+                    target = Math.floor((beginning + end) / 2);
+                    pos = lines[i].getPointAtLength(target);
+                    if ((target === end || target === beginning) && pos.x !== mouseCo[0]) {
+                        break;
+                    }
+                    if (pos.x > mouseCo[0]) { end = target; } else if (pos.x < mouseCo[0]) { beginning = target; } else break;
+                }
+
+                // d3.select(this).select("text")
+                // .text(y.invert(pos.y).toFixed(2)); 
+
+                return "translate(" + mouseCo[0] + "," + pos.y + ")";
+            });
+    });
+
 };
-
