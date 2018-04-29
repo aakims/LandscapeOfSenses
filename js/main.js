@@ -30,6 +30,7 @@ var graphVars = ["chart1", "chart2", "chart3", "chart4"];
 var chart1, chart2, chart3, chart4;
 var thisData = [];
 var lineData;
+var xTime; 
 // DEFINE TRIP DATA 
 
 var defineData = function(tripIndex) {
@@ -251,6 +252,44 @@ var displayMapbox = function() {
             //map.setFilter("sensing-collection-path", ["==", "unixt", e.features[0].properties["unixt"]])
             mapTime = e.features[0].properties["gtime"];
             console.log(mapTime);
+
+/*
+            d3.select(".mouse-line")
+            .attr("d", function() {
+                var d = "M" 
+            })
+
+            stalkerG.append("svg:rect")
+            .attr("width", tooltipWidth)
+            .attr("height", tooltipHeight)
+            .attr("fill", "none")
+            .attr("pointer-events", "all")
+            .on("mousemove", function() {
+                var 
+            })
+
+    .on("mouseout", function() {
+        d3.select(".mouse-line").style("opacity", "0");
+        d3.selectAll(".mouse-per-line circle").style("opacity", "0");
+        //d3.selectAll(".mouse-per-line text").style("opacity", "0");
+    })
+    .on("mouseover", function() {
+        d3.select(".mouse-line").style("opacity", "1");
+        d3.selectAll(".mouse-per-line circle").style("opacity", "1");
+        //d3.selectAll(".mouse-per-line text").style("opacity", "1");
+    })
+    
+    .on("mousemove", function() {
+        var mouseCo = d3.mouse(this);
+        d3.select(".mouse-line")
+            .attr("d", function() {
+                var d = "M" + mouseCo[0] + "," + tooltipHeight;
+                d += " " + mouseCo[0] + "," + 0;
+                return d;
+            });
+            */
+
+
         });
 
         map.on("mouseleave", "sensing-collection-path", function(e) {
@@ -274,7 +313,7 @@ var displayGraphs = function(tripIndex) {
     //displayMap();
     var map;
     enableToolTips();
-    displayMapbox();
+
 
     _.each(graphItems, function(graphItem) {
 
@@ -291,12 +330,15 @@ var displayGraphs = function(tripIndex) {
 
     });
 
+    displayMapbox();
     console.log($(".mouse-line")[0]);
     //console.log($(".mouse-line")[0].attributes.d.value);
-    document.getElementsByClassName("mouse-line").addEventListener('mousemove', function(e) {
+    
+    // document.getElementsByClassName("mouse-line").addEventListener('mousemove', function(e) {
 
-        //console.log(JSON.stringify(e.point));
-    });
+    //     //console.log(JSON.stringify(e.point));
+    // });
+    
 
 
 
@@ -384,6 +426,7 @@ stalkerG.append("svg:rect")
         d3.selectAll(".mouse-per-line circle").style("opacity", "1");
         //d3.selectAll(".mouse-per-line text").style("opacity", "1");
     })
+    
     .on("mousemove", function() {
         var mouseCo = d3.mouse(this);
         d3.select(".mouse-line")
@@ -393,34 +436,37 @@ stalkerG.append("svg:rect")
                 return d;
             });
 
-
+        /*
         d3.selectAll(".mouse-per-line")
             .attr("transform", function(d, i) {
                 console.log(tooltipWidth / mouseCo[0]);
-                var xTime = x.invert(mouseCo[0]),
-                    bisect = d3.bisector(function(d) { return d["gtime"]; }).right,
-                    idx = bisect(d.values, xTime);
+                xTime = x.invert(mouseCo[0]);
+                    //bisect = d3.bisector(function(d) { return d["gtime"]; }).right,
+                    //idx = bisect(d.values, xTime);
 
                 console.log(xTime);
+                mouseguess = x.invert(xTime);
+                console.log(mouseguess);
 
-                var beginning = 0,
-                    end = lines[i].getTotalLength(),
-                    target = null;
+                // var beginning = 0,
+                //     end = lines[i].getTotalLength(),
+                //     target = null;
 
-                while (true) {
-                    target = Math.floor((beginning + end) / 2);
-                    pos = lines[i].getPointAtLength(target);
-                    if ((target === end || target === beginning) && pos.x !== mouseCo[0]) {
-                        break;
-                    }
-                    if (pos.x > mouseCo[0]) { end = target; } else if (pos.x < mouseCo[0]) { beginning = target; } else break;
-                }
+                // while (true) {
+                //     target = Math.floor((beginning + end) / 2);
+                //     pos = lines[i].getPointAtLength(target);
+                //     if ((target === end || target === beginning) && pos.x !== mouseCo[0]) {
+                //         break;
+                //     }
+                //     if (pos.x > mouseCo[0]) { end = target; } else if (pos.x < mouseCo[0]) { beginning = target; } else break;
+                // }
 
                 // d3.select(this).select("text")
                 // .text(y.invert(pos.y).toFixed(2)); 
 
                 return "translate(" + mouseCo[0] + "," + pos.y + ")";
-            });
-    });
+            }); 
+            */
+    }); 
 
 };
