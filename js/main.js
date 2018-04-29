@@ -31,6 +31,8 @@ var chart1, chart2, chart3, chart4;
 var thisData = [];
 var lineData;
 var xTime; 
+var thisDataF, thisDataL;
+var mapt;  
 // DEFINE TRIP DATA 
 
 var defineData = function(tripIndex) {
@@ -51,6 +53,8 @@ var defineData = function(tripIndex) {
         })
         .value();
 
+    thisDataF = thisData[0],
+    thisDataL = thisData[thisData.length - 1];
     console.log(thisData[1]);
     return thisData;
 
@@ -250,15 +254,33 @@ var displayMapbox = function() {
             //console.log(e.features[0]);
             map.setFilter("path-hover", ["==", "unixt", e.features[0].properties["unixt"]]);
             //map.setFilter("sensing-collection-path", ["==", "unixt", e.features[0].properties["unixt"]])
-            mapTime = e.features[0].properties["gtime"];
-            console.log(mapTime);
+            console.log(e.features[0]);
+            mapt = (e.features[0].properties["unixt"] * 1000)+ 18000000;
+            mapTime = new Date ((e.features[0].properties["unixt"] * 1000)+ 18000000);
+            console.log("maptime: ", mapTime);
+            //console.log(Date(mapTime*1000 + 18000000));
 
-/*
+            var tooltipFrom = $(".graphs-tool-tip").width() / 2 - (graphWidth / 2) + 15;
+
+            console.log(thisData[0]);
+            //console.log(thisDataF, thisDataL);
+            var timeRange = thisDataL.properties.gtime - thisDataF.properties.gtime;
+            var timeOffset = mapTime - thisDataF.properties.gtime;
+            var graphIndicator = 600*(timeOffset/timeRange) + tooltipFrom;
+            console.log(timeRange, timeOffset, graphIndicator);
+            
+            // this works! 
             d3.select(".mouse-line")
             .attr("d", function() {
-                var d = "M" 
+                var d = "M" + graphIndicator + "," + tooltipHeight;
+                d += " " + graphIndicator + "," + 0;
+                return d;
             })
+            .style("stroke", "#54505E")
+            .style("stroke-width", "2px")
+            .style("opacity", "1");
 
+/*
             stalkerG.append("svg:rect")
             .attr("width", tooltipWidth)
             .attr("height", tooltipHeight)
@@ -313,7 +335,6 @@ var displayGraphs = function(tripIndex) {
     //displayMap();
     var map;
     enableToolTips();
-
 
     _.each(graphItems, function(graphItem) {
 
