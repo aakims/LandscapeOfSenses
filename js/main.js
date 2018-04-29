@@ -231,6 +231,12 @@ var displayMapbox = function() {
             "paint": {
                 "circle-radius": markerSize,
                 "circle-color": "#db8a83",
+                // [
+                // 'match', 
+                // ['get', 'properties.olive'],
+                // 6 , "#ffff", 
+                // "#db8a83"
+                // ],
                 "circle-opacity": 1
             }
         });
@@ -266,7 +272,7 @@ var displayMapbox = function() {
             //console.log(thisDataF, thisDataL);
             var timeRange = thisDataL.properties.gtime - thisDataF.properties.gtime;
             var timeOffset = mapTime - thisDataF.properties.gtime;
-            var graphIndicator = 600*(timeOffset/timeRange) + tooltipFrom;
+            var graphIndicator = 600*(timeOffset/timeRange);// + tooltipFrom;
             console.log(timeRange, timeOffset, graphIndicator);
             
             // this works! 
