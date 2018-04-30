@@ -12,11 +12,14 @@ var defaultMap = new mapboxgl.Map({
 
 defaultMap.addControl(new mapboxgl.NavigationControl());
 
+// data fields:
+// ["trip", "olive", "unixt", "time", "date", "speed", "dust", "light", "tempC", "tempF", "FIPS", "distToOS", "dist2H2Omi", "GEOID10", "Probabilit", "COUNT"]
+
 var tripIndex; // define trip number 1~11
 var indexFields = ["trip", "olive"],
     timeField = ["ftime"],
-    displayFields = ["dust", "light", "tempF", "GINI_IND"],
-    dataFields = ["unixt", "trip", "olive", "ftime", "dust", "light", "tempF", "GINI_IND"];
+    displayFields = ["dust", "light", "tempF", "Probabilit"],
+    dataFields = ["unixt", "trip", "olive", "ftime", "dust", "light", "tempF", "Probabilit"];
 var mapCenterCoor;
 var defineMapCenter = function() {
     var midIndex = thisData.length / 2;
@@ -25,7 +28,7 @@ var defineMapCenter = function() {
 
 var selectFields = _.uniq(_.union(indexFields, timeField, displayFields, dataFields));
 
-var graphTitles = ["Air Quality", "Light Level", "Temperature", "Gini Index"];
+var graphTitles = ["Air Quality", "Light Level", "Temperature", "Diversity Index"];
 var graphVars = ["chart1", "chart2", "chart3", "chart4"];
 var chart1, chart2, chart3, chart4;
 var thisData = [];

@@ -1,0 +1,2476 @@
+<!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
+<qgis version="3.0.0-Girona" projectname="">
+  <title></title>
+  <autotransaction active="0"/>
+  <evaluateDefaultValues active="0"/>
+  <trust active="0"/>
+  <projectCrs>
+    <spatialrefsys>
+      <proj4>+proj=lcc +lat_1=39.93333333333333 +lat_2=40.96666666666667 +lat_0=39.33333333333334 +lon_0=-77.75 +x_0=600000.0000000001 +y_0=0 +datum=NAD83 +units=us-ft +no_defs</proj4>
+      <srsid>27556</srsid>
+      <srid>102729</srid>
+      <authid>EPSG:102729</authid>
+      <description>NAD_1983_StatePlane_Pennsylvania_South_FIPS_3702_Feet</description>
+      <projectionacronym>lcc</projectionacronym>
+      <ellipsoidacronym></ellipsoidacronym>
+      <geographicflag>false</geographicflag>
+    </spatialrefsys>
+  </projectCrs>
+  <layer-tree-group>
+    <customproperties/>
+    <layer-tree-layer expanded="1" source="../newersensorydata.shp" checked="Qt::Checked" name="newersensorydata.shp newersensorydata" id="newersensorydata_shp_7cd9f730_5041_4013_8d1c_d13bc88ec65e" providerKey="ogr">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer expanded="1" source="./newsensorydata_withdiversity.shp" checked="Qt::Checked" name="newsensorydata_withdiversity.shp newsensorydata_withdiversity" id="newsensorydata_withdiversity_shp_4034659d_ae12_4d59_bce5_496d35fcf549" providerKey="ogr">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer expanded="1" source="../newsensorydata2.geojson" checked="Qt::Checked" name="newsensorydata2" id="newsensorydata2_661647fd_d3f2_4e1e_ae76_7af8a3435f29" providerKey="ogr">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer expanded="1" source="./blockgroup_dvindex.shp" checked="Qt::Checked" name="blockgroup_dvindex.shp blockgroup_dvindex" id="blockgroup_dvindex_shp_7f5c8e2b_81fc_4fa7_b296_bde39586f42e" providerKey="ogr">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer expanded="1" source="file:///Users/aakims/Dropbox/carrot/sensorymap/data/addtl_downloads/diversityindex_philabg2.csv?type=csv&amp;geomType=none&amp;subsetIndex=no&amp;watchFile=no" checked="Qt::Checked" name="diversityindex_philabg2" id="diversityindex_philabg2_3839939a_5bb9_4348_8ed6_d922a116bf65" providerKey="delimitedtext">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer expanded="1" source="file:///Users/aakims/Dropbox/carrot/sensorymap/data/addtl_downloads/diversityindex_philabg.csv?type=csv&amp;geomType=none&amp;subsetIndex=no&amp;watchFile=no" checked="Qt::Checked" name="diversityindex_philabg" id="diversityindex_philabg_b4b6268c_2f29_4667_b00c_32aa07ee7e7d" providerKey="delimitedtext">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer expanded="1" source="./philadelphia_blockgroup_proj.shp" checked="Qt::Checked" name="philadelphia_blockgroup_proj" id="philadelphia_blockgroup_proj_998f773b_2e49_4eb3_99c6_099546fa01d5" providerKey="ogr">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer expanded="1" source="./PhiladelphiaCensusBlockGroups201201.geojson" checked="Qt::Checked" name="PhiladelphiaCensusBlockGroups201201" id="PhiladelphiaCensusBlockGroups201201_af40ae36_575e_4a3e_a374_e6b61bb5c52d" providerKey="ogr">
+      <customproperties/>
+    </layer-tree-layer>
+    <custom-order enabled="0">
+      <item>PhiladelphiaCensusBlockGroups201201_af40ae36_575e_4a3e_a374_e6b61bb5c52d</item>
+      <item>philadelphia_blockgroup_proj_998f773b_2e49_4eb3_99c6_099546fa01d5</item>
+      <item>diversityindex_philabg_b4b6268c_2f29_4667_b00c_32aa07ee7e7d</item>
+      <item>diversityindex_philabg2_3839939a_5bb9_4348_8ed6_d922a116bf65</item>
+      <item>blockgroup_dvindex_shp_7f5c8e2b_81fc_4fa7_b296_bde39586f42e</item>
+      <item>newsensorydata2_661647fd_d3f2_4e1e_ae76_7af8a3435f29</item>
+      <item>newsensorydata_withdiversity_shp_4034659d_ae12_4d59_bce5_496d35fcf549</item>
+      <item>newersensorydata_shp_7cd9f730_5041_4013_8d1c_d13bc88ec65e</item>
+    </custom-order>
+  </layer-tree-group>
+  <snapping-settings unit="1" enabled="0" mode="2" tolerance="12" intersection-snapping="0" type="1">
+    <individual-layer-settings>
+      <layer-setting units="1" id="newsensorydata_withdiversity_shp_4034659d_ae12_4d59_bce5_496d35fcf549" enabled="0" tolerance="12" type="1"/>
+      <layer-setting units="1" id="newsensorydata2_661647fd_d3f2_4e1e_ae76_7af8a3435f29" enabled="0" tolerance="12" type="1"/>
+      <layer-setting units="1" id="newersensorydata_shp_7cd9f730_5041_4013_8d1c_d13bc88ec65e" enabled="0" tolerance="12" type="1"/>
+      <layer-setting units="1" id="PhiladelphiaCensusBlockGroups201201_af40ae36_575e_4a3e_a374_e6b61bb5c52d" enabled="0" tolerance="12" type="1"/>
+      <layer-setting units="1" id="philadelphia_blockgroup_proj_998f773b_2e49_4eb3_99c6_099546fa01d5" enabled="0" tolerance="12" type="1"/>
+      <layer-setting units="1" id="blockgroup_dvindex_shp_7f5c8e2b_81fc_4fa7_b296_bde39586f42e" enabled="0" tolerance="12" type="1"/>
+    </individual-layer-settings>
+  </snapping-settings>
+  <relations/>
+  <mapcanvas name="theMapCanvas" annotationsVisible="1">
+    <units>feet</units>
+    <extent>
+      <xmin>2658365.66669909656047821</xmin>
+      <ymin>205179.35397843382088467</ymin>
+      <xmax>2752410.48963161371648312</xmax>
+      <ymax>307290.00374182179803029</ymax>
+    </extent>
+    <rotation>0</rotation>
+    <destinationsrs>
+      <spatialrefsys>
+        <proj4>+proj=lcc +lat_1=39.93333333333333 +lat_2=40.96666666666667 +lat_0=39.33333333333334 +lon_0=-77.75 +x_0=600000.0000000001 +y_0=0 +datum=NAD83 +units=us-ft +no_defs</proj4>
+        <srsid>27556</srsid>
+        <srid>102729</srid>
+        <authid>EPSG:102729</authid>
+        <description>NAD_1983_StatePlane_Pennsylvania_South_FIPS_3702_Feet</description>
+        <projectionacronym>lcc</projectionacronym>
+        <ellipsoidacronym></ellipsoidacronym>
+        <geographicflag>false</geographicflag>
+      </spatialrefsys>
+    </destinationsrs>
+    <rendermaptile>0</rendermaptile>
+  </mapcanvas>
+  <legend updateDrawingOrder="true">
+    <legendlayer checked="Qt::Checked" open="true" name="newersensorydata.shp newersensorydata" drawingOrder="-1" showFeatureCount="0">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile isInOverview="0" visible="1" layerid="newersensorydata_shp_7cd9f730_5041_4013_8d1c_d13bc88ec65e"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer checked="Qt::Checked" open="true" name="newsensorydata_withdiversity.shp newsensorydata_withdiversity" drawingOrder="-1" showFeatureCount="0">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile isInOverview="0" visible="1" layerid="newsensorydata_withdiversity_shp_4034659d_ae12_4d59_bce5_496d35fcf549"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer checked="Qt::Checked" open="true" name="newsensorydata2" drawingOrder="-1" showFeatureCount="0">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile isInOverview="0" visible="1" layerid="newsensorydata2_661647fd_d3f2_4e1e_ae76_7af8a3435f29"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer checked="Qt::Checked" open="true" name="blockgroup_dvindex.shp blockgroup_dvindex" drawingOrder="-1" showFeatureCount="0">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile isInOverview="0" visible="1" layerid="blockgroup_dvindex_shp_7f5c8e2b_81fc_4fa7_b296_bde39586f42e"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer checked="Qt::Checked" open="true" name="diversityindex_philabg2" drawingOrder="-1" showFeatureCount="0">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile isInOverview="0" visible="1" layerid="diversityindex_philabg2_3839939a_5bb9_4348_8ed6_d922a116bf65"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer checked="Qt::Checked" open="true" name="diversityindex_philabg" drawingOrder="-1" showFeatureCount="0">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile isInOverview="0" visible="1" layerid="diversityindex_philabg_b4b6268c_2f29_4667_b00c_32aa07ee7e7d"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer checked="Qt::Checked" open="true" name="philadelphia_blockgroup_proj" drawingOrder="-1" showFeatureCount="0">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile isInOverview="0" visible="1" layerid="philadelphia_blockgroup_proj_998f773b_2e49_4eb3_99c6_099546fa01d5"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer checked="Qt::Checked" open="true" name="PhiladelphiaCensusBlockGroups201201" drawingOrder="-1" showFeatureCount="0">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile isInOverview="0" visible="1" layerid="PhiladelphiaCensusBlockGroups201201_af40ae36_575e_4a3e_a374_e6b61bb5c52d"/>
+      </filegroup>
+    </legendlayer>
+  </legend>
+  <mapViewDocks/>
+  <mapViewDocks3D/>
+  <mapcanvas name="mAreaCanvas" annotationsVisible="1">
+    <units>degrees</units>
+    <extent>
+      <xmin>0</xmin>
+      <ymin>0</ymin>
+      <xmax>0</xmax>
+      <ymax>0</ymax>
+    </extent>
+    <rotation>0</rotation>
+    <destinationsrs>
+      <spatialrefsys>
+        <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+        <srsid>3452</srsid>
+        <srid>4326</srid>
+        <authid>EPSG:4326</authid>
+        <description>WGS 84</description>
+        <projectionacronym>longlat</projectionacronym>
+        <ellipsoidacronym>WGS84</ellipsoidacronym>
+        <geographicflag>true</geographicflag>
+      </spatialrefsys>
+    </destinationsrs>
+    <rendermaptile>0</rendermaptile>
+  </mapcanvas>
+  <mapcanvas name="mAreaCanvas" annotationsVisible="1">
+    <units>degrees</units>
+    <extent>
+      <xmin>0</xmin>
+      <ymin>0</ymin>
+      <xmax>0</xmax>
+      <ymax>0</ymax>
+    </extent>
+    <rotation>0</rotation>
+    <destinationsrs>
+      <spatialrefsys>
+        <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+        <srsid>3452</srsid>
+        <srid>4326</srid>
+        <authid>EPSG:4326</authid>
+        <description>WGS 84</description>
+        <projectionacronym>longlat</projectionacronym>
+        <ellipsoidacronym>WGS84</ellipsoidacronym>
+        <geographicflag>true</geographicflag>
+      </spatialrefsys>
+    </destinationsrs>
+    <rendermaptile>0</rendermaptile>
+  </mapcanvas>
+  <mapcanvas name="mAreaCanvas" annotationsVisible="1">
+    <units>degrees</units>
+    <extent>
+      <xmin>0</xmin>
+      <ymin>0</ymin>
+      <xmax>0</xmax>
+      <ymax>0</ymax>
+    </extent>
+    <rotation>0</rotation>
+    <destinationsrs>
+      <spatialrefsys>
+        <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+        <srsid>3452</srsid>
+        <srid>4326</srid>
+        <authid>EPSG:4326</authid>
+        <description>WGS 84</description>
+        <projectionacronym>longlat</projectionacronym>
+        <ellipsoidacronym>WGS84</ellipsoidacronym>
+        <geographicflag>true</geographicflag>
+      </spatialrefsys>
+    </destinationsrs>
+    <rendermaptile>0</rendermaptile>
+  </mapcanvas>
+  <projectlayers>
+    <maplayer labelsEnabled="0" readOnly="0" minScale="1e+8" refreshOnNotifyEnabled="0" simplifyMaxScale="1" refreshOnNotifyMessage="" simplifyDrawingHints="1" simplifyAlgorithm="0" autoRefreshEnabled="0" geometry="Polygon" maxScale="0" type="vector" hasScaleBasedVisibilityFlag="0" autoRefreshTime="0" simplifyLocal="1" simplifyDrawingTol="1">
+      <extent>
+        <xmin>-75.28030647443267753</xmin>
+        <ymin>39.86746381593872002</ymin>
+        <xmax>-74.95574684870183546</xmax>
+        <ymax>40.13792673372432063</ymax>
+      </extent>
+      <id>PhiladelphiaCensusBlockGroups201201_af40ae36_575e_4a3e_a374_e6b61bb5c52d</id>
+      <datasource>./PhiladelphiaCensusBlockGroups201201.geojson</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>PhiladelphiaCensusBlockGroups201201</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+        <links/>
+      </resourceMetadata>
+      <provider encoding="UTF-8">ogr</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <expressionfields/>
+      <map-layer-style-manager current="default">
+        <map-layer-style name="default"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <renderer-v2 enableorderby="0" symbollevels="0" type="singleSymbol" forceraster="0">
+        <symbols>
+          <symbol name="0" clip_to_extent="1" type="fill" alpha="1">
+            <layer pass="0" class="SimpleFill" enabled="1" locked="0">
+              <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
+              <prop v="44,186,110,255" k="color"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="35,35,35,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0.26" k="outline_width"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="solid" k="style"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option name="name" type="QString" value=""/>
+                  <Option name="properties"/>
+                  <Option name="type" type="QString" value="collection"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </symbols>
+        <rotation/>
+        <sizescale/>
+      </renderer-v2>
+      <customproperties/>
+      <blendMode>0</blendMode>
+      <featureBlendMode>0</featureBlendMode>
+      <layerOpacity>1</layerOpacity>
+      <fieldConfiguration>
+        <field name="AWATER10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="TRACTCE10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="OBJECTID">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ALAND10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="BLKGRPCE10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="FUNCSTAT10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="NAMELSAD10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="COUNTYFP10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="STATEFP10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="Shape_Leng">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="MTFCC10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="GEOID10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="INTPTLAT10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="INTPTLON10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias field="AWATER10" index="0" name=""/>
+        <alias field="TRACTCE10" index="1" name=""/>
+        <alias field="OBJECTID" index="2" name=""/>
+        <alias field="ALAND10" index="3" name=""/>
+        <alias field="BLKGRPCE10" index="4" name=""/>
+        <alias field="FUNCSTAT10" index="5" name=""/>
+        <alias field="NAMELSAD10" index="6" name=""/>
+        <alias field="COUNTYFP10" index="7" name=""/>
+        <alias field="STATEFP10" index="8" name=""/>
+        <alias field="Shape_Leng" index="9" name=""/>
+        <alias field="MTFCC10" index="10" name=""/>
+        <alias field="GEOID10" index="11" name=""/>
+        <alias field="INTPTLAT10" index="12" name=""/>
+        <alias field="INTPTLON10" index="13" name=""/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default applyOnUpdate="0" field="AWATER10" expression=""/>
+        <default applyOnUpdate="0" field="TRACTCE10" expression=""/>
+        <default applyOnUpdate="0" field="OBJECTID" expression=""/>
+        <default applyOnUpdate="0" field="ALAND10" expression=""/>
+        <default applyOnUpdate="0" field="BLKGRPCE10" expression=""/>
+        <default applyOnUpdate="0" field="FUNCSTAT10" expression=""/>
+        <default applyOnUpdate="0" field="NAMELSAD10" expression=""/>
+        <default applyOnUpdate="0" field="COUNTYFP10" expression=""/>
+        <default applyOnUpdate="0" field="STATEFP10" expression=""/>
+        <default applyOnUpdate="0" field="Shape_Leng" expression=""/>
+        <default applyOnUpdate="0" field="MTFCC10" expression=""/>
+        <default applyOnUpdate="0" field="GEOID10" expression=""/>
+        <default applyOnUpdate="0" field="INTPTLAT10" expression=""/>
+        <default applyOnUpdate="0" field="INTPTLON10" expression=""/>
+      </defaults>
+      <constraints>
+        <constraint notnull_strength="0" unique_strength="0" field="AWATER10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="TRACTCE10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="OBJECTID" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="ALAND10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="BLKGRPCE10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="FUNCSTAT10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="NAMELSAD10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="COUNTYFP10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="STATEFP10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="Shape_Leng" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="MTFCC10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="GEOID10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="INTPTLAT10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="INTPTLON10" exp_strength="0" constraints="0"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint field="AWATER10" desc="" exp=""/>
+        <constraint field="TRACTCE10" desc="" exp=""/>
+        <constraint field="OBJECTID" desc="" exp=""/>
+        <constraint field="ALAND10" desc="" exp=""/>
+        <constraint field="BLKGRPCE10" desc="" exp=""/>
+        <constraint field="FUNCSTAT10" desc="" exp=""/>
+        <constraint field="NAMELSAD10" desc="" exp=""/>
+        <constraint field="COUNTYFP10" desc="" exp=""/>
+        <constraint field="STATEFP10" desc="" exp=""/>
+        <constraint field="Shape_Leng" desc="" exp=""/>
+        <constraint field="MTFCC10" desc="" exp=""/>
+        <constraint field="GEOID10" desc="" exp=""/>
+        <constraint field="INTPTLAT10" desc="" exp=""/>
+        <constraint field="INTPTLON10" desc="" exp=""/>
+      </constraintExpressions>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="" actionWidgetStyle="dropDown" sortOrder="0">
+        <columns/>
+      </attributetableconfig>
+      <editform></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable/>
+      <labelOnTop/>
+      <widgets/>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <expressionfields/>
+      <previewExpression></previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer labelsEnabled="0" readOnly="0" minScale="1e+8" refreshOnNotifyEnabled="0" simplifyMaxScale="1" refreshOnNotifyMessage="" simplifyDrawingHints="1" simplifyAlgorithm="0" autoRefreshEnabled="0" geometry="Polygon" maxScale="0" type="vector" hasScaleBasedVisibilityFlag="0" autoRefreshTime="0" simplifyLocal="1" simplifyDrawingTol="1">
+      <extent>
+        <xmin>-75.28030647443267753</xmin>
+        <ymin>39.86746381593872002</ymin>
+        <xmax>-74.95574684870183546</xmax>
+        <ymax>40.13792673372432063</ymax>
+      </extent>
+      <id>blockgroup_dvindex_shp_7f5c8e2b_81fc_4fa7_b296_bde39586f42e</id>
+      <datasource>./blockgroup_dvindex.shp</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>blockgroup_dvindex.shp blockgroup_dvindex</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+        <links/>
+      </resourceMetadata>
+      <provider encoding="UTF-8">ogr</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <expressionfields/>
+      <map-layer-style-manager current="default">
+        <map-layer-style name="default"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <renderer-v2 enableorderby="0" symbollevels="0" type="singleSymbol" forceraster="0">
+        <symbols>
+          <symbol name="0" clip_to_extent="1" type="fill" alpha="1">
+            <layer pass="0" class="SimpleFill" enabled="1" locked="0">
+              <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
+              <prop v="160,75,39,255" k="color"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="35,35,35,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0.26" k="outline_width"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="solid" k="style"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option name="name" type="QString" value=""/>
+                  <Option name="properties"/>
+                  <Option name="type" type="QString" value="collection"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </symbols>
+        <rotation/>
+        <sizescale/>
+      </renderer-v2>
+      <customproperties>
+        <property key="dualview/previewExpressions">
+          <value>"OBJECTID"</value>
+        </property>
+      </customproperties>
+      <blendMode>0</blendMode>
+      <featureBlendMode>0</featureBlendMode>
+      <layerOpacity>1</layerOpacity>
+      <fieldConfiguration>
+        <field name="AWATER10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="TRACTCE10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="OBJECTID">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ALAND10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="BLKGRPCE10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="FUNCSTAT10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="NAMELSAD10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="COUNTYFP10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="STATEFP10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="Shape_Leng">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="MTFCC10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="GEOID10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="INTPTLAT10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="INTPTLON10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="Block_Grou">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="FIPS_Code">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="Formatted_">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="Probabilit">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias field="AWATER10" index="0" name=""/>
+        <alias field="TRACTCE10" index="1" name=""/>
+        <alias field="OBJECTID" index="2" name=""/>
+        <alias field="ALAND10" index="3" name=""/>
+        <alias field="BLKGRPCE10" index="4" name=""/>
+        <alias field="FUNCSTAT10" index="5" name=""/>
+        <alias field="NAMELSAD10" index="6" name=""/>
+        <alias field="COUNTYFP10" index="7" name=""/>
+        <alias field="STATEFP10" index="8" name=""/>
+        <alias field="Shape_Leng" index="9" name=""/>
+        <alias field="MTFCC10" index="10" name=""/>
+        <alias field="GEOID10" index="11" name=""/>
+        <alias field="INTPTLAT10" index="12" name=""/>
+        <alias field="INTPTLON10" index="13" name=""/>
+        <alias field="Block_Grou" index="14" name=""/>
+        <alias field="FIPS_Code" index="15" name=""/>
+        <alias field="Formatted_" index="16" name=""/>
+        <alias field="Probabilit" index="17" name=""/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default applyOnUpdate="0" field="AWATER10" expression=""/>
+        <default applyOnUpdate="0" field="TRACTCE10" expression=""/>
+        <default applyOnUpdate="0" field="OBJECTID" expression=""/>
+        <default applyOnUpdate="0" field="ALAND10" expression=""/>
+        <default applyOnUpdate="0" field="BLKGRPCE10" expression=""/>
+        <default applyOnUpdate="0" field="FUNCSTAT10" expression=""/>
+        <default applyOnUpdate="0" field="NAMELSAD10" expression=""/>
+        <default applyOnUpdate="0" field="COUNTYFP10" expression=""/>
+        <default applyOnUpdate="0" field="STATEFP10" expression=""/>
+        <default applyOnUpdate="0" field="Shape_Leng" expression=""/>
+        <default applyOnUpdate="0" field="MTFCC10" expression=""/>
+        <default applyOnUpdate="0" field="GEOID10" expression=""/>
+        <default applyOnUpdate="0" field="INTPTLAT10" expression=""/>
+        <default applyOnUpdate="0" field="INTPTLON10" expression=""/>
+        <default applyOnUpdate="0" field="Block_Grou" expression=""/>
+        <default applyOnUpdate="0" field="FIPS_Code" expression=""/>
+        <default applyOnUpdate="0" field="Formatted_" expression=""/>
+        <default applyOnUpdate="0" field="Probabilit" expression=""/>
+      </defaults>
+      <constraints>
+        <constraint notnull_strength="0" unique_strength="0" field="AWATER10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="TRACTCE10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="OBJECTID" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="ALAND10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="BLKGRPCE10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="FUNCSTAT10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="NAMELSAD10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="COUNTYFP10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="STATEFP10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="Shape_Leng" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="MTFCC10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="GEOID10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="INTPTLAT10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="INTPTLON10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="Block_Grou" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="FIPS_Code" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="Formatted_" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="Probabilit" exp_strength="0" constraints="0"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint field="AWATER10" desc="" exp=""/>
+        <constraint field="TRACTCE10" desc="" exp=""/>
+        <constraint field="OBJECTID" desc="" exp=""/>
+        <constraint field="ALAND10" desc="" exp=""/>
+        <constraint field="BLKGRPCE10" desc="" exp=""/>
+        <constraint field="FUNCSTAT10" desc="" exp=""/>
+        <constraint field="NAMELSAD10" desc="" exp=""/>
+        <constraint field="COUNTYFP10" desc="" exp=""/>
+        <constraint field="STATEFP10" desc="" exp=""/>
+        <constraint field="Shape_Leng" desc="" exp=""/>
+        <constraint field="MTFCC10" desc="" exp=""/>
+        <constraint field="GEOID10" desc="" exp=""/>
+        <constraint field="INTPTLAT10" desc="" exp=""/>
+        <constraint field="INTPTLON10" desc="" exp=""/>
+        <constraint field="Block_Grou" desc="" exp=""/>
+        <constraint field="FIPS_Code" desc="" exp=""/>
+        <constraint field="Formatted_" desc="" exp=""/>
+        <constraint field="Probabilit" desc="" exp=""/>
+      </constraintExpressions>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="" actionWidgetStyle="dropDown" sortOrder="0">
+        <columns>
+          <column hidden="0" name="AWATER10" type="field" width="-1"/>
+          <column hidden="0" name="TRACTCE10" type="field" width="-1"/>
+          <column hidden="0" name="OBJECTID" type="field" width="-1"/>
+          <column hidden="0" name="ALAND10" type="field" width="-1"/>
+          <column hidden="0" name="BLKGRPCE10" type="field" width="-1"/>
+          <column hidden="0" name="FUNCSTAT10" type="field" width="-1"/>
+          <column hidden="0" name="NAMELSAD10" type="field" width="-1"/>
+          <column hidden="0" name="COUNTYFP10" type="field" width="-1"/>
+          <column hidden="0" name="STATEFP10" type="field" width="-1"/>
+          <column hidden="0" name="Shape_Leng" type="field" width="-1"/>
+          <column hidden="0" name="MTFCC10" type="field" width="-1"/>
+          <column hidden="0" name="GEOID10" type="field" width="-1"/>
+          <column hidden="0" name="INTPTLAT10" type="field" width="-1"/>
+          <column hidden="0" name="INTPTLON10" type="field" width="-1"/>
+          <column hidden="0" name="Block_Grou" type="field" width="-1"/>
+          <column hidden="0" name="FIPS_Code" type="field" width="-1"/>
+          <column hidden="0" name="Formatted_" type="field" width="-1"/>
+          <column hidden="0" name="Probabilit" type="field" width="-1"/>
+          <column hidden="1" type="actions" width="-1"/>
+        </columns>
+      </attributetableconfig>
+      <editform></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable/>
+      <labelOnTop/>
+      <widgets/>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <expressionfields/>
+      <previewExpression>"OBJECTID"</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer readOnly="0" minScale="1e+8" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" autoRefreshEnabled="0" geometry="No geometry" maxScale="0" type="vector" hasScaleBasedVisibilityFlag="0" autoRefreshTime="0">
+      <id>diversityindex_philabg2_3839939a_5bb9_4348_8ed6_d922a116bf65</id>
+      <datasource>file:./diversityindex_philabg2.csv?type=csv&amp;geomType=none&amp;subsetIndex=no&amp;watchFile=no</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>diversityindex_philabg2</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent>
+          <spatial maxx="0" maxy="0" miny="0" maxz="0" crs="" dimensions="2" minz="0" minx="0"/>
+          <temporal>
+            <period>
+              <start></start>
+              <end></end>
+            </period>
+          </temporal>
+        </extent>
+        <contact>
+          <name></name>
+          <organization></organization>
+          <position></position>
+          <voice></voice>
+          <fax></fax>
+          <email></email>
+          <role></role>
+        </contact>
+        <links/>
+      </resourceMetadata>
+      <customproperties>
+        <property key="embeddedWidgets/count" value="0"/>
+        <property key="variableNames"/>
+        <property key="variableValues"/>
+      </customproperties>
+      <provider encoding="UTF-8">delimitedtext</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <expressionfields>
+        <field typeName="text" name="geoid" length="-1" subType="0" type="10" precision="-1" expression="to_string(fips_code)" comment=""/>
+      </expressionfields>
+      <map-layer-style-manager current="default">
+        <map-layer-style name="default"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <fieldConfiguration>
+        <field name="Block_Group">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="FIPS_Code">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="Formatted_FIPS">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="Probability that two individuals chosen at random would be of di">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="geoid">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias field="Block_Group" index="0" name=""/>
+        <alias field="FIPS_Code" index="1" name=""/>
+        <alias field="Formatted_FIPS" index="2" name=""/>
+        <alias field="Probability that two individuals chosen at random would be of di" index="3" name=""/>
+        <alias field="geoid" index="4" name=""/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default applyOnUpdate="0" field="Block_Group" expression=""/>
+        <default applyOnUpdate="0" field="FIPS_Code" expression=""/>
+        <default applyOnUpdate="0" field="Formatted_FIPS" expression=""/>
+        <default applyOnUpdate="0" field="Probability that two individuals chosen at random would be of di" expression=""/>
+        <default applyOnUpdate="0" field="geoid" expression=""/>
+      </defaults>
+      <constraints>
+        <constraint notnull_strength="0" unique_strength="0" field="Block_Group" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="FIPS_Code" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="Formatted_FIPS" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="Probability that two individuals chosen at random would be of di" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="geoid" exp_strength="0" constraints="0"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint field="Block_Group" desc="" exp=""/>
+        <constraint field="FIPS_Code" desc="" exp=""/>
+        <constraint field="Formatted_FIPS" desc="" exp=""/>
+        <constraint field="Probability that two individuals chosen at random would be of di" desc="" exp=""/>
+        <constraint field="geoid" desc="" exp=""/>
+      </constraintExpressions>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="" actionWidgetStyle="dropDown" sortOrder="0">
+        <columns>
+          <column hidden="0" name="Block_Group" type="field" width="-1"/>
+          <column hidden="0" name="FIPS_Code" type="field" width="-1"/>
+          <column hidden="0" name="Formatted_FIPS" type="field" width="-1"/>
+          <column hidden="0" name="Probability that two individuals chosen at random would be of di" type="field" width="-1"/>
+          <column hidden="0" name="geoid" type="field" width="-1"/>
+          <column hidden="1" type="actions" width="-1"/>
+        </columns>
+      </attributetableconfig>
+      <editform></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
+"""
+QGIS forms can have a Python function that is called when the form is
+opened.
+
+Use this function to add extra logic to your forms.
+
+Enter the name of the function in the "Python Init function"
+field.
+An example follows:
+"""
+from qgis.PyQt.QtWidgets import QWidget
+
+def my_form_open(dialog, layer, feature):
+	geom = feature.geometry()
+	control = dialog.findChild(QWidget, "MyLineEdit")
+]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable>
+        <field name="Block_Group" editable="1"/>
+        <field name="FIPS_Code" editable="1"/>
+        <field name="Formatted_FIPS" editable="1"/>
+        <field name="Probability that two individuals chosen at random would be of di" editable="1"/>
+      </editable>
+      <labelOnTop>
+        <field name="Block_Group" labelOnTop="0"/>
+        <field name="FIPS_Code" labelOnTop="0"/>
+        <field name="Formatted_FIPS" labelOnTop="0"/>
+        <field name="Probability that two individuals chosen at random would be of di" labelOnTop="0"/>
+      </labelOnTop>
+      <widgets/>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <expressionfields>
+        <field typeName="text" name="geoid" length="-1" subType="0" type="10" precision="-1" expression="to_string(fips_code)" comment=""/>
+      </expressionfields>
+      <previewExpression>Probability that two individuals chosen at random would be of di</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer readOnly="0" minScale="1e+8" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" autoRefreshEnabled="0" geometry="No geometry" maxScale="0" type="vector" hasScaleBasedVisibilityFlag="0" autoRefreshTime="0">
+      <id>diversityindex_philabg_b4b6268c_2f29_4667_b00c_32aa07ee7e7d</id>
+      <datasource>file:./diversityindex_philabg.csv?type=csv&amp;geomType=none&amp;subsetIndex=no&amp;watchFile=no</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>diversityindex_philabg</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+        <links/>
+      </resourceMetadata>
+      <customproperties>
+        <property key="dualview/previewExpressions">
+          <value>"Probability that two individuals chosen at random would be of di"</value>
+        </property>
+      </customproperties>
+      <provider encoding="UTF-8">delimitedtext</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <expressionfields/>
+      <map-layer-style-manager current="default">
+        <map-layer-style name="default"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <fieldConfiguration>
+        <field name="Block Group">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="FIPS Code">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="Formatted FIPS">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="Probability that two individuals chosen at random would be of di">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias field="Block Group" index="0" name=""/>
+        <alias field="FIPS Code" index="1" name=""/>
+        <alias field="Formatted FIPS" index="2" name=""/>
+        <alias field="Probability that two individuals chosen at random would be of di" index="3" name=""/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default applyOnUpdate="0" field="Block Group" expression=""/>
+        <default applyOnUpdate="0" field="FIPS Code" expression=""/>
+        <default applyOnUpdate="0" field="Formatted FIPS" expression=""/>
+        <default applyOnUpdate="0" field="Probability that two individuals chosen at random would be of di" expression=""/>
+      </defaults>
+      <constraints>
+        <constraint notnull_strength="0" unique_strength="0" field="Block Group" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="FIPS Code" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="Formatted FIPS" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="Probability that two individuals chosen at random would be of di" exp_strength="0" constraints="0"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint field="Block Group" desc="" exp=""/>
+        <constraint field="FIPS Code" desc="" exp=""/>
+        <constraint field="Formatted FIPS" desc="" exp=""/>
+        <constraint field="Probability that two individuals chosen at random would be of di" desc="" exp=""/>
+      </constraintExpressions>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="" actionWidgetStyle="dropDown" sortOrder="0">
+        <columns>
+          <column hidden="0" name="Block Group" type="field" width="146"/>
+          <column hidden="0" name="FIPS Code" type="field" width="-1"/>
+          <column hidden="0" name="Formatted FIPS" type="field" width="-1"/>
+          <column hidden="0" name="Probability that two individuals chosen at random would be of di" type="field" width="-1"/>
+          <column hidden="1" type="actions" width="-1"/>
+        </columns>
+      </attributetableconfig>
+      <editform></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable/>
+      <labelOnTop/>
+      <widgets/>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <expressionfields/>
+      <previewExpression>"Probability that two individuals chosen at random would be of di"</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer labelsEnabled="0" readOnly="0" minScale="1e+8" refreshOnNotifyEnabled="0" simplifyMaxScale="1" refreshOnNotifyMessage="" simplifyDrawingHints="1" simplifyAlgorithm="0" autoRefreshEnabled="0" geometry="Point" maxScale="0" type="vector" hasScaleBasedVisibilityFlag="0" autoRefreshTime="0" simplifyLocal="1" simplifyDrawingTol="1">
+      <extent>
+        <xmin>-75.21729200000000048</xmin>
+        <ymin>39.93738900000000314</ymin>
+        <xmax>-75.13994499999999732</xmax>
+        <ymax>39.97891599999999812</ymax>
+      </extent>
+      <id>newersensorydata_shp_7cd9f730_5041_4013_8d1c_d13bc88ec65e</id>
+      <datasource>../newersensorydata.shp</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>newersensorydata.shp newersensorydata</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+        <links/>
+      </resourceMetadata>
+      <provider encoding="UTF-8">ogr</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <expressionfields/>
+      <map-layer-style-manager current="default">
+        <map-layer-style name="default"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <renderer-v2 enableorderby="0" symbollevels="0" type="singleSymbol" forceraster="0">
+        <symbols>
+          <symbol name="0" clip_to_extent="1" type="marker" alpha="1">
+            <layer pass="0" class="SimpleMarker" enabled="1" locked="0">
+              <prop v="0" k="angle"/>
+              <prop v="198,34,163,255" k="color"/>
+              <prop v="1" k="horizontal_anchor_point"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="circle" k="name"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="35,35,35,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0" k="outline_width"/>
+              <prop v="3x:0,0,0,0,0,0" k="outline_width_map_unit_scale"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="diameter" k="scale_method"/>
+              <prop v="2" k="size"/>
+              <prop v="3x:0,0,0,0,0,0" k="size_map_unit_scale"/>
+              <prop v="MM" k="size_unit"/>
+              <prop v="1" k="vertical_anchor_point"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option name="name" type="QString" value=""/>
+                  <Option name="properties"/>
+                  <Option name="type" type="QString" value="collection"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </symbols>
+        <rotation/>
+        <sizescale/>
+      </renderer-v2>
+      <customproperties>
+        <property key="dualview/previewExpressions">
+          <value>"GEOID10"</value>
+        </property>
+      </customproperties>
+      <blendMode>0</blendMode>
+      <featureBlendMode>0</featureBlendMode>
+      <layerOpacity>1</layerOpacity>
+      <fieldConfiguration>
+        <field name="trip">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="olive">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="unixt">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="time">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="date">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="speed">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="dust">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="light">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="tempC">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="tempF">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="FIPS">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="distToOS">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="dist2H2Omi">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="GEOID10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="Probabilit">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="COUNT">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias field="trip" index="0" name=""/>
+        <alias field="olive" index="1" name=""/>
+        <alias field="unixt" index="2" name=""/>
+        <alias field="time" index="3" name=""/>
+        <alias field="date" index="4" name=""/>
+        <alias field="speed" index="5" name=""/>
+        <alias field="dust" index="6" name=""/>
+        <alias field="light" index="7" name=""/>
+        <alias field="tempC" index="8" name=""/>
+        <alias field="tempF" index="9" name=""/>
+        <alias field="FIPS" index="10" name=""/>
+        <alias field="distToOS" index="11" name=""/>
+        <alias field="dist2H2Omi" index="12" name=""/>
+        <alias field="GEOID10" index="13" name=""/>
+        <alias field="Probabilit" index="14" name=""/>
+        <alias field="COUNT" index="15" name=""/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default applyOnUpdate="0" field="trip" expression=""/>
+        <default applyOnUpdate="0" field="olive" expression=""/>
+        <default applyOnUpdate="0" field="unixt" expression=""/>
+        <default applyOnUpdate="0" field="time" expression=""/>
+        <default applyOnUpdate="0" field="date" expression=""/>
+        <default applyOnUpdate="0" field="speed" expression=""/>
+        <default applyOnUpdate="0" field="dust" expression=""/>
+        <default applyOnUpdate="0" field="light" expression=""/>
+        <default applyOnUpdate="0" field="tempC" expression=""/>
+        <default applyOnUpdate="0" field="tempF" expression=""/>
+        <default applyOnUpdate="0" field="FIPS" expression=""/>
+        <default applyOnUpdate="0" field="distToOS" expression=""/>
+        <default applyOnUpdate="0" field="dist2H2Omi" expression=""/>
+        <default applyOnUpdate="0" field="GEOID10" expression=""/>
+        <default applyOnUpdate="0" field="Probabilit" expression=""/>
+        <default applyOnUpdate="0" field="COUNT" expression=""/>
+      </defaults>
+      <constraints>
+        <constraint notnull_strength="0" unique_strength="0" field="trip" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="olive" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="unixt" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="time" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="date" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="speed" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="dust" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="light" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="tempC" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="tempF" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="FIPS" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="distToOS" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="dist2H2Omi" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="GEOID10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="Probabilit" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="COUNT" exp_strength="0" constraints="0"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint field="trip" desc="" exp=""/>
+        <constraint field="olive" desc="" exp=""/>
+        <constraint field="unixt" desc="" exp=""/>
+        <constraint field="time" desc="" exp=""/>
+        <constraint field="date" desc="" exp=""/>
+        <constraint field="speed" desc="" exp=""/>
+        <constraint field="dust" desc="" exp=""/>
+        <constraint field="light" desc="" exp=""/>
+        <constraint field="tempC" desc="" exp=""/>
+        <constraint field="tempF" desc="" exp=""/>
+        <constraint field="FIPS" desc="" exp=""/>
+        <constraint field="distToOS" desc="" exp=""/>
+        <constraint field="dist2H2Omi" desc="" exp=""/>
+        <constraint field="GEOID10" desc="" exp=""/>
+        <constraint field="Probabilit" desc="" exp=""/>
+        <constraint field="COUNT" desc="" exp=""/>
+      </constraintExpressions>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="" actionWidgetStyle="dropDown" sortOrder="0">
+        <columns>
+          <column hidden="0" name="trip" type="field" width="-1"/>
+          <column hidden="0" name="olive" type="field" width="-1"/>
+          <column hidden="0" name="unixt" type="field" width="-1"/>
+          <column hidden="0" name="time" type="field" width="-1"/>
+          <column hidden="0" name="date" type="field" width="-1"/>
+          <column hidden="0" name="speed" type="field" width="-1"/>
+          <column hidden="0" name="dust" type="field" width="-1"/>
+          <column hidden="0" name="light" type="field" width="-1"/>
+          <column hidden="0" name="tempC" type="field" width="-1"/>
+          <column hidden="0" name="tempF" type="field" width="-1"/>
+          <column hidden="0" name="FIPS" type="field" width="-1"/>
+          <column hidden="0" name="distToOS" type="field" width="-1"/>
+          <column hidden="0" name="dist2H2Omi" type="field" width="-1"/>
+          <column hidden="0" name="GEOID10" type="field" width="-1"/>
+          <column hidden="0" name="Probabilit" type="field" width="-1"/>
+          <column hidden="0" name="COUNT" type="field" width="-1"/>
+          <column hidden="1" type="actions" width="-1"/>
+        </columns>
+      </attributetableconfig>
+      <editform></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable/>
+      <labelOnTop/>
+      <widgets/>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <expressionfields/>
+      <previewExpression>"GEOID10"</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer labelsEnabled="0" readOnly="0" minScale="1e+8" refreshOnNotifyEnabled="0" simplifyMaxScale="1" refreshOnNotifyMessage="" simplifyDrawingHints="1" simplifyAlgorithm="0" autoRefreshEnabled="0" geometry="Point" maxScale="0" type="vector" hasScaleBasedVisibilityFlag="0" autoRefreshTime="0" simplifyLocal="1" simplifyDrawingTol="1">
+      <extent>
+        <xmin>-75.21729200000000048</xmin>
+        <ymin>39.93738900000000314</ymin>
+        <xmax>-75.13994499999999732</xmax>
+        <ymax>39.97891599999999812</ymax>
+      </extent>
+      <id>newsensorydata2_661647fd_d3f2_4e1e_ae76_7af8a3435f29</id>
+      <datasource>../newsensorydata2.geojson</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>newsensorydata2</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+        <links/>
+      </resourceMetadata>
+      <provider encoding="UTF-8">ogr</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <expressionfields/>
+      <map-layer-style-manager current="default">
+        <map-layer-style name="default"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <renderer-v2 enableorderby="0" symbollevels="0" type="singleSymbol" forceraster="0">
+        <symbols>
+          <symbol name="0" clip_to_extent="1" type="marker" alpha="1">
+            <layer pass="0" class="SimpleMarker" enabled="1" locked="0">
+              <prop v="0" k="angle"/>
+              <prop v="79,103,150,255" k="color"/>
+              <prop v="1" k="horizontal_anchor_point"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="circle" k="name"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="35,35,35,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0" k="outline_width"/>
+              <prop v="3x:0,0,0,0,0,0" k="outline_width_map_unit_scale"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="diameter" k="scale_method"/>
+              <prop v="2" k="size"/>
+              <prop v="3x:0,0,0,0,0,0" k="size_map_unit_scale"/>
+              <prop v="MM" k="size_unit"/>
+              <prop v="1" k="vertical_anchor_point"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option name="name" type="QString" value=""/>
+                  <Option name="properties"/>
+                  <Option name="type" type="QString" value="collection"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </symbols>
+        <rotation/>
+        <sizescale/>
+      </renderer-v2>
+      <customproperties/>
+      <blendMode>0</blendMode>
+      <featureBlendMode>0</featureBlendMode>
+      <layerOpacity>1</layerOpacity>
+      <fieldConfiguration>
+        <field name="">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="Join_Count">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="TARGET_FID">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="trip">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="olive">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="unixt">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="time">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="date">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="speed">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="dust">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="light">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="tempC">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="tempF">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="Join_Cou_1">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="TARGET_F_1">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="JOIN_FID">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="FIPS">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="TOT_POP">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="TOT_W">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="PCT_W">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="PCTBACHMOR">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="MED_HHINC">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="PERCPT_INC">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="GINI_IND">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="TOT_HOU">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="PCT_RENT">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="MED_BUILT">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="MED_RENT">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="distToOS">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="dist2H2Omi">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias field="" index="0" name=""/>
+        <alias field="Join_Count" index="1" name=""/>
+        <alias field="TARGET_FID" index="2" name=""/>
+        <alias field="trip" index="3" name=""/>
+        <alias field="olive" index="4" name=""/>
+        <alias field="unixt" index="5" name=""/>
+        <alias field="time" index="6" name=""/>
+        <alias field="date" index="7" name=""/>
+        <alias field="speed" index="8" name=""/>
+        <alias field="dust" index="9" name=""/>
+        <alias field="light" index="10" name=""/>
+        <alias field="tempC" index="11" name=""/>
+        <alias field="tempF" index="12" name=""/>
+        <alias field="Join_Cou_1" index="13" name=""/>
+        <alias field="TARGET_F_1" index="14" name=""/>
+        <alias field="JOIN_FID" index="15" name=""/>
+        <alias field="FIPS" index="16" name=""/>
+        <alias field="TOT_POP" index="17" name=""/>
+        <alias field="TOT_W" index="18" name=""/>
+        <alias field="PCT_W" index="19" name=""/>
+        <alias field="PCTBACHMOR" index="20" name=""/>
+        <alias field="MED_HHINC" index="21" name=""/>
+        <alias field="PERCPT_INC" index="22" name=""/>
+        <alias field="GINI_IND" index="23" name=""/>
+        <alias field="TOT_HOU" index="24" name=""/>
+        <alias field="PCT_RENT" index="25" name=""/>
+        <alias field="MED_BUILT" index="26" name=""/>
+        <alias field="MED_RENT" index="27" name=""/>
+        <alias field="distToOS" index="28" name=""/>
+        <alias field="dist2H2Omi" index="29" name=""/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default applyOnUpdate="0" field="" expression=""/>
+        <default applyOnUpdate="0" field="Join_Count" expression=""/>
+        <default applyOnUpdate="0" field="TARGET_FID" expression=""/>
+        <default applyOnUpdate="0" field="trip" expression=""/>
+        <default applyOnUpdate="0" field="olive" expression=""/>
+        <default applyOnUpdate="0" field="unixt" expression=""/>
+        <default applyOnUpdate="0" field="time" expression=""/>
+        <default applyOnUpdate="0" field="date" expression=""/>
+        <default applyOnUpdate="0" field="speed" expression=""/>
+        <default applyOnUpdate="0" field="dust" expression=""/>
+        <default applyOnUpdate="0" field="light" expression=""/>
+        <default applyOnUpdate="0" field="tempC" expression=""/>
+        <default applyOnUpdate="0" field="tempF" expression=""/>
+        <default applyOnUpdate="0" field="Join_Cou_1" expression=""/>
+        <default applyOnUpdate="0" field="TARGET_F_1" expression=""/>
+        <default applyOnUpdate="0" field="JOIN_FID" expression=""/>
+        <default applyOnUpdate="0" field="FIPS" expression=""/>
+        <default applyOnUpdate="0" field="TOT_POP" expression=""/>
+        <default applyOnUpdate="0" field="TOT_W" expression=""/>
+        <default applyOnUpdate="0" field="PCT_W" expression=""/>
+        <default applyOnUpdate="0" field="PCTBACHMOR" expression=""/>
+        <default applyOnUpdate="0" field="MED_HHINC" expression=""/>
+        <default applyOnUpdate="0" field="PERCPT_INC" expression=""/>
+        <default applyOnUpdate="0" field="GINI_IND" expression=""/>
+        <default applyOnUpdate="0" field="TOT_HOU" expression=""/>
+        <default applyOnUpdate="0" field="PCT_RENT" expression=""/>
+        <default applyOnUpdate="0" field="MED_BUILT" expression=""/>
+        <default applyOnUpdate="0" field="MED_RENT" expression=""/>
+        <default applyOnUpdate="0" field="distToOS" expression=""/>
+        <default applyOnUpdate="0" field="dist2H2Omi" expression=""/>
+      </defaults>
+      <constraints>
+        <constraint notnull_strength="0" unique_strength="0" field="" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="Join_Count" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="TARGET_FID" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="trip" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="olive" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="unixt" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="time" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="date" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="speed" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="dust" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="light" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="tempC" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="tempF" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="Join_Cou_1" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="TARGET_F_1" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="JOIN_FID" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="FIPS" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="TOT_POP" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="TOT_W" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="PCT_W" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="PCTBACHMOR" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="MED_HHINC" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="PERCPT_INC" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="GINI_IND" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="TOT_HOU" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="PCT_RENT" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="MED_BUILT" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="MED_RENT" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="distToOS" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="dist2H2Omi" exp_strength="0" constraints="0"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint field="" desc="" exp=""/>
+        <constraint field="Join_Count" desc="" exp=""/>
+        <constraint field="TARGET_FID" desc="" exp=""/>
+        <constraint field="trip" desc="" exp=""/>
+        <constraint field="olive" desc="" exp=""/>
+        <constraint field="unixt" desc="" exp=""/>
+        <constraint field="time" desc="" exp=""/>
+        <constraint field="date" desc="" exp=""/>
+        <constraint field="speed" desc="" exp=""/>
+        <constraint field="dust" desc="" exp=""/>
+        <constraint field="light" desc="" exp=""/>
+        <constraint field="tempC" desc="" exp=""/>
+        <constraint field="tempF" desc="" exp=""/>
+        <constraint field="Join_Cou_1" desc="" exp=""/>
+        <constraint field="TARGET_F_1" desc="" exp=""/>
+        <constraint field="JOIN_FID" desc="" exp=""/>
+        <constraint field="FIPS" desc="" exp=""/>
+        <constraint field="TOT_POP" desc="" exp=""/>
+        <constraint field="TOT_W" desc="" exp=""/>
+        <constraint field="PCT_W" desc="" exp=""/>
+        <constraint field="PCTBACHMOR" desc="" exp=""/>
+        <constraint field="MED_HHINC" desc="" exp=""/>
+        <constraint field="PERCPT_INC" desc="" exp=""/>
+        <constraint field="GINI_IND" desc="" exp=""/>
+        <constraint field="TOT_HOU" desc="" exp=""/>
+        <constraint field="PCT_RENT" desc="" exp=""/>
+        <constraint field="MED_BUILT" desc="" exp=""/>
+        <constraint field="MED_RENT" desc="" exp=""/>
+        <constraint field="distToOS" desc="" exp=""/>
+        <constraint field="dist2H2Omi" desc="" exp=""/>
+      </constraintExpressions>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="" actionWidgetStyle="dropDown" sortOrder="0">
+        <columns/>
+      </attributetableconfig>
+      <editform></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable/>
+      <labelOnTop/>
+      <widgets/>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <expressionfields/>
+      <previewExpression></previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer labelsEnabled="0" readOnly="0" minScale="1e+8" refreshOnNotifyEnabled="0" simplifyMaxScale="1" refreshOnNotifyMessage="" simplifyDrawingHints="1" simplifyAlgorithm="0" autoRefreshEnabled="0" geometry="Point" maxScale="0" type="vector" hasScaleBasedVisibilityFlag="0" autoRefreshTime="0" simplifyLocal="1" simplifyDrawingTol="1">
+      <extent>
+        <xmin>-75.21729200000000048</xmin>
+        <ymin>39.93738900000000314</ymin>
+        <xmax>-75.13994499999999732</xmax>
+        <ymax>39.97891599999999812</ymax>
+      </extent>
+      <id>newsensorydata_withdiversity_shp_4034659d_ae12_4d59_bce5_496d35fcf549</id>
+      <datasource>./newsensorydata_withdiversity.shp</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>newsensorydata_withdiversity.shp newsensorydata_withdiversity</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+        <links/>
+      </resourceMetadata>
+      <provider encoding="UTF-8">ogr</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <expressionfields/>
+      <map-layer-style-manager current="default">
+        <map-layer-style name="default"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <renderer-v2 enableorderby="0" symbollevels="0" type="singleSymbol" forceraster="0">
+        <symbols>
+          <symbol name="0" clip_to_extent="1" type="marker" alpha="1">
+            <layer pass="0" class="SimpleMarker" enabled="1" locked="0">
+              <prop v="0" k="angle"/>
+              <prop v="217,134,155,255" k="color"/>
+              <prop v="1" k="horizontal_anchor_point"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="circle" k="name"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="35,35,35,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0" k="outline_width"/>
+              <prop v="3x:0,0,0,0,0,0" k="outline_width_map_unit_scale"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="diameter" k="scale_method"/>
+              <prop v="2" k="size"/>
+              <prop v="3x:0,0,0,0,0,0" k="size_map_unit_scale"/>
+              <prop v="MM" k="size_unit"/>
+              <prop v="1" k="vertical_anchor_point"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option name="name" type="QString" value=""/>
+                  <Option name="properties"/>
+                  <Option name="type" type="QString" value="collection"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </symbols>
+        <rotation/>
+        <sizescale/>
+      </renderer-v2>
+      <customproperties>
+        <property key="dualview/previewExpressions">
+          <value>"TARGET_FID"</value>
+        </property>
+      </customproperties>
+      <blendMode>0</blendMode>
+      <featureBlendMode>0</featureBlendMode>
+      <layerOpacity>1</layerOpacity>
+      <fieldConfiguration>
+        <field name="TARGET_FID">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="COUNT">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias field="TARGET_FID" index="0" name=""/>
+        <alias field="COUNT" index="1" name=""/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default applyOnUpdate="0" field="TARGET_FID" expression=""/>
+        <default applyOnUpdate="0" field="COUNT" expression=""/>
+      </defaults>
+      <constraints>
+        <constraint notnull_strength="0" unique_strength="0" field="TARGET_FID" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="COUNT" exp_strength="0" constraints="0"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint field="TARGET_FID" desc="" exp=""/>
+        <constraint field="COUNT" desc="" exp=""/>
+      </constraintExpressions>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="" actionWidgetStyle="dropDown" sortOrder="0">
+        <columns>
+          <column hidden="0" name="TARGET_FID" type="field" width="-1"/>
+          <column hidden="0" name="COUNT" type="field" width="-1"/>
+          <column hidden="1" type="actions" width="-1"/>
+        </columns>
+      </attributetableconfig>
+      <editform></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable/>
+      <labelOnTop/>
+      <widgets/>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <expressionfields/>
+      <previewExpression>"TARGET_FID"</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer labelsEnabled="0" readOnly="0" minScale="1e+8" refreshOnNotifyEnabled="0" simplifyMaxScale="1" refreshOnNotifyMessage="" simplifyDrawingHints="1" simplifyAlgorithm="0" autoRefreshEnabled="0" geometry="Polygon" maxScale="0" type="vector" hasScaleBasedVisibilityFlag="0" autoRefreshTime="0" simplifyLocal="1" simplifyDrawingTol="1">
+      <extent>
+        <xmin>2660574.54655136307701468</xmin>
+        <ymin>204813.85932527165277861</ymin>
+        <xmax>2750112.77856378583237529</xmax>
+        <ymax>304942.42776851373491809</ymax>
+      </extent>
+      <id>philadelphia_blockgroup_proj_998f773b_2e49_4eb3_99c6_099546fa01d5</id>
+      <datasource>./philadelphia_blockgroup_proj.shp</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>philadelphia_blockgroup_proj</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=lcc +lat_1=39.93333333333333 +lat_2=40.96666666666667 +lat_0=39.33333333333334 +lon_0=-77.75 +x_0=600000.0000000001 +y_0=0 +datum=NAD83 +units=us-ft +no_defs</proj4>
+          <srsid>27556</srsid>
+          <srid>102729</srid>
+          <authid>EPSG:102729</authid>
+          <description>NAD_1983_StatePlane_Pennsylvania_South_FIPS_3702_Feet</description>
+          <projectionacronym>lcc</projectionacronym>
+          <ellipsoidacronym></ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+        <links/>
+      </resourceMetadata>
+      <provider encoding="UTF-8">ogr</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <expressionfields/>
+      <map-layer-style-manager current="default">
+        <map-layer-style name="default"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <renderer-v2 enableorderby="0" symbollevels="0" type="singleSymbol" forceraster="0">
+        <symbols>
+          <symbol name="0" clip_to_extent="1" type="fill" alpha="1">
+            <layer pass="0" class="SimpleFill" enabled="1" locked="0">
+              <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
+              <prop v="0,133,156,255" k="color"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="35,35,35,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0.26" k="outline_width"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="solid" k="style"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option name="name" type="QString" value=""/>
+                  <Option name="properties"/>
+                  <Option name="type" type="QString" value="collection"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </symbols>
+        <rotation/>
+        <sizescale/>
+      </renderer-v2>
+      <customproperties/>
+      <blendMode>0</blendMode>
+      <featureBlendMode>0</featureBlendMode>
+      <layerOpacity>1</layerOpacity>
+      <fieldConfiguration>
+        <field name="AWATER10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="TRACTCE10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="OBJECTID">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ALAND10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="BLKGRPCE10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="FUNCSTAT10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="NAMELSAD10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="COUNTYFP10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="STATEFP10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="Shape_Leng">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="MTFCC10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="GEOID10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="INTPTLAT10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="INTPTLON10">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias field="AWATER10" index="0" name=""/>
+        <alias field="TRACTCE10" index="1" name=""/>
+        <alias field="OBJECTID" index="2" name=""/>
+        <alias field="ALAND10" index="3" name=""/>
+        <alias field="BLKGRPCE10" index="4" name=""/>
+        <alias field="FUNCSTAT10" index="5" name=""/>
+        <alias field="NAMELSAD10" index="6" name=""/>
+        <alias field="COUNTYFP10" index="7" name=""/>
+        <alias field="STATEFP10" index="8" name=""/>
+        <alias field="Shape_Leng" index="9" name=""/>
+        <alias field="MTFCC10" index="10" name=""/>
+        <alias field="GEOID10" index="11" name=""/>
+        <alias field="INTPTLAT10" index="12" name=""/>
+        <alias field="INTPTLON10" index="13" name=""/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default applyOnUpdate="0" field="AWATER10" expression=""/>
+        <default applyOnUpdate="0" field="TRACTCE10" expression=""/>
+        <default applyOnUpdate="0" field="OBJECTID" expression=""/>
+        <default applyOnUpdate="0" field="ALAND10" expression=""/>
+        <default applyOnUpdate="0" field="BLKGRPCE10" expression=""/>
+        <default applyOnUpdate="0" field="FUNCSTAT10" expression=""/>
+        <default applyOnUpdate="0" field="NAMELSAD10" expression=""/>
+        <default applyOnUpdate="0" field="COUNTYFP10" expression=""/>
+        <default applyOnUpdate="0" field="STATEFP10" expression=""/>
+        <default applyOnUpdate="0" field="Shape_Leng" expression=""/>
+        <default applyOnUpdate="0" field="MTFCC10" expression=""/>
+        <default applyOnUpdate="0" field="GEOID10" expression=""/>
+        <default applyOnUpdate="0" field="INTPTLAT10" expression=""/>
+        <default applyOnUpdate="0" field="INTPTLON10" expression=""/>
+      </defaults>
+      <constraints>
+        <constraint notnull_strength="0" unique_strength="0" field="AWATER10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="TRACTCE10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="OBJECTID" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="ALAND10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="BLKGRPCE10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="FUNCSTAT10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="NAMELSAD10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="COUNTYFP10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="STATEFP10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="Shape_Leng" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="MTFCC10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="GEOID10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="INTPTLAT10" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="INTPTLON10" exp_strength="0" constraints="0"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint field="AWATER10" desc="" exp=""/>
+        <constraint field="TRACTCE10" desc="" exp=""/>
+        <constraint field="OBJECTID" desc="" exp=""/>
+        <constraint field="ALAND10" desc="" exp=""/>
+        <constraint field="BLKGRPCE10" desc="" exp=""/>
+        <constraint field="FUNCSTAT10" desc="" exp=""/>
+        <constraint field="NAMELSAD10" desc="" exp=""/>
+        <constraint field="COUNTYFP10" desc="" exp=""/>
+        <constraint field="STATEFP10" desc="" exp=""/>
+        <constraint field="Shape_Leng" desc="" exp=""/>
+        <constraint field="MTFCC10" desc="" exp=""/>
+        <constraint field="GEOID10" desc="" exp=""/>
+        <constraint field="INTPTLAT10" desc="" exp=""/>
+        <constraint field="INTPTLON10" desc="" exp=""/>
+      </constraintExpressions>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="" actionWidgetStyle="dropDown" sortOrder="0">
+        <columns>
+          <column hidden="0" name="AWATER10" type="field" width="-1"/>
+          <column hidden="0" name="TRACTCE10" type="field" width="-1"/>
+          <column hidden="0" name="OBJECTID" type="field" width="-1"/>
+          <column hidden="0" name="ALAND10" type="field" width="-1"/>
+          <column hidden="0" name="BLKGRPCE10" type="field" width="-1"/>
+          <column hidden="0" name="FUNCSTAT10" type="field" width="-1"/>
+          <column hidden="0" name="NAMELSAD10" type="field" width="-1"/>
+          <column hidden="0" name="COUNTYFP10" type="field" width="-1"/>
+          <column hidden="0" name="STATEFP10" type="field" width="-1"/>
+          <column hidden="0" name="Shape_Leng" type="field" width="-1"/>
+          <column hidden="0" name="MTFCC10" type="field" width="-1"/>
+          <column hidden="0" name="GEOID10" type="field" width="-1"/>
+          <column hidden="0" name="INTPTLAT10" type="field" width="-1"/>
+          <column hidden="0" name="INTPTLON10" type="field" width="-1"/>
+          <column hidden="1" type="actions" width="-1"/>
+        </columns>
+      </attributetableconfig>
+      <editform></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable/>
+      <labelOnTop/>
+      <widgets/>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <expressionfields/>
+      <previewExpression>"OBJECTID"</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+  </projectlayers>
+  <layerorder>
+    <layer id="PhiladelphiaCensusBlockGroups201201_af40ae36_575e_4a3e_a374_e6b61bb5c52d"/>
+    <layer id="philadelphia_blockgroup_proj_998f773b_2e49_4eb3_99c6_099546fa01d5"/>
+    <layer id="diversityindex_philabg_b4b6268c_2f29_4667_b00c_32aa07ee7e7d"/>
+    <layer id="diversityindex_philabg2_3839939a_5bb9_4348_8ed6_d922a116bf65"/>
+    <layer id="blockgroup_dvindex_shp_7f5c8e2b_81fc_4fa7_b296_bde39586f42e"/>
+    <layer id="newsensorydata2_661647fd_d3f2_4e1e_ae76_7af8a3435f29"/>
+    <layer id="newsensorydata_withdiversity_shp_4034659d_ae12_4d59_bce5_496d35fcf549"/>
+    <layer id="newersensorydata_shp_7cd9f730_5041_4013_8d1c_d13bc88ec65e"/>
+  </layerorder>
+  <properties>
+    <PositionPrecision>
+      <Automatic type="bool">true</Automatic>
+      <DecimalPlaces type="int">2</DecimalPlaces>
+    </PositionPrecision>
+    <Paths>
+      <Absolute type="bool">false</Absolute>
+    </Paths>
+    <Gui>
+      <CanvasColorBluePart type="int">255</CanvasColorBluePart>
+      <SelectionColorRedPart type="int">255</SelectionColorRedPart>
+      <CanvasColorRedPart type="int">255</CanvasColorRedPart>
+      <CanvasColorGreenPart type="int">255</CanvasColorGreenPart>
+      <SelectionColorGreenPart type="int">255</SelectionColorGreenPart>
+      <SelectionColorBluePart type="int">0</SelectionColorBluePart>
+      <SelectionColorAlphaPart type="int">255</SelectionColorAlphaPart>
+    </Gui>
+    <Legend>
+      <filterByMap type="bool">false</filterByMap>
+    </Legend>
+    <Measurement>
+      <AreaUnits type="QString">m2</AreaUnits>
+      <DistanceUnits type="QString">meters</DistanceUnits>
+    </Measurement>
+    <Measure>
+      <Ellipsoid type="QString"></Ellipsoid>
+    </Measure>
+    <SpatialRefSys>
+      <ProjectionsEnabled type="int">1</ProjectionsEnabled>
+    </SpatialRefSys>
+  </properties>
+  <visibility-presets/>
+  <transformContext/>
+  <Annotations/>
+  <Layouts/>
+</qgis>
