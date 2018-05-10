@@ -327,7 +327,8 @@ var displayGraphs = function(tripIndex) {
     clearData();
     defineData(tripIndex);
     var formatTime = d3.timeFormat("%B %d, %Y");
-    $('#helper').text('viewing sensing from ' + formatTime(thisData[0].properties['gtime'])); 
+    $(".welcome").hide()
+    $('#helper').text('viewing sensing from ' + formatTime(thisData[0].properties['gtime']));
 
     graphSeries = document.getElementsByClassName("graphs");
     graphItems = _.map(graphSeries, function(graphItem) { return graphItem.id });
@@ -382,6 +383,12 @@ var clearCanvas = function() {
     });
 
     $(".mouse-line").hide();
+    $(".current-view").addClass("hiddenload");
+    $(".current-view").removeClass("current-view");
+    $("#1view").addClass("current-view");
+    $("#1view").removeClass("hiddenload");
+    $(".hiddenload").hide();
+    $('.current-view').show();
 
     // ("#" + thisItem).append("svg")
     clearData();

@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+div.hiddenload {
+    display: none;
+}
+
 .wrapper {
     display: grid;
     max-width: 90%;
@@ -73,6 +77,59 @@
     bottom: 0;
     margin-top: 5px;
     position: relative;
+}
+
+
+.welcome-box {
+    grid-column: 2/3;
+    grid-row: 3/4;
+    height: 700px;
+    margin-top: 5px;
+    z-index: 1000;
+}
+
+
+.welcome {
+    max-width: 80%;
+    height: 90%;
+    margin: 3% auto;
+    padding: 3%;
+    text-align: left;
+    background: rgba(60, 134, 133, 0.5);
+    z-index: 1000;
+    border-radius: 2%;
+    position: relative;
+}
+
+ol {
+    text-indent: 2%;
+    padding-left: 10%;
+    line-height: 150%;
+}
+
+ul {
+    list-style: none;
+    padding-left: 5%;
+    line-height: 150%;
+}
+
+.help::before {
+    content: ">";
+    position: absolute;
+    text-indent: -1em;
+    color: #3C8685;
+    display: inline-block;
+    width: 1em;
+    line-height: 150%;
+    text-wrap
+
+}
+
+.bottom-stuck {
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+    text-align: right;
 }
 
 .graphs-here {
@@ -158,34 +215,36 @@ path {
 }
 
 i {
-    color: #eab075;
+    color: #f4f7f7;
     font-size: 1.1em;
 }
+
 a {
     text-decoration: none;
     color: #778499;
 }
 
 a:hover {
-    color: #3C8685;
+    color: #efefef;
 }
 
 .contactLink {
-    color: #eab075;
+    color: #efefef;
     vertical-align: middle;
 }
 
 .contactLink:hover {
-    color: #3C8685;
+    color: #eab075;
 }
 
-#more-description {
+.welcome-toggle {
+    cursor: pointer;
     color: #eab075;
     vertical-align: middle;
 }
 
-#more-description:hover {
-    color: #3C8685
+.welcome-toggle:hover {
+    color: #efefef
 }
 
 #text-photo {
@@ -196,7 +255,7 @@ a:hover {
 }
 
 #device-text {
-/*    position: relative;
+    /*    position: relative;
     width: 50%;*/
 }
 
@@ -206,8 +265,7 @@ a:hover {
 
 img {
     max-width: 80%;
-        display: block;
+    display: block;
     margin-left: auto;
     margin-right: auto;
 }
-
