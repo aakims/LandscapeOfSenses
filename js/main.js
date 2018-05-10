@@ -310,8 +310,8 @@ var displayMapbox = function() {
         map.on("mouseleave", "sensing-collection-path", function(e) {
             map.setFilter("path-hover", ["==", "unixt", ""]);
             d3.select(".mouse-line")
-                .style("stroke", "#54505E")
-                .style("stroke-width", "2px")
+                // .style("stroke", "#54505E")
+                // .style("stroke-width", "2px")
                 .style("opacity", "0");
         });
 
@@ -332,6 +332,7 @@ var displayGraphs = function(tripIndex) {
     //displayMap();
     var map;
     enableToolTips();
+    $(".mouse-line").show();
 
     _.each(graphItems, function(graphItem) {
 
@@ -376,6 +377,9 @@ var clearCanvas = function() {
         zoom: 11,
         center: [-75.1652, 39.9526]
     });
+
+    $(".mouse-line").hide();
+
     // ("#" + thisItem).append("svg")
     clearData();
     //$("#map").append(defaultMap);
@@ -417,17 +421,17 @@ var enableToolTips = function() {
 
     var lines = document.getElementsByClassName("line");
 
-    var stalkerPerLine = stalkerG.selectAll(".mouse-per-line")
-        .data(thisData)
-        .enter()
-        .append("g")
-        .attr("class", "mouse-per-line");
+    // var stalkerPerLine = stalkerG.selectAll(".mouse-per-line")
+    //     .data(thisData)
+    //     .enter()
+    //     .append("g")
+    //     .attr("class", "mouse-per-line");
 
-    stalkerPerLine.append("circle")
-        .attr("r", 4)
-        .style("stroke", "#54505E")
-        .style("fill", "#54505E")
-        .style("opacity", "0");
+    // stalkerPerLine.append("circle")
+    //     .attr("r", 4)
+    //     .style("stroke", "#54505E")
+    //     .style("fill", "#54505E")
+    //     .style("opacity", "0");
 
     stalkerG.append("svg:rect")
         .attr("width", tooltipWidth)
