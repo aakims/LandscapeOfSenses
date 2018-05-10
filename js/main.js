@@ -326,6 +326,9 @@ var displayGraphs = function(tripIndex) {
 
     clearData();
     defineData(tripIndex);
+    var formatTime = d3.timeFormat("%B %d, %Y");
+    $('#helper').text('sensing sample from ' + formatTime(thisData[0].properties['gtime'])); 
+
     graphSeries = document.getElementsByClassName("graphs");
     graphItems = _.map(graphSeries, function(graphItem) { return graphItem.id });
 
