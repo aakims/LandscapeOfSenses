@@ -32,8 +32,6 @@
     justify-content: center;
 }
 
-
-
 #nav-title {
     grid-column: 1/2;
     align-items: center;
@@ -139,6 +137,12 @@ h2 {
     text-align: center;
 }
 
+h3 {
+    font-family: "karla";
+    font-size: 17px;
+    text-align: left;
+}
+
 path {
     stroke: #4c4c4c;
     stroke-width: 2;
@@ -152,3 +156,58 @@ path {
     stroke-width: 1;
     shape-rendering: crispEdges;
 }
+
+i {
+    color: #eab075;
+    font-size: 1.1em;
+}
+a {
+    text-decoration: none;
+    color: #778499;
+}
+
+a:hover {
+    color: #3C8685;
+}
+
+.contactLink {
+    color: #eab075;
+    vertical-align: middle;
+}
+
+.contactLink:hover {
+    color: #3C8685;
+}
+
+#more-description {
+    color: #eab075;
+    vertical-align: middle;
+}
+
+#more-description:hover {
+    color: #3C8685
+}
+
+#text-photo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /*position: relative;
+    width: 100%;*/
+}
+
+#device-text {
+/*    position: relative;
+    width: 50%;*/
+}
+
+#device-img {
+    align-content: center;
+}
+
+img {
+    max-width: 80%;
+        display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+

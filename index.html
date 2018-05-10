@@ -16,6 +16,7 @@
     <link href="https://fonts.googleapis.com/css?family=Karla|Oswald|Nothing+You+Could+Do" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css" />
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel='stylesheet' />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
 </head>
 
 <body>
@@ -24,7 +25,7 @@
             <h1>LANDSCAPE OF SENSES</h1></div>
         <div class="navbar">
             <div id="nav-title">
-                <h2 id = "helper">choose a sensing sample to view</h2></div>
+                <h2 id="helper">choose a sensing sample to view</h2></div>
             <div class="buttons">
                 <button class="tripfilter button" id=buttonC onClick="clearCanvas()">Clear</button>
                 <button class="tripfilter button" id=button1 onClick="displayGraphs(1)">1</button>
@@ -43,6 +44,36 @@
         </div>
         <div class="maphere" id='map'></div>
         <div class="graphs-here">
+            <div class='welcome' id="welcoming-text">
+                Welcome to  <i>  Landscape of Senses  </i>  project page, where I visualize urban sensory data I collected around Philadelphia. It is an ongoing hobby-project that is one part self-quantification and one part my first attempt at measuring the intangible.
+                <br>
+                <br> By selecting different sensing samples I collected, you can visualize spatially and quantitatively the four variables, some of the building blocks of what I call the sensory landscape: <br>1. air quality, 2. ambient light level, 3. temperature, and 4. diversity index.
+                <br>
+                <br> The first stage of this project was completed for a joint assignment for
+                information design + visualization and javascript for planners and designers courses at PennDesign in spring of 2018.
+                <br>
+                <br> Start exploring!
+                <br> If you'd like to find out more about the project, click here and read on <i class="fas fa-angle-double-right" id="more-description"></i>
+            </div>
+            <div class='welcome' id='more-text'>
+                <h3> The Variables </h3>
+                The first three -- air quality, ambient light level, and temperature -- you likely find reasonable.
+                <br><br>
+                The decision to include the diversity index perhaps is a perplexing one. An important part of my process for developing this project was thinking more critically about the urban elements that affect my sense of place. So I broadened and challenged the definition of sensory agents to those that evoke emotional responses and shape how I perceive my surroundings on the streets of the city. 
+                <br><br>
+                As a student of city planning and community economic development, and of a minority woman myself, there are very few days that the issues of race and diversity is sitting on my mind. From which topics and conversations they stem from varies everyday; but that is the point. They undoubtably make an integral part of what it means to live in the US, and appropriately no part of urban life can be painted without them. 
+                <br><br>
+                The diversity index dataset I used was a Census block group level data created by <a href="https://www.policymap.com/maps?i=9933854&btd=4&period=2015&cx=-98.74552233238856&cy=39.105907084009964&cz=3&slc=l0nGhXy" target="_blank">PolicyMap</a>, who used US Census data to calculate the probability of two randomly chosen people in a block group to be of different races or ethnicities. 
+                <br>
+                <br> 
+                <h3> The Device </h3>
+                <div id = "text-photo"><div id = 'device-text'>All sample datasets displayed on this application was collected on the Arduino-run sensing device I built with <a href = "https://www.adafruit.com/product/1272" target = "_blank">Adafruit Ultimate GPS Logger Shield</a>, <a href = "https://www.seeedstudio.com/Grove-Dust-Sensor%EF%BC%88PPD42NS%EF%BC%89-p-1050.html" target = "_blank">a Shenyei PPD42NS air quality sensor</a>, a photoresistor, and a TMP36 temperature sensor. 
+                <br>
+                <br>Data samples that are available for visualization were collected between March 6th and March 9th of 2018 during trips that were naturally occuring as parts of my days. The device was set up to log the sensing data every 10 seconds. </div>
+                <div id = "device-img"><img src ="img/sensors.jpg" alt = "Arduino Sensor Device"></div>
+            </div>
+                <br><br><small>data sources: Diversity Index from Census+PolicyMap (<a href = "https://www.policymap.com/maps?i=9933854&btd=4&period=2015&cx=-98.74552233238856&cy=39.105907084009964&cz=3&slc=l0nGhXy" target = "_blank">view map</a> or <a href = "https://www.policymap.com/data/our-data-directory/#Census%20and%20PolicyMap:%20Racial%20and%20Ethnic%20Diversity" target = "_blank">read data description</a>)<br>data collection, processing + visualization by alana s kim, 2018</small><span>   </span><a href="https://www.github.com/aakims" target="_blank"><i class="fab fa-github contactLink" ></i></a><span> </span><a href="mailto:alanakim12@gmail.com" target="_top"><i class="fas fa-envelope contactLink"></i></a>
+            </div>
             <div class="graphs-tool-tip">
             </div>
             <div class="graphs" id="graph1"></div>
